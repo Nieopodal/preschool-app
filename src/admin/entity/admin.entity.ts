@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Admin extends BaseEntity {
+export class AdminEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
