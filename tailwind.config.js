@@ -8,4 +8,7 @@ module.exports = {
   variants: {
     display: ['group-hover'],
   },
+  daisyui: {
+    themes: ['cupcake'],
+  },
 };

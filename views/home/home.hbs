@@ -1,55 +1,127 @@
-<div>
-    <div>
-        <img class="w-full" src="/img/tlo1.jpg" alt="tło">
-        <!-- @TODO alt-->
+<!--<div>-->
+<!--    <div>-->
+<!--        <img class="w-full" src="/img/tlo1.jpg" alt="tło">-->
+<!--        &lt;!&ndash; &ndash;&gt;-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="hero min-h-screen" style="background-image: url(/img/tlo1.jpg);">
+  <div class="hero-overlay bg-opacity-30"></div>
+  <div class="hero-content text-center text-white">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
+      <p class="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
     </div>
+  </div>
 </div>
 
-<article class="container-for-article">
-    <header>
-        <h2 class="md:text-4xl text-4xl lg:text-5xl page-title">Dlaczego my?</h2>
-    </header>
+<!--<article class="container-for-article">-->
 
-    <div class="lg:flex items-center pb-16 justify-center text-justify lg:text-left">
-        <div class="text-lg pb-8 py-4 text-base lg:text-xl">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam culpa
-                dignissimos
-                distinctio dolorem
-                doloremque ducimus illo laboriosam laudantium maxime natus nisi, quaerat quos ratione rerum sapiente sed
-                soluta vel vitae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque
-                dignissimos dolorem ea est
-                fugiat laboriosam nemo, officiis perspiciatis sunt tenetur vel, velit veniam veritatis voluptas! A
-                eligendi fugit natus? Ab aspernatur, aut esse excepturi impedit ipsum iste magni officiis optio porro,
-                quasi voluptatibus.
-                Asperiores commodi consequatur obcaecati, odio quasi vitae. Adipisci architecto autem eaque iste laborum
-                nam nulla unde?</p>
-
-        </div>
-        <img class="rounded-full px-4 py-2 mx-auto" src="/img/zdjęcie1.jpg" alt="">
+  <div class="hero min-h-screen bg-base-200">
+    <div class="hero-content flex-col lg:flex-row-reverse">
+      <img src="/img/zdjęcie1.jpg" class="max-w-[20rem] rounded-full shadow-lg" />
+      <div>
+        <h1 class="text-5xl font-bold">Dlaczego my?</h1>
+        <p class="py-6 pr-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam culpa
+          dignissimos
+          distinctio dolorem
+          doloremque ducimus illo laboriosam laudantium maxime natus nisi, quaerat quos ratione rerum sapiente sed
+          soluta vel vitae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque
+          dignissimos dolorem ea est
+          fugiat laboriosam nemo, officiis perspiciatis sunt tenetur vel, velit veniam veritatis voluptas! A
+          eligendi fugit natus? Ab aspernatur, aut esse excepturi impedit ipsum iste magni officiis optio porro,
+          quasi voluptatibus.
+          Asperiores commodi consequatur obcaecati, odio quasi vitae. Adipisci architecto autem eaque iste laborum
+          nam nulla unde?</p>
+      </div>
     </div>
-</article>
+  </div>
+<!--    <header>-->
+<!--        <h2 class="md:text-4xl text-4xl lg:text-5xl page-title">Dlaczego my?</h2>-->
+<!--    </header>-->
 
-<article class="py-8 bg-sky-300 left-0 right-0 text-white text-base lg:text-xl">
 
-    {{#with shorterFirstNews}}
-    <div class="my-0 mx-auto md:max-w-screen-lg px-8">
-        <h3 class="text-4xl lg:text-5xl text-center font-bold py-8 px-4">Z życia przedszkola</h3>
-        <div class="flex justify-center">
-            <h4 class="font-semibold text-3xl pb-2">{{this.title}}</h4>
-        </div>
+<!--    <div class="lg:flex items-center pb-16 justify-center text-justify lg:text-left">-->
+<!--        <div class="text-lg pb-8 py-4 text-base lg:text-xl">-->
+<!--            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam culpa-->
+<!--                dignissimos-->
+<!--                distinctio dolorem-->
+<!--                doloremque ducimus illo laboriosam laudantium maxime natus nisi, quaerat quos ratione rerum sapiente sed-->
+<!--                soluta vel vitae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque-->
+<!--                dignissimos dolorem ea est-->
+<!--                fugiat laboriosam nemo, officiis perspiciatis sunt tenetur vel, velit veniam veritatis voluptas! A-->
+<!--                eligendi fugit natus? Ab aspernatur, aut esse excepturi impedit ipsum iste magni officiis optio porro,-->
+<!--                quasi voluptatibus.-->
+<!--                Asperiores commodi consequatur obcaecati, odio quasi vitae. Adipisci architecto autem eaque iste laborum-->
+<!--                nam nulla unde?</p>-->
 
-        <div class="py-4 pb-8 text-justify whitespace-pre-wrap break-all flex justify-center"><span>{{this.article}}{{#if this.isTooLong}}...<a class=" text-xl font-bold hover:font-extrabold uppercase" href="/aktualnosci/{{this.id}}">czytaj dalej</a>{{/if}}</span></div>
-        <div class="flex justify-center text-base font-bold">
-            <a class="hover:font-extrabold uppercase" href="/aktualnosci">Zobacz więcej</a>
-        </div>
+<!--        </div>-->
+<!--        <img class="rounded-full px-4 py-2 mx-auto" src="/img/zdjęcie1.jpg" alt="">-->
+<!--    </div>-->
+<!--</article>-->
+
+<!--<article class="py-8 bg-sky-300 left-0 right-0 text-white text-base lg:text-xl">-->
+
+
+<div class="hero min-h-screen bg-primary text-white">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      <h1 class="text-5xl font-bold">Z życia przedszkola</h1>
+      <div class="flex justify-center">
+        <h4 class="font-semibold text-3xl pb-2">{{this.title}}</h4>
+      </div>
+
+      <div class="py-4 pb-8 text-justify whitespace-pre-wrap break-all flex justify-center"><span><a class=" text-xl font-bold hover:font-extrabold uppercase">czytaj dalej</a></span></div>
+      <div class="flex justify-center text-base font-bold">
+        <a class="hover:font-extrabold uppercase" href="/aktualnosci">Zobacz więcej</a>
+      </div>
     </div>
-        {{/with}}
-</article>
+  </div>
+</div>
 
-<article class="container-for-article">
 
-    <div class="pt-4">
-        {{> contact-details}}
-    </div>
 
-</article>
+
+
+
+
+
+
+<!--{{#with shorterFirstNews}}-->
+<!--  <div class="hero min-h-screen bg-base-200">-->
+<!--    <div class="hero-content text-center">-->
+<!--      <div class="max-w-md">-->
+<!--        <h1 class="text-5xl font-bold">Z życia przedszkola</h1>-->
+<!--        <div class="flex justify-center">-->
+<!--          <h4 class="font-semibold text-3xl pb-2">{{this.title}}</h4>-->
+<!--        </div>-->
+
+<!--        <div class="py-4 pb-8 text-justify whitespace-pre-wrap break-all flex justify-center"><span>{{this.article}}{{#if this.isTooLong}}...<a class=" text-xl font-bold hover:font-extrabold uppercase" href="/aktualnosci/{{this.id}}">czytaj dalej</a>{{/if}}</span></div>-->
+<!--        <div class="flex justify-center text-base font-bold">-->
+<!--          <a class="hover:font-extrabold uppercase" href="/aktualnosci">Zobacz więcej</a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--{{/with}}-->
+
+
+
+
+
+
+
+
+<!--    <div class="my-0 mx-auto md:max-w-screen-lg px-8">-->
+<!--        <h3 class="text-4xl lg:text-5xl text-center font-bold py-8 px-4">Z życia przedszkola</h3>-->
+<!--        <div class="flex justify-center">-->
+<!--            <h4 class="font-semibold text-3xl pb-2">{{this.title}}</h4>-->
+<!--        </div>-->
+
+<!--        <div class="py-4 pb-8 text-justify whitespace-pre-wrap break-all flex justify-center"><span>{{this.article}}{{#if this.isTooLong}}...<a class=" text-xl font-bold hover:font-extrabold uppercase" href="/aktualnosci/{{this.id}}">czytaj dalej</a>{{/if}}</span></div>-->
+<!--        <div class="flex justify-center text-base font-bold">-->
+<!--            <a class="hover:font-extrabold uppercase" href="/aktualnosci">Zobacz więcej</a>-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--    </div>-->
+
+<!--</article>-->
