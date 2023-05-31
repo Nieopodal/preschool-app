@@ -13,13 +13,11 @@ export class News extends BaseEntity {
 
   @Column({
     length: 60,
-    nullable: false,
   })
   title: string;
 
   @Column({
     length: 5000,
-    nullable: false,
   })
   article: string;
 
@@ -27,4 +25,7 @@ export class News extends BaseEntity {
     type: 'timestamp',
   })
   createdAt: Date;
+
+  @Column()
+  isTooLong: boolean;
 }
