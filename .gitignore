@@ -33,3 +33,9 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+/.env
+/public/img/upload/
+/public/img/300571133_490695053062752_1647734458814074167_n.jpg
+/public/img/f_logo_RGB-Blue_58.png
+/public/img/logo-prototyp.jpg
+/public/img/tlo1.jpg

@@ -1,0 +1,26 @@
+<article class="container-for-article">
+
+    {{#with onePhotoRecord}}
+        <h2 class="post-title">{{this.title}}</h2>
+
+        <h3 class="text-center pb-10 pt-2">Data: {{this.createdAt}}</h3>
+
+        {{#if ../userLoggedIn}}
+            {{> edit-post this}}
+        {{/if}}
+
+            <div class="rounded overflow-hidden shadow-md hover:shadow-lg my-8">
+
+                <a href="/img/upload/{{this.fileName}}" target="_blank" rel="noreferrer noopener">
+                    <img class=" w-full object-cover rounded" src="{{this.path}}" alt="{{this.title}}">
+                </a>
+            </div>
+    {{/with}}
+
+    <div class="flex justify-center">
+        <a href="/album" class="text-center semibold-link-with-hover pt-4">Powrót do albumu</a>
+    </div>
+
+</article>
+
+
