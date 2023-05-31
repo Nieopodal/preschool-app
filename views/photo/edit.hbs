@@ -1,0 +1,54 @@
+<div class="container-for-article">
+
+    {{> deleting-dialog-box this}}
+
+    {{#with editingRecord}}
+
+    <div id="container-to-blur-when-popup" class="relative z-0">
+
+        {{> blur-effect-div}}
+
+        <header>
+            <h2 class="page-title">Edytuj wpis w albumie z dnia {{this.createdAt}}</h2>
+        </header>
+
+    <form action="/album/{{this.id}}?_method=PUT" method="POST">
+
+    <div class="text-lg mx-auto">
+        <label class="block py-8 ">
+            <span class="pb-2 font-semibold">Tytuł</span>
+            <input id="input-news-title" type="text" name="title" minlength="5" maxlength="40" required
+                   value="{{this.title}}"
+                   class="text-input font-semibold">
+            <span id="title-char-counter">0/40</span>
+        </label>
+
+        <div class="rounded overflow-hidden shadow-md hover:shadow-lg">
+            <a href="/img/upload/{{this.fileName}}" target="_blank" rel="noreferrer noopener">
+                <img class=" w-full object-cover rounded" src="{{this.path}}" alt="{{this.title}}">
+            </a>
+        </div>
+
+        <div class="text-center pt-8">
+            <button type="submit" id="send-photo"
+                    class="xl-actions-btn font-semibold hover:font-semibold mx-2">
+                Zapisz
+            </button>
+
+            <button type="button" id="show-deleting-form-btn"
+                    class="xl-actions-btn hover:font-normal mx-2 my-2 sm:my-0">
+                Usuń wpis
+            </button>
+
+            <a href="/album/{{this.id}}" class="xl-actions-btn hover:font-normal mx-2 my-2 sm:my-0">Anuluj</a>
+
+        </div>
+    {{/with}}
+</div>
+
+</form>
+</div>
+</div>
+
+<script src="/scripts/photo/add-form.js"></script>
+<script src="/scripts/edit-form.js"></script>
