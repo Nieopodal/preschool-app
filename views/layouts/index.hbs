@@ -1,14 +1,174 @@
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Publiczne Przedszkole Nr 23 w Jastrzębiu-Zdroju</title>
+
+  <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
-hello!
-{{{body}}}
+
+<div class="bg-white text-gray-500">
+  <!--main container -->
+  <header>
+
+    {{#if userLoggedIn}}
+      <div class="text-center flex justify-around md:justify-end py-2 sm:uppercase font-bold text-sm md:text-sm 2xl:text-base max-w-screen md:px-4 break-words">
+        <span class="text-pink-400 sm:px-4">{{userLoggedIn}}</span>
+        <a class="sm:px-4 hover:text-pink-400" href="/session/dashboard">Panel użytkownika</a>
+        <form action="/session?_method=DELETE" method="POST" class="sm:px-4 md:pr-0">
+          <button type="submit" class="sm:uppercase hover:text-pink-400">Wyloguj się</button>
+        </form>
+      </div>
+    {{/if}}
+
+    <nav class="px-2 bg-white py-8 border-b">
+      <div class="container lg:flex lg:flex-wrap justify-evenly xl:justify-between items-center mx-auto max-w-full">
+        <div class="flex sm:justify-between">
+          <!--                        @TODO change image-->
+          <a href="http://localhost:3000" class="flex items-center">
+            <img src="https://flowbite.com/docs/images/logo.svg" class=" pl-2 h-8 mr-3 sm:h-10"
+                 alt="Flowbite Logo"/>
+            <span class="self-center text-sky-300 text-xl 2xl:text-2xl font-bold ">Publiczne Przedszkole nr 23 w Jastrzębiu-Zdroju</span>
+          </a>
+
+          <button id="main-menu-btn" data-collapse-toggle="navbar-dropdown" type="button"
+                  class=" inline-flex items-center p-2 ml-3 text-md text-pink-400 rounded-lg lg:hidden focus:outline-none focus:ring-1 focus:ring-pink-400"
+                  aria-controls="navbar-dropdown" aria-expanded="false">
+            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clip-rule="evenodd"/>
+            </svg>
+          </button>
+          <button id="close-main-menu-btn" data-collapse-toggle="navbar-dropdown" type="button"
+                  class="hidden main-menu-btn inline-flex items-center p-2 ml-3 text-md text-pink-400 rounded-lg lg:hidden focus:outline-none focus:ring-1 focus:ring-pink-400"
+                  aria-controls="navbar-dropdown" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="block hidden top-0 bottom-0 lg:flex bg-white lg:relative lg:w-auto lg:h-auto z-50"
+             id="main-menu">
+
+          <ul class=" block lg:flex flex-col px-2 py-4 mt-4 rounded-lg  lg:flex-row lg:space-x-8 lg:mt-0 lg:text-sm lg:font-semibold lg:bg-white 2xl:text-base">
+
+            <li class="relative">
+
+              <button
+                id="toggle-menu-btn" data-dropdown-toggle="dropdownNavbar"
+                class="peer relative flex items-center justify-between w-full py-2 pl-3 pr-4 font-semibold text-pink-400 hover:bg-pink-400 hover:text-white lg:hover:text-pink-400 lg:hover:bg-transparent lg:border-b lg:border-white lg:hover:border-pink-400 lg:p-0 lg:w-auto"
+              >Menu
+                <svg class="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"/>
+                </svg>
+              </button>
+
+              <!-- Dropdown menu -->
+
+              <div id="dropdownNavbar"
+                   class="hidden lg:ml-0 lg:z-20 lg:peer-hover:block lg:hover:block lg:absolute font-normal bg-white rounded w-70 lg:w-44 border-pink-400 shadow-xl 2xl:text-base">
+                <ul class="py-1 text-sm" aria-labelledby="dropdownLargeButton">
+                  <li>
+                    <a href="/" class="hidden-menu-item">Strona główna</a>
+                  </li>
+                  <li>
+                    <a href="/aktualnosci" class="hidden-menu-item">Aktualności</a>
+                  </li>
+                  <li>
+                    <a href="/pracownicy-przedszkola" class="hidden-menu-item">Pracownicy
+                      przedszkola</a>
+                  </li>
+
+                  <li>
+                    <a href="/grupy-w-przedszkolu" class="hidden-menu-item">Grupy w przedszkolu</a>
+                  </li>
+
+                  <li>
+                    <a href="/realizowane-programy-certyfikaty" class="hidden-menu-item">Realizowane
+                      programy, certyfikaty</a>
+                  </li>
+                  <li>
+                    <a href="/organizacja-pracy" class="hidden-menu-item">Organizacja pracy</a>
+                  </li>
+                  <li>
+                    <a href="/album" class="hidden-menu-item">Album fotograficzny</a>
+                  </li>
+                  {{#unless userLoggedIn}}
+                    <li>
+                      <a href="/session/new" class="hidden-menu-item">Logowanie</a>
+                    </li>
+                  {{/unless}}
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a href="/o-przedszkolu" class="main-menu-item">O przedszkolu</a>
+            </li>
+            <li>
+              <a href="/kontakt" class="main-menu-item">Kontakt</a>
+            </li>
+            <li>
+              <a href="/statut" class="main-menu-item">Statut</a>
+            </li>
+            <li>
+              <a href="/oplaty" class="main-menu-item">Opłaty</a>
+            </li>
+            <li>
+              <a href="/ochrona-danych-osobowych" class="main-menu-item">Ochrona danych osobowych</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    {{{body}}}
+  </main>
+
+  <footer class="pt-8 pb-4 my-0 mx-auto md:max-w-screen-lg block text-center">
+
+    <div class="flex justify-center items-center">
+      <!--                        @TODO change image-->
+      <svg class="" xmlns="http://www.w3.org/2000/svg" width="50" height="50" preserveAspectRatio="xMidYMid meet"
+           viewBox="0 0 24 24">
+        <rect x="0" y="0" width="24" height="24" fill="none" stroke="none"/>
+        <path fill="none" stroke="#f472b6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0a4 4 0 0 1 8 0Z"/>
+      </svg>
+
+      <span class="text-sky-300 font-bold text-sm md:text-base">Publiczne Przedszkole Nr 23 w Jastrzębiu-Zdroju</span>
+
+    </div>
+
+    <div class="block text-xs">Wszelkie prawa zastrzeżone</div>
+    <div class="block text-xs"><a href="/polityka-prywatnosci" class="hover:text-pink-400">Polityka prywatności</a>
+    </div>
+
+    <div class="block text-xs">Designed by Nieopodal</div>
+
+    <!--            @TODO Privacy policy-->
+    <!--Ta strona korzysta z plików cookies zgodnie z Polityką Prywatości (tu link do dokumentu). Możesz określić warunki przechowywania lub dostępu mechanizmu cookie w Twojej przeglądarce.
+    Rozumiem
+    -->
+    {{> privacy-policy}}
+  </footer>
+
+</div>
+
+<script src="/scripts/scripts.js"></script>
+
 </body>
 </html>
