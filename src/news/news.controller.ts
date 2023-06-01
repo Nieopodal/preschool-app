@@ -5,12 +5,6 @@ import { NewsService } from './news.service';
 @Controller('/aktualnosci')
 export class NewsController {
   constructor(private readonly newsService: NewsService) {}
-
-  @Get('/strona')
-  @Redirect('/aktualnosci/strona/1')
-  Redirect() {
-    return;
-  }
   @Get('/')
   @Redirect('/aktualnosci/strona/1')
   SecondRedirect() {
@@ -22,5 +16,10 @@ export class NewsController {
     @Param('pageNumber') pageNumber: string,
   ) {
     return await this.newsService.getNewsPage(res, Number(pageNumber));
+  }
+
+  @Get('/:id')
+  async getOneNews(@Res() res: Response, @Param('id') id: string) {
+    return await this.newsService.getOneNews(res, id);
   }
 }

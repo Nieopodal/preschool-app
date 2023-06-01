@@ -15,9 +15,7 @@ export class NewsService {
       skip: maxPerPage * (currentPage - 1),
       take: maxPerPage,
     });
-
     const pagesCount = Math.ceil(count / maxPerPage);
-
     const fixedDateNews = news.map((news) => {
       return {
         ...news,
@@ -34,5 +32,22 @@ export class NewsService {
         'aktualnosci',
       ),
     });
+  }
+
+  async getOneNews(res: Response, id: string) {
+    const news = await News.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!news) {
+      throw new Error('Artykuł nie został odnaleziony.');
+    }
+    const fixedDateNews = {
+      ...news,
+      createdAt: format(news.createdAt, 'dd.MM.yyyy, HH:mm'),
+    };
+    res.render('news/list-one', { layout: 'index', news: fixedDateNews });
   }
 }
