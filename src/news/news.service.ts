@@ -18,10 +18,13 @@ export class NewsService {
 
     const pagesCount = Math.ceil(count / maxPerPage);
 
-    const fixedDateNews = news.map((news) => ({
-      ...news,
-      createdAt: format(news.createdAt, 'dd.MM.yyyy, HH:mm'),
-    }));
+    const fixedDateNews = news.map((news) => {
+      return {
+        ...news,
+        article: news.isTooLong ? news.article.substring(0, 600) : news.article,
+        createdAt: format(news.createdAt, 'dd.MM.yyyy, HH:mm'),
+      };
+    });
     return res.render('news/list-all', {
       layout: 'index',
       news: fixedDateNews,
