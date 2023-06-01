@@ -28,6 +28,7 @@
     "@types/express-handlebars": "^5.3.0",
     "cookie-parser": "^1.4.6",
     "daisyui": "^2.52.0",
+    "date-fns": "^2.30.0",
     "express-handlebars": "^5.3.0",
     "helmet": "^7.0.0",
     "method-override": "^3.0.0",

@@ -3,15 +3,15 @@
         <h2 class="page-title">Aktualności</h2>
     </header>
 
-    {{#if userLoggedIn}}
+
         <div class="flex justify-center">
             <a href="/aktualnosci/dodaj"
                class="xl-actions-btn font-normal hover:font-normal">Dodaj
                 nowy wpis</a>
         </div>
-    {{/if}}
 
-    {{#each shorterRecentNews}}
+
+    {{#each news}}
         <div class="one-article">
             <div class="p-4">
                 <h3 class="font-bold text-2xl"><a href="/aktualnosci/{{this.id}}" class="hover:text-pink-400">{{this.title}}</a></h3>
@@ -21,10 +21,10 @@
                 <div class="text-base pt-2">
                     <a href="/aktualnosci/{{this.id}}" class="hover:text-pink-400">Czytaj całość</a>
 
-                    {{#if ../userLoggedIn}}
+
                        | <a href="/aktualnosci/{{this.id}}/edit" class="text-pink-400 hover:font-bold">Edytuj wpis</a>
 
-                    {{/if}}
+
                 </div>
             </div>
         </div>
