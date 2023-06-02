@@ -1,13 +1,11 @@
 <article class="container-for-article">
 
-    {{#with onePhotoRecord}}
+    {{#with photo}}
         <h2 class="post-title">{{this.title}}</h2>
 
         <h3 class="text-center pb-10 pt-2">Data: {{this.createdAt}}</h3>
 
-        {{#if ../userLoggedIn}}
             {{> edit-post this}}
-        {{/if}}
 
             <div class="rounded overflow-hidden shadow-md hover:shadow-lg my-8">
 

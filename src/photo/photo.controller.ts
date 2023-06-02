@@ -19,4 +19,9 @@ export class PhotoController {
   ) {
     return await this.photoService.getAllPhotos(res, Number(pageNumber));
   }
+
+  @Get('/:id')
+  async getOnePhoto(@Res() res: Response, @Param('id') id: string) {
+    return await this.photoService.getOnePhoto(res, id);
+  }
 }

@@ -7,7 +7,7 @@ import { Response } from 'express';
 @Injectable()
 export class PhotoService {
   async getAllPhotos(res: Response, currentPage: number) {
-    const maxPerPage = 3;
+    const maxPerPage = 10;
     const [photos, count] = await Photo.findAndCount({
       order: {
         createdAt: 'DESC',
@@ -27,5 +27,22 @@ export class PhotoService {
       photos: fixedDatePhotos,
       paginationSettings: paginationHandler(currentPage, pagesCount, 'album'),
     });
+  }
+
+  async getOnePhoto(res: Response, id: string) {
+    const photo = await Photo.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!photo) {
+      throw new Error('Zdjęcie nie zostało odnalezione.');
+    }
+    const fixedDatePhoto = {
+      ...photo,
+      createdAt: format(photo.createdAt, 'dd.MM.yyyy, HH:mm'),
+    };
+    res.render('photo/list-one', { layout: 'index', photo: fixedDatePhoto });
   }
 }
