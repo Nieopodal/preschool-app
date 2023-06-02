@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { NewsService } from './news.service';
+import { NewsDto } from './dto/news.dto';
 
 @Controller('/aktualnosci')
 export class NewsController {
@@ -25,10 +26,7 @@ export class NewsController {
   async addNews(
     @Res() res: Response,
     @Body()
-    data: {
-      title: string;
-      article: string;
-    },
+    data: NewsDto,
   ) {
     return await this.newsService.addNews(res, data);
   }
@@ -38,10 +36,7 @@ export class NewsController {
     @Res() res: Response,
     @Param('id') id: string,
     @Body()
-    data: {
-      title: string;
-      article: string;
-    },
+    data: NewsDto,
   ) {
     return await this.newsService.editNews(res, id, data);
   }
