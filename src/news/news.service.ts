@@ -115,6 +115,7 @@ export class NewsService {
     const news = await News.update(id, {
       title,
       article,
+      isTooLong: article.length > 600,
     });
     if (news.affected !== 1) {
       throw new Error('Podczas aktualizacji wpisu wystąpił błąd.');
