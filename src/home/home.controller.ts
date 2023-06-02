@@ -1,11 +1,13 @@
 import { Controller, Get, Res } from '@nestjs/common';
 import { Response } from 'express';
+import { HomeService } from './home.service';
 
 @Controller('/')
 export class HomeController {
+  constructor(private readonly homeService: HomeService) {}
   @Get('/')
   async getHomePage(@Res() res: Response) {
-    return res.render('home/home', { layout: 'index' });
+    return await this.homeService.getHomePage(res);
   }
 
   @Get('/o-przedszkolu')

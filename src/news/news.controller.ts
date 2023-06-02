@@ -18,6 +18,11 @@ export class NewsController {
     return await this.newsService.getNewsPage(res, Number(pageNumber));
   }
 
+  @Get('/:id/edycja')
+  async getEditNewsPage(@Res() res: Response, @Param('id') id: string) {
+    return await this.newsService.getEditNewsPage(res, id);
+  }
+
   @Get('/:id')
   async getOneNews(@Res() res: Response, @Param('id') id: string) {
     return await this.newsService.getOneNews(res, id);
