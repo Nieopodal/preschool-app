@@ -101,4 +101,24 @@ export class NewsService {
       idOfNews: newArticle.id,
     });
   }
+
+  async editNews(
+    res: Response,
+    id: string,
+    data: { title: string; article: string },
+  ) {
+    const { title, article } = data;
+    const news = await News.update(id, {
+      title,
+      article,
+    });
+    if (news.affected !== 1) {
+      throw new Error('Podczas aktualizacji wpisu wystąpił błąd.');
+    }
+    return res.render('news/success', {
+      layout: 'index',
+      message: 'Pomyślnie zaktualizowano wpis.',
+      idOfNews: id,
+    });
+  }
 }

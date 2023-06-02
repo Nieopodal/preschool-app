@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Redirect,
   Res,
 } from '@nestjs/common';
@@ -29,6 +30,19 @@ export class NewsController {
     },
   ) {
     return await this.newsService.addNews(res, data);
+  }
+
+  @Put('/:id')
+  async editNews(
+    @Res() res: Response,
+    @Param('id') id: string,
+    @Body()
+    data: {
+      title: string;
+      article: string;
+    },
+  ) {
+    return await this.newsService.editNews(res, id, data);
   }
 
   @Get('/strona/:pageNumber')
