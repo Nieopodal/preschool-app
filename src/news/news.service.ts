@@ -83,4 +83,22 @@ export class NewsService {
     };
     res.render('news/edit', { layout: 'index', news: fixedDateNews });
   }
+
+  async getAddNewsPage(res: Response) {
+    return res.render('news/add', { layout: 'index' });
+  }
+
+  async addNews(res: Response, data: { title: string; article: string }) {
+    const { title, article } = data;
+    const newArticle = new News();
+    newArticle.title = title;
+    newArticle.article = article;
+    newArticle.isTooLong = article.length > 600;
+    await newArticle.save();
+    return res.render('news/success', {
+      layout: 'index',
+      message: 'Pomyślnie dodano nowy artykuł',
+      idOfNews: newArticle.id,
+    });
+  }
 }
