@@ -7,8 +7,10 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
+import { handlebarsHelpers } from './utils/handlebars-helpers';
 
 async function bootstrap() {
+  const { isEqual } = handlebarsHelpers;
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.use(helmet());
   app.use(cookieParser());
@@ -26,6 +28,7 @@ async function bootstrap() {
       extname: 'hbs',
       defaultLayout: 'index',
       layoutsDir: join(__dirname, '..', 'views/layouts'),
+      helpers: { isEqual },
     }),
   );
   app.setViewEngine('hbs');

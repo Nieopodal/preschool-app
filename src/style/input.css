@@ -9,7 +9,7 @@
 
 
 .main-menu-item {
-    @apply block py-2 pl-3 pr-4 text-pink-400 hover:bg-pink-400 hover:text-white lg:hover:bg-transparent lg:p-0 lg:border-b lg:border-white lg:hover:border-pink-400 lg:hover:text-pink-400
+    @apply block py-2 pl-3 pr-4 text-secondary-focus hover:bg-secondary-focus hover:text-white lg:hover:bg-transparent lg:p-0 lg:border-b lg:border-white lg:hover:border-secondary-focus lg:hover:text-secondary-focus
 
 }
 
@@ -19,7 +19,7 @@
 /*}*/
 
 .hidden-menu-item {
-    @apply px-4 py-2 block text-pink-400 hover:bg-pink-400 hover:text-white
+    @apply px-4 py-2 block text-secondary-focus hover:bg-secondary-focus hover:text-white
 }
 
 /*.hover-menu-element {*/
@@ -31,11 +31,11 @@
 }
 
 .post-title {
-    @apply text-3xl md:text-3xl lg:text-4xl text-center font-bold text-pink-400 pt-8 px-4
+    @apply text-3xl md:text-3xl lg:text-4xl text-center font-bold text-secondary-focus pt-8 px-4
 }
 
 .small-title {
-    @apply text-xl md:text-2xl lg:text-3xl text-center font-bold text-pink-400 py-8 px-4
+    @apply text-xl md:text-2xl lg:text-3xl text-center font-bold text-secondary-focus py-8 px-4
 }
 
 .container-for-article {
@@ -59,7 +59,7 @@
 }
 
 .actions-btn {
-    @apply border-2 rounded hover:bg-pink-400 hover:text-white hover:font-bold focus:outline-pink-400 mx-2 md:mx-1
+    @apply border-2 rounded hover:bg-secondary-focus hover:text-white hover:font-bold focus:outline-secondary-focus mx-2 md:mx-1
 }
 
 .slider-actions-btn {
@@ -67,7 +67,7 @@
 }
 
 .text-input {
-    @apply border-[1px] rounded p-2 focus:outline-pink-400 w-full
+    @apply border-[1px] rounded p-2 focus:outline-secondary-focus w-full
 }
 
 .bold-link-with-hover {
@@ -79,5 +79,5 @@
 }
 
 .link-with-hover {
-    @apply hover:text-pink-400 text-lg
+    @apply hover:text-secondary-focus text-lg
 }
