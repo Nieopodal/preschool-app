@@ -8,7 +8,7 @@ import { NewsResponse } from '../types';
 @Injectable()
 export class NewsService {
   async getNewsPage(res: Response, currentPage: number) {
-    const maxPerPage = 3;
+    const maxPerPage = 10;
     const [news, count] = await News.findAndCount({
       order: {
         createdAt: 'DESC',
