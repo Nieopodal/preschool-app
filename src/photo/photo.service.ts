@@ -49,4 +49,25 @@ export class PhotoService {
   async getAddPhotoPage(res: Response) {
     return res.render('photo/add', { layout: 'index' });
   }
+
+  async getEditPhotoPage(res: Response, id: string) {
+    const photo = await Photo.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!photo) {
+      throw new Error('Artykuł nie został odnaleziony.');
+    }
+    const fixedDatePhoto = {
+      ...photo,
+      createdAt: format(photo.createdAt, 'dd.MM.yyyy, HH:mm'),
+    };
+    res.render('photo/edit', {
+      layout: 'index',
+      item: fixedDatePhoto,
+      pageName: 'album',
+    });
+  }
 }

@@ -83,7 +83,7 @@ export class NewsService {
     };
     res.render('news/edit', {
       layout: 'index',
-      news: fixedDateNews,
+      item: fixedDateNews,
       pageName: 'aktualnosci',
     });
   }

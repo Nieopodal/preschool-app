@@ -25,6 +25,11 @@ export class PhotoController {
     return await this.photoService.getAddPhotoPage(res);
   }
 
+  @Get('/:id/edycja')
+  async getEditPhotoPage(@Res() res: Response, @Param('id') id: string) {
+    return await this.photoService.getEditPhotoPage(res, id);
+  }
+
   @Get('/:id')
   async getOnePhoto(@Res() res: Response, @Param('id') id: string) {
     return await this.photoService.getOnePhoto(res, id);
