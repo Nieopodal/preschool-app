@@ -45,4 +45,8 @@ export class PhotoService {
     };
     res.render('photo/list-one', { layout: 'index', photo: fixedDatePhoto });
   }
+
+  async getAddPhotoPage(res: Response) {
+    return res.render('photo/add', { layout: 'index' });
+  }
 }

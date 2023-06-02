@@ -20,6 +20,11 @@ export class PhotoController {
     return await this.photoService.getAllPhotos(res, Number(pageNumber));
   }
 
+  @Get('/dodaj')
+  async getAddPhotoPage(@Res() res: Response) {
+    return await this.photoService.getAddPhotoPage(res);
+  }
+
   @Get('/:id')
   async getOnePhoto(@Res() res: Response, @Param('id') id: string) {
     return await this.photoService.getOnePhoto(res, id);
