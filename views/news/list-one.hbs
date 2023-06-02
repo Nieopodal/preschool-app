@@ -1,0 +1,21 @@
+<article class="container-for-article">
+
+    {{#with news}}
+    <h2 class="post-title">{{this.title}}</h2>
+
+    <h3 class="text-center pb-10 pt-2">Data: {{this.createdAt}}</h3>
+
+
+            {{> edit-post this}}
+
+
+    <div class="text-xl whitespace-pre-wrap break-all flex justify-center text-justify">
+        <span>{{this.article}}</span>
+    </div>
+    {{/with}}
+
+    <div class="flex justify-center">
+        <a href="/aktualnosci" class="text-center semibold-link-with-hover pt-8">Powrót do aktualności</a>
+    </div>
+
+</article>
