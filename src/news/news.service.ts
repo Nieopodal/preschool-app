@@ -81,7 +81,11 @@ export class NewsService {
       ...news,
       createdAt: format(news.createdAt, 'dd.MM.yyyy, HH:mm'),
     };
-    res.render('news/edit', { layout: 'index', news: fixedDateNews });
+    res.render('news/edit', {
+      layout: 'index',
+      news: fixedDateNews,
+      pageName: 'aktualnosci',
+    });
   }
 
   async getAddNewsPage(res: Response) {
@@ -119,6 +123,17 @@ export class NewsService {
       layout: 'index',
       message: 'Pomyślnie zaktualizowano wpis.',
       idOfNews: id,
+    });
+  }
+
+  async removeNews(res: Response, id: string) {
+    const deleteResult = await News.delete(id);
+    if (deleteResult.affected !== 1) {
+      throw new Error('Podczas usuwania wpisu wystąpił błąd.');
+    }
+    return res.render('news/success', {
+      layout: 'index',
+      message: 'Pomyślnie usunięto wpis.',
     });
   }
 }

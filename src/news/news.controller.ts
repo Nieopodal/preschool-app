@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -43,6 +44,11 @@ export class NewsController {
     },
   ) {
     return await this.newsService.editNews(res, id, data);
+  }
+
+  @Delete('/:id')
+  async removeNews(@Res() res: Response, @Param('id') id: string) {
+    return await this.newsService.removeNews(res, id);
   }
 
   @Get('/strona/:pageNumber')
