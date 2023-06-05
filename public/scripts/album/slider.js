@@ -46,6 +46,7 @@ const loadContentToSlider = () => {
       'p-4',
       'hover:text-pink-400',
       'leading-none',
+      'hidden',
     );
     photoDescription.classList.add('description', 'p-2', 'sm:p-2');
     titleSpan.classList =

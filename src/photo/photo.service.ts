@@ -19,10 +19,10 @@ export class PhotoService {
     const fixedDatePhotos = photos.map((photo) => {
       return {
         ...photo,
-        createdAt: format(photo.createdAt, 'dd.MM.yyyy, HH:mm'),
+        createdAt: format(photo.createdAt, 'dd.MM.yyyy'),
       };
     });
-    return res.render('photo/list-all', {
+    return res.render('album/list-all', {
       layout: 'index',
       photos: fixedDatePhotos,
       paginationSettings: paginationHandler(currentPage, pagesCount, 'album'),
@@ -43,11 +43,11 @@ export class PhotoService {
       ...photo,
       createdAt: format(photo.createdAt, 'dd.MM.yyyy, HH:mm'),
     };
-    res.render('photo/list-one', { layout: 'index', photo: fixedDatePhoto });
+    res.render('album/list-one', { layout: 'index', photo: fixedDatePhoto });
   }
 
   async getAddPhotoPage(res: Response) {
-    return res.render('photo/add', { layout: 'index' });
+    return res.render('album/add', { layout: 'index' });
   }
 
   async getEditPhotoPage(res: Response, id: string) {
@@ -64,7 +64,7 @@ export class PhotoService {
       ...photo,
       createdAt: format(photo.createdAt, 'dd.MM.yyyy, HH:mm'),
     };
-    res.render('photo/edit', {
+    res.render('album/edit', {
       layout: 'index',
       item: fixedDatePhoto,
       pageName: 'album',

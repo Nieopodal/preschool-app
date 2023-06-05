@@ -16,7 +16,7 @@ export class DatabaseConfiguration implements TypeOrmOptionsFactory {
       database: this.configService.get('DB_NAME'),
       entities: [this.configService.get('TYPEORM_ENTITIES')],
       autoLoadEntities: true,
-      bigNumberStrings: false,
+      bigNumberStrings: true,
       logging: true,
       synchronize: false, // if true to create/update tables in db.
       // namingStrategy: new SnakeNamingStrategy(),

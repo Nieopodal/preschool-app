@@ -1,0 +1,38 @@
+<div class="container-for-article">
+  <header>
+    <h2 class="page-title">Dodaj nowy album</h2>
+  </header>
+
+  <form action="/album" method="POST" enctype="multipart/form-data">
+
+    <div class="text-lg mx-auto">
+      <label class="block py-8 ">
+        <span class="pb-2 font-semibold">Tytuł</span>
+        <input id="input-news-title" type="text" name="title" minlength="5" maxlength="40" required
+               class="text-input font-semibold">
+        <span id="title-char-counter">0/40</span>
+      </label>
+      <label class="block mb-2">
+        <span class="pb-2 font-semibold">Wybierz zdjęcia</span>
+
+        <input class="block text-input" required name="image" type="file" accept="image/jpeg">
+        <p class="mt-1 text-sm text-gray-500" id="file_input_help">*.JPG, *.JPEG (MAX. 7MB)</p>
+      </label>
+
+      <div class="text-center">
+        <button type="submit" id="send-article"
+                class="xl-actions-btn font-semibold hover:font-semibold mx-2">
+          Dodaj
+        </button>
+
+        <a href="/album"
+           class="xl-actions-btn hover:font-normal mx-2">Anuluj</a>
+      </div>
+
+
+    </div>
+  </form>
+
+</div>
+
+<script src="/scripts/photo/add-form.js"></script>

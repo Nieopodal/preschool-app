@@ -4,20 +4,20 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Album } from '../../album/entity/album.entity';
+import { Photo } from '../../photo/entity/photo.entity';
 
 @Entity()
-export class Photo extends BaseEntity {
+export class Album extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({
-    length: 41,
+    length: 40,
   })
-  fileName: string;
+  title: string;
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -25,13 +25,11 @@ export class Photo extends BaseEntity {
   createdAt: Date;
 
   @Column({
-    length: 100,
+    default: 0,
   })
-  path: string;
+  numberOfPhotos: number;
 
-  @Column()
-  size: number;
-
-  @ManyToOne(() => Album, (entity) => entity.photos)
-  album: Album;
+  @OneToMany(() => Photo, (entity) => entity.album)
+  @JoinColumn()
+  photos: Photo[];
 }

@@ -1,0 +1,74 @@
+<div class="container-for-article">
+
+  {{> deleting-dialog-box this}}
+
+  {{#with item}}
+
+  <div id="container-to-blur-when-popup" class="relative z-0">
+
+    {{> blur-effect-div}}
+
+    <header>
+      <h2 class="page-title">Edycja albumu z dnia {{this.createdAt}}</h2>
+    </header>
+
+    <form action="/album/{{this.id}}?_method=PUT" method="POST">
+
+      <div class="text-lg mx-auto">
+        <label class="block py-8 ">
+          <span class="pb-2 font-semibold">Tytuł</span>
+          <input id="input-news-title" type="text" name="title" minlength="5" maxlength="40" required
+                 value="{{this.title}}"
+                 class="text-input font-semibold">
+          <span id="title-char-counter">0/40</span>
+        </label>
+
+        <div class="text-center pt-8">
+          <button type="submit" id="send-photo"
+                  class="xl-actions-btn font-semibold hover:font-semibold mx-2">
+            Zapisz
+          </button>
+          <button type="button" id="show-deleting-form-btn"
+                  class="xl-actions-btn hover:font-normal mx-2 my-2 sm:my-0">
+            Usuń album
+          </button>
+          <a href="/album/{{this.id}}" class="xl-actions-btn hover:font-normal mx-2 my-2 sm:my-0">Anuluj</a>
+        </div>
+      </div>
+    </form>
+
+    <div class="grid md:grid-cols-2 gap-10 pt-8 pb-12">
+      {{#each this.photos}}
+        <div class="one-photo rounded overflow-hidden shadow-md hover:shadow-lg">
+          <img class="photo-img h-60 sm:h-80 md:h-64 w-full object-cover rounded hover:cursor-pointer"
+               src="{{this.path}}"
+               alt="Zdjęcie z albumu {{../this.title}}">
+
+          <div>
+            <form action="/photo/{{this.id}}?_method=DELETE" method="POST">
+              <div class="dropdown dropdown-top">
+                <label tabindex="0" class="btn btn-ghost border-2 m-1">Usuń zdjęcie</label>
+                <ul tabindex="0" class="dropdown-content menu z-50 p-2 shadow-md bg-base-100 rounded-box w-52">
+                  <li>
+                    <button>Potwierdź usunięcie</button>
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+
+
+
+
+  {{/with}}
+
+
+</div>
+</div>
+
+<script src="/scripts/album/add-form.js"></script>
+<script src="/scripts/edit-form.js"></script>
+
