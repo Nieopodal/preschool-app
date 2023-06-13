@@ -100,6 +100,7 @@ export class AlbumService {
           await newPhotoEntity.save();
         }),
       );
+      //@TODO: przenieść ww. map do photo service
       return res.render('album/success', {
         layout: 'index',
         message: 'Pomyślnie dodano nowy album',
@@ -116,6 +117,7 @@ export class AlbumService {
               });
               if (brokenPhoto) await brokenPhoto.remove();
             }),
+            //@TODO: przenieść ww. map do photo service
           );
         }
         const brokenAlbum = await Album.findOne({
@@ -129,5 +131,28 @@ export class AlbumService {
       //@TODO: improve errors
       throw e;
     }
+  }
+
+  async numberOfPhotos(id: string): Promise<number> {
+    const album = await Album.findOne({ where: { id } });
+    if (!album) throw new Error('Album nie został odnaleziony.');
+    return album.numberOfPhotos;
+  }
+
+  async editOrDecreaseNumberOfPhotos(
+    id: string,
+    newValue?: number,
+  ): Promise<void> {
+    const album = await Album.findOne({ where: { id } });
+    if (!album) throw new Error('Album nie został odnaleziony.');
+    if (newValue) {
+      album.numberOfPhotos = newValue;
+    } else {
+      album.numberOfPhotos--;
+      if (album.numberOfPhotos < 0)
+        throw new Error('Liczba dostępnych zdjęć nie może być mniejsza od 0.');
+    }
+
+    await album.save();
   }
 }
