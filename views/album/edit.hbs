@@ -13,63 +13,13 @@
       <p class="mx-auto w-fit text-lg">Tutaj możesz zmienić tytuł, dodać/usunąć zdjęcia lub usunąć cały album.</p>
     </header>
 
-    <form action="/album/{{this.id}}?_method=PATCH" method="POST" enctype="multipart/form-data">
-      <div class="text-lg mx-auto">
-        <label class="block py-8 ">
-          <span class="pb-2 font-semibold">Zmień tytuł</span>
-          <input id="input-news-title" type="text" name="title" minlength="5" maxlength="40" required
-                 value="{{this.title}}"
-                 class="text-input font-semibold">
-          <span id="title-char-counter">0/40</span>
-        </label>
+    {{> album/editing-form this}}
 
-        <label class="block mb-2">
-          <span class="pb-2 font-semibold">Dodaj zdjęcia</span>
-
-          <input class="block text-input bg-white" name="files" type="file" accept="image/jpeg, image/png, mage/heic, image/heif" multiple>
-          <p class="mt-1 text-sm text-gray-500" id="file_input_help">Możliwość dodania do 10 plików na raz, *.JPG, *.JPEG, *PNG, *HEIC, *HEIF (MAX. 7MB/zdjęcie)</p>
-        </label>
-
-        <div class="text-center">
-          <button type="submit" id="send-photo"
-                  class="xl-actions-btn font-semibold hover:font-semibold mx-2">
-            Zapisz
-          </button>
-          <button type="button" id="show-deleting-form-btn"
-                  class="xl-actions-btn hover:font-normal mx-2 my-2 sm:my-0">
-            Usuń album
-          </button>
-          <a href="/album/{{this.id}}" class="xl-actions-btn hover:font-normal mx-2 my-2 sm:my-0">Anuluj</a>
-        </div>
-      </div>
-    </form>
-
-    <div class="grid md:grid-cols-2 gap-10 pt-8 pb-12">
-      {{#each this.photos}}
-        <div class="one-photo rounded overflow-hidden shadow-md hover:shadow-lg">
-          <img class="photo-img h-60 sm:h-80 md:h-64 w-full object-cover rounded hover:cursor-pointer"
-               src="/img/upload//{{this.fileName}}"
-               alt="Zdjęcie z albumu {{../this.title}}">
-
-          <div>
-            <form action="/photo/{{this.fileName}}/{{../this.id}}?_method=DELETE" method="POST">
-              <div class="dropdown dropdown-top">
-                <label tabindex="0" class="btn btn-ghost border-2 m-1">Usuń zdjęcie</label>
-                <ul tabindex="0" class="dropdown-content menu z-50 p-2 shadow-md bg-base-100 rounded-box w-52">
-                  <li>
-                    <button>Potwierdź usunięcie</button>
-                  </li>
-                </ul>
-              </div>
-            </form>
-          </div>
-        </div>
-      {{/each}}
-    </div>
+    {{> album/editing-photo this}}
 
   {{/with}}
 
-</div>
+  </div>
 </div>
 
 <script src="/scripts/album/add-form.js"></script>

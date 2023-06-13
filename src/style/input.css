@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.main-menu-item {
-    @apply block py-2 pl-3 pr-4 text-secondary-focus hover:bg-secondary-focus hover:text-white lg:hover:bg-transparent lg:p-0 lg:border-b lg:border-white lg:hover:border-secondary-focus lg:hover:text-secondary-focus
-
-}
-
-.hidden-menu-item {
-    @apply px-4 py-2 block text-secondary-focus hover:bg-secondary-focus hover:text-white
-}
-
 .page-title {
     @apply post-title pb-10
 }
@@ -23,12 +14,14 @@
     @apply text-xl md:text-2xl lg:text-3xl text-center font-bold text-secondary-focus py-8 px-4
 }
 
+/*the whole page*/
 .container-for-article {
-    @apply my-0 mx-auto md:max-w-screen-lg pt-4 md:pt-8 px-8 break-words
+    @apply mt-0 mb-8 mx-auto md:max-w-screen-lg pt-4 md:pt-8 px-8 break-words
 }
 
+/*one article*/
 .one-article {
-    @apply py-4 text-justify lg:text-xl  pb-10
+    @apply py-4 text-justify lg:text-xl pb-10
 }
 
 .actions-container {
@@ -39,12 +32,8 @@
     @apply block actions-btn p-1 text-lg
 }
 
-.xl-actions-btn {
-    @apply actions-btn p-2 text-xl
-}
-
 .actions-btn {
-    @apply border-2 rounded hover:bg-secondary-focus hover:text-white hover:font-bold focus:outline-secondary-focus mx-2 md:mx-1
+    @apply btn btn-primary my-2 mx-2 md:mx-1 font-semibold hover:font-semibold
 }
 
 .slider-actions-btn {
