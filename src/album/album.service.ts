@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { format } from 'date-fns';
 import { paginationHandler } from '../utils/pagination.handler';
 import { Album } from './entity/album.entity';
 import { Photo } from '../photo/entity/photo.entity';
+import * as fs from 'fs';
+import * as path from 'path';
+import { storageDir } from '../utils/storage';
 
 interface AlbumWithPhotos extends Album {
   photos: Photo[];
 }
+
 // @TODO: przenieść do typów
 
 @Injectable()
@@ -50,7 +54,7 @@ export class AlbumService {
     });
 
     if (!album) {
-      throw new Error('Zdjęcie nie zostało odnalezione.');
+      throw new Error('Album nie został odnaleziony.');
     }
     const fixedDateAlbum = {
       ...album,
@@ -72,14 +76,58 @@ export class AlbumService {
     });
 
     if (!album) {
-      throw new Error('Zdjęcie nie zostało odnalezione.');
+      throw new Error('Album nie został odnaleziony.');
     }
     const fixedDateAlbum = {
       ...album,
       createdAt: format(album.createdAt, 'dd.MM.yyyy'),
     };
 
-
     return res.render('album/edit', { layout: 'index', item: fixedDateAlbum });
+  }
+
+  async addAlbum(req: Request, res: Response, files: string[]) {
+    const album = new Album();
+    try {
+      album.title = JSON.parse(JSON.stringify(req.body)).title;
+      album.numberOfPhotos = files.length;
+      await album.save();
+      await Promise.all(
+        files.map(async (file) => {
+          const newPhotoEntity = new Photo();
+          newPhotoEntity.album = album;
+          newPhotoEntity.fileName = file;
+          await newPhotoEntity.save();
+        }),
+      );
+      return res.render('album/success', {
+        layout: 'index',
+        message: 'Pomyślnie dodano nowy album',
+        id: album.id,
+      });
+    } catch (e) {
+      try {
+        if (files.length > 0) {
+          await Promise.all(
+            files.map(async (file) => {
+              await fs.promises.unlink(path.join(storageDir(), 'upload', file));
+              const brokenPhoto = await Photo.findOne({
+                where: { fileName: file },
+              });
+              if (brokenPhoto) await brokenPhoto.remove();
+            }),
+          );
+        }
+        const brokenAlbum = await Album.findOne({
+          where: { id: album.id },
+        });
+
+        if (brokenAlbum) await brokenAlbum.remove();
+      } catch (e2) {
+        console.log('błąd podczas usuwania pliku', e2);
+      }
+      //@TODO: improve errors
+      throw e;
+    }
   }
 }

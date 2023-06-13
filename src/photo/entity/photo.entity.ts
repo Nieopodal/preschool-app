@@ -24,14 +24,7 @@ export class Photo extends BaseEntity {
   })
   createdAt: Date;
 
-  @Column({
-    length: 100,
-  })
-  path: string;
-
-  @Column()
-  size: number;
-
   @ManyToOne(() => Album, (entity) => entity.photos)
+  @JoinColumn()
   album: Album;
 }

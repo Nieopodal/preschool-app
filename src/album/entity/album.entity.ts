@@ -3,7 +3,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -30,6 +29,5 @@ export class Album extends BaseEntity {
   numberOfPhotos: number;
 
   @OneToMany(() => Photo, (entity) => entity.album)
-  @JoinColumn()
   photos: Photo[];
 }
