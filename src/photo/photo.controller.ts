@@ -12,6 +12,6 @@ export class PhotoController {
     @Param('fileName') fileName: string,
     @Param('albumId') albumId: string,
   ) {
-    return await this.photoService.delete(res, fileName, albumId);
+    return await this.photoService.delete(res, fileName, albumId, true);
   }
 }

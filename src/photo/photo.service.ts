@@ -1,35 +1,53 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { Response } from 'express';
-import { AlbumService } from '../album/album.service';
 import * as fs from 'fs';
 import * as path from 'path';
+import { AlbumService } from '../album/album.service';
 import { storageDir } from '../utils/storage';
 import { Photo } from './entity/photo.entity';
+import { Album } from '../album/entity/album.entity';
 
 @Injectable()
 export class PhotoService {
-  constructor(private readonly albumService: AlbumService) {}
-  async delete(res: Response, fileName: string, albumId: string) {
+  constructor(
+    @Inject(forwardRef(() => AlbumService))
+    private readonly albumService: AlbumService,
+  ) {}
+
+  async delete(
+    res: Response,
+    fileName: string,
+    albumId: string,
+    redirect?: boolean,
+    e?: any,
+  ): Promise<any> {
     try {
       const photo = await Photo.findOne({
+        relations: ['album'],
         where: {
           fileName,
         },
       });
-
       if (!photo) throw new Error('Brak zdjęcia w bazie danych.');
+      if (photo.album.id !== albumId)
+        throw new Error('Zdjęcie nie znajduje się w bieżącym albumie.');
 
       await fs.promises.unlink(path.join(storageDir(), 'upload', fileName));
-      const brokenPhoto = await Photo.findOne({
-        where: { fileName },
-      });
-      if (brokenPhoto) await brokenPhoto.remove();
+      if (photo) await photo.remove();
 
       await this.albumService.editOrDecreaseNumberOfPhotos(albumId);
 
-      res.redirect(`/album/${albumId}/edycja/`);
+      if (e) return e;
+      if (redirect) res.redirect(`/album/${albumId}/edycja/`);
     } catch (e) {
       console.log(e);
     }
+  }
+
+  async add(fileName: string, album: Album): Promise<void> {
+    const photo = new Photo();
+    photo.album = album;
+    photo.fileName = fileName;
+    await photo.save();
   }
 }
