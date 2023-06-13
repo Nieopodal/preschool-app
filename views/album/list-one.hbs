@@ -1,4 +1,5 @@
 {{> photo-gallery}}
+
 <article class="container-for-article">
 
   {{#with album}}
@@ -11,9 +12,11 @@
     <div class="all-photos-container">
       {{#each this.photos}}
         <div class="photo-card one-photo">
-          <img class="photo-img image"
-               src="/img/upload//{{this.fileName}}"
-               alt="Zdjęcie z albumu {{../this.title}}">
+          <img
+            class="photo-img image"
+            src="/img/upload//{{this.fileName}}"
+            alt="Zdjęcie z albumu {{../this.title}}"
+          >
 
           <div class="p-4 hidden" id="photo-description">
             <span class="title-span font-bold py-4 text-xl">{{../this.title}}</span>
@@ -25,7 +28,7 @@
 
   {{/with}}
 
-  {{> go-to-albums }}
+  {{> album/go-to-albums}}
 
 </article>
 
