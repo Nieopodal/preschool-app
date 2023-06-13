@@ -85,7 +85,11 @@ export class AlbumService {
       createdAt: format(album.createdAt, 'dd.MM.yyyy'),
     };
 
-    return res.render('album/edit', { layout: 'index', item: fixedDateAlbum });
+    return res.render('album/edit', {
+      layout: 'index',
+      item: fixedDateAlbum,
+      pageName: 'album',
+    });
   }
 
   async addOrEdit(
@@ -159,5 +163,30 @@ export class AlbumService {
     }
 
     await album.save();
+  }
+
+  async delete(res: Response, id: string) {
+    const album = await Album.findOne({
+      where: { id },
+      relations: ['photos'],
+    });
+
+    if (!album) throw new Error('Nie znaleziono albumu.');
+
+    try {
+      await Promise.all(
+        album.photos.map(async (photo) => {
+          await this.photoService.delete(res, photo.fileName, album.id, false);
+        }),
+      );
+      await album.remove();
+
+      return res.render('album/success', {
+        layout: 'index',
+        message: 'Pomyślnie usunięto album',
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

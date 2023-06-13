@@ -1,5 +1,6 @@
 import {
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -40,7 +41,7 @@ export class AlbumController {
     return await this.albumService.addOrEdit(req, res, files);
   }
 
-  @Patch('/:albumId')
+  @Patch('/:id')
   @UseInterceptors(
     FilesInterceptor('files', 10, {
       fileFilter: photoFileFilter,
@@ -51,10 +52,16 @@ export class AlbumController {
     files: string[],
     @Req() req: Request,
     @Res() res: Response,
-    @Param('albumId') albumId: string,
+    @Param('id') id: string,
   ) {
-    return await this.albumService.addOrEdit(req, res, files, albumId);
+    return await this.albumService.addOrEdit(req, res, files, id);
   }
+
+  @Delete('/:id')
+  async deleteAlbum(@Res() res: Response, @Param('id') id: string) {
+    return await this.albumService.delete(res, id);
+  }
+
   @Get('/strona/:pageNumber')
   async getAllAlbums(
     @Res() res: Response,
