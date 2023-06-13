@@ -88,11 +88,20 @@ export class AlbumService {
     return res.render('album/edit', { layout: 'index', item: fixedDateAlbum });
   }
 
-  async addAlbum(req: Request, res: Response, fileNames: string[]) {
-    const album = new Album();
+  async addOrEdit(
+    req: Request,
+    res: Response,
+    fileNames: string[],
+    editingAlbumId?: string,
+  ) {
+    const album = editingAlbumId
+      ? await Album.findOneOrFail({ where: { id: editingAlbumId } })
+      : new Album();
     try {
       album.title = JSON.parse(JSON.stringify(req.body)).title;
-      album.numberOfPhotos = fileNames.length;
+      album.numberOfPhotos = editingAlbumId
+        ? album.numberOfPhotos + fileNames.length
+        : fileNames.length;
       await album.save();
       await Promise.all(
         fileNames.map(async (fileName) => {
@@ -102,7 +111,9 @@ export class AlbumService {
 
       return res.render('album/success', {
         layout: 'index',
-        message: 'Pomyślnie dodano nowy album',
+        message: editingAlbumId
+          ? 'Zapisano zmiany'
+          : 'Pomyślnie dodano nowy album',
         id: album.id,
       });
     } catch (e) {

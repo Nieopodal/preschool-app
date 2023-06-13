@@ -13,7 +13,7 @@
       <p class="mx-auto w-fit text-lg">Tutaj możesz zmienić tytuł, dodać/usunąć zdjęcia lub usunąć cały album.</p>
     </header>
 
-    <form action="/album/{{this.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+    <form action="/album/{{this.id}}?_method=PATCH" method="POST" enctype="multipart/form-data">
       <div class="text-lg mx-auto">
         <label class="block py-8 ">
           <span class="pb-2 font-semibold">Zmień tytuł</span>

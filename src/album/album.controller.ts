@@ -2,6 +2,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Redirect,
   Req,
@@ -36,7 +37,23 @@ export class AlbumController {
     @Req() req: Request,
     @Res() res: Response,
   ) {
-    return await this.albumService.addAlbum(req, res, files);
+    return await this.albumService.addOrEdit(req, res, files);
+  }
+
+  @Patch('/:albumId')
+  @UseInterceptors(
+    FilesInterceptor('files', 10, {
+      fileFilter: photoFileFilter,
+    }),
+  )
+  async editAlbum(
+    @UploadedFiles(SharpPipe)
+    files: string[],
+    @Req() req: Request,
+    @Res() res: Response,
+    @Param('albumId') albumId: string,
+  ) {
+    return await this.albumService.addOrEdit(req, res, files, albumId);
   }
   @Get('/strona/:pageNumber')
   async getAllAlbums(
