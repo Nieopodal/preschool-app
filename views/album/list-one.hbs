@@ -8,10 +8,10 @@
 
     {{> edit-post this}}
 
-    <div class="grid md:grid-cols-2 gap-10 pt-8 pb-12">
+    <div class="all-photos-container">
       {{#each this.photos}}
-        <div class="one-photo rounded overflow-hidden shadow-md hover:shadow-lg">
-          <img class="photo-img h-60 sm:h-80 md:h-64 w-full object-cover rounded hover:cursor-pointer"
+        <div class="photo-card one-photo">
+          <img class="photo-img image"
                src="/img/upload//{{this.fileName}}"
                alt="Zdjęcie z albumu {{../this.title}}">
 
@@ -25,9 +25,7 @@
 
   {{/with}}
 
-  <div class="flex justify-center">
-    <a href="/album" class="text-center semibold-link-with-hover pt-4">Powrót do listy albumów</a>
-  </div>
+  {{> go-to-albums }}
 
 </article>
 

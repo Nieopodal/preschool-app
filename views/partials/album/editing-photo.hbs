@@ -1,9 +1,11 @@
-<div class="grid md:grid-cols-2 gap-10 pt-8 pb-12">
+<div class="all-photos-container">
   {{#each this.photos}}
-    <div class="one-photo rounded overflow-hidden shadow-md hover:shadow-lg">
-      <img class="photo-img h-60 sm:h-80 md:h-64 w-full object-cover rounded hover:cursor-pointer"
-           src="/img/upload//{{this.fileName}}"
-           alt="Zdjęcie z albumu {{../this.title}}">
+    <div class="photo-card one-photo">
+      <img
+        class="photo-img image"
+        src="/img/upload//{{this.fileName}}"
+        alt="Zdjęcie z albumu {{../this.title}}"
+      >
 
       <div>
         <form action="/photo/{{this.fileName}}/{{../this.id}}?_method=DELETE" method="POST">
