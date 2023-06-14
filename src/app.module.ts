@@ -9,10 +9,16 @@ import { NewsModule } from './news/news.module';
 import { PhotoModule } from './photo/photo.module';
 import { AdminModule } from './admin/admin.module';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { AlbumModule } from './album/album.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    MulterModule.register({
+      storage: memoryStorage(),
+    }),
     TypeOrmModule.forRootAsync({
       useClass: DatabaseConfiguration,
     }),
@@ -24,6 +30,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
     NewsModule,
     PhotoModule,
     AdminModule,
+    AlbumModule,
   ],
   controllers: [AppController],
   providers: [AppService],

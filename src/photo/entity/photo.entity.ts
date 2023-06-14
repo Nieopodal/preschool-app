@@ -3,18 +3,16 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Album } from '../../album/entity/album.entity';
 
 @Entity()
 export class Photo extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-
-  @Column({
-    length: 40,
-  })
-  title: string;
 
   @Column({
     length: 41,
@@ -26,11 +24,7 @@ export class Photo extends BaseEntity {
   })
   createdAt: Date;
 
-  @Column({
-    length: 100,
-  })
-  path: string;
-
-  @Column()
-  size: number;
+  @ManyToOne(() => Album, (entity) => entity.photos)
+  @JoinColumn()
+  album: Album;
 }

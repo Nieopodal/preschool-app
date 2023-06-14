@@ -2,30 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-/*.main-menu-item {*/
-/*    @apply block md:flex w-full hover:cursor-pointer uppercase text-xs md:text-[10px] md:leading-snug xl:text-sm font-bold md:font-bold items-center justify-center md:text-center tracking-widest md:tracking-wider md:h-14 py-4 md:border-b-0 px-4 md:px-0 hover:font-extrabold md:w-20 lg:w-24 xl:w-32 md:py-8 lg:hover:border-b-2 lg:hover:border-pink-400 lg:border-b-2 lg:border-white*/
-/*}*/
-
-
-.main-menu-item {
-    @apply block py-2 pl-3 pr-4 text-secondary-focus hover:bg-secondary-focus hover:text-white lg:hover:bg-transparent lg:p-0 lg:border-b lg:border-white lg:hover:border-secondary-focus lg:hover:text-secondary-focus
-
-}
-
-
-/*.main-menu-item {*/
-/*    @apply block md:flex w-full hover:cursor-pointer uppercase text-xs md:text-[10px] md:leading-snug xl:text-sm font-bold md:font-bold items-center justify-center md:text-center md:py-0 tracking-widest md:tracking-wider md:hover:font-extrabold md:h-14 py-4 md:border-b-0 px-4 md:px-0 hover:font-extrabold md:w-20 lg:w-24 xl:w-32*/
-/*}*/
-
-.hidden-menu-item {
-    @apply px-4 py-2 block text-secondary-focus hover:bg-secondary-focus hover:text-white
-}
-
-/*.hover-menu-element {*/
-/*    @apply block py-3 md:py-2 lg:py-3 px-2 md:text-[8px] lg:text-[9px] xl:text-[13px] font-semibold hover:font-extrabold transition ease-out duration-500 border-b-[1px] md:border-b-0 text-pink-400*/
-/*}*/
-
 .page-title {
     @apply post-title pb-10
 }
@@ -38,12 +14,14 @@
     @apply text-xl md:text-2xl lg:text-3xl text-center font-bold text-secondary-focus py-8 px-4
 }
 
+/*the whole page*/
 .container-for-article {
-    @apply my-0 mx-auto md:max-w-screen-lg pt-4 md:pt-8 px-8 break-words
+    @apply mt-0 mb-8 mx-auto md:max-w-screen-lg pt-4 md:pt-8 px-8 break-words
 }
 
+/*one article*/
 .one-article {
-    @apply py-4 text-justify lg:text-xl
+    @apply py-4 text-justify lg:text-xl pb-10
 }
 
 .actions-container {
@@ -54,12 +32,8 @@
     @apply block actions-btn p-1 text-lg
 }
 
-.xl-actions-btn {
-    @apply actions-btn p-2 text-xl
-}
-
 .actions-btn {
-    @apply border-2 rounded hover:bg-secondary-focus hover:text-white hover:font-bold focus:outline-secondary-focus mx-2 md:mx-1
+    @apply btn btn-primary my-2 mx-2 md:mx-1 font-semibold hover:font-semibold
 }
 
 .slider-actions-btn {
@@ -80,4 +54,16 @@
 
 .link-with-hover {
     @apply hover:text-secondary-focus text-lg
+}
+
+.all-photos-container {
+    @apply grid md:grid-cols-2 gap-10 pt-8 pb-12
+}
+
+.photo-card {
+    @apply rounded overflow-hidden shadow-md hover:shadow-lg
+}
+
+.image {
+    @apply h-60 sm:h-80 md:h-64 w-full object-cover rounded hover:cursor-pointer
 }

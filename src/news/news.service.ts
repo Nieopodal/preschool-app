@@ -8,7 +8,7 @@ import { NewsResponse } from '../types';
 @Injectable()
 export class NewsService {
   async getNewsPage(res: Response, currentPage: number) {
-    const maxPerPage = 3;
+    const maxPerPage = 10;
     const [news, count] = await News.findAndCount({
       order: {
         createdAt: 'DESC',
@@ -83,7 +83,7 @@ export class NewsService {
     };
     res.render('news/edit', {
       layout: 'index',
-      news: fixedDateNews,
+      item: fixedDateNews,
       pageName: 'aktualnosci',
     });
   }
@@ -115,6 +115,7 @@ export class NewsService {
     const news = await News.update(id, {
       title,
       article,
+      isTooLong: article.length > 600,
     });
     if (news.affected !== 1) {
       throw new Error('Podczas aktualizacji wpisu wystąpił błąd.');

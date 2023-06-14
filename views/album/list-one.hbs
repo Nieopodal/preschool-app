@@ -1,0 +1,35 @@
+{{> album/photo-gallery}}
+
+<article class="container-for-article">
+
+  {{#with album}}
+    <h2 class="post-title">{{this.title}}</h2>
+
+    <h3 class="text-center pb-10 pt-2">{{this.createdAt}}</h3>
+
+    {{> edit-post this}}
+
+    <div class="all-photos-container">
+      {{#each this.photos}}
+        <div class="photo-card one-photo">
+          <img
+            class="photo-img image"
+            src="/img/upload//{{this.fileName}}"
+            alt="Zdjęcie z albumu {{../this.title}}"
+          >
+
+          <div class="p-4 hidden" id="photo-description">
+            <span class="title-span font-bold py-4 text-xl">{{../this.title}}</span>
+            <span class="createdAt-span text-basic block">{{../this.createdAt}}</span>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+
+  {{/with}}
+
+  {{> album/go-to-albums}}
+
+</article>
+
+<script src="/scripts/album/slider.js"></script>

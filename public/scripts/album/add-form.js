@@ -1,4 +1,4 @@
-const inputNewsTitle = document.querySelector('#input-news-title');
+const inputTitle = document.querySelector('#input-title');
 const titleCharCounterSpan = document.querySelector('#title-char-counter');
 
 let numOfEnteredCharsToTitle;
@@ -19,7 +19,7 @@ const countCharsHandler = (input, counterSpan, min, max, numOfEnteredChars) => {
 
 const countTitleHandler = () => {
   countCharsHandler(
-    inputNewsTitle,
+    inputTitle,
     titleCharCounterSpan,
     5,
     40,
@@ -27,6 +27,6 @@ const countTitleHandler = () => {
   );
 };
 
-inputNewsTitle.addEventListener('input', countTitleHandler);
+inputTitle.addEventListener('input', countTitleHandler);
 
 window.addEventListener('load', countTitleHandler);

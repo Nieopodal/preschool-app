@@ -1,0 +1,38 @@
+<article class="container-for-article">
+
+  <header>
+    <h2 class="page-title">Album fotograficzny</h2>
+  </header>
+
+  <div class="one-article">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
+      distinctio doloremque eaque error harum illum incidunt.
+    </p>
+  </div>
+
+  <div class="flex justify-center py-4">
+    <a href="/album/dodaj" class="actions-btn">
+      Dodaj nowy wpis
+    </a>
+  </div>
+
+  <div class="all-photos-container">
+    {{#each albums}}
+      <a href="/album/{{this.id}}">
+        <div class="photo-card one-photo hover:text-secondary-focus">
+          <img class="photo-img image"
+               src="/img/upload/{{this.firstImg.fileName}}"
+               alt="{{this.title}}">
+          <div class=" p-4">
+            <span class="title-span font-bold py-4 text-xl">{{this.title}}</span>
+            <span class="createdAt-span text-basic flex">{{this.createdAt}}
+              , {{this.numberOfPhotos}} {{> icons/photo-svg}}
+            </span>
+          </div>
+        </div>
+      </a>
+    {{/each}}
+  </div>
+
+  {{> pagination this}}
+</article>

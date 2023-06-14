@@ -1,0 +1,27 @@
+<div class="container-for-article">
+
+  {{> deleting-dialog-box this}}
+
+  {{#with item}}
+
+  <div id="container-to-blur-when-popup" class="relative z-0">
+
+    {{> blur-effect-div}}
+
+    <header>
+      <h2 class="page-title">Edycja albumu z dnia {{this.createdAt}}</h2>
+      <p class="mx-auto w-fit text-lg">Tutaj możesz zmienić tytuł, dodać/usunąć zdjęcia lub usunąć cały album.</p>
+    </header>
+
+    {{> album/editing-form this}}
+
+    {{> album/editing-photo this}}
+
+  {{/with}}
+
+  </div>
+</div>
+
+<script src="/scripts/album/add-form.js"></script>
+<script src="/scripts/edit-form.js"></script>
+
