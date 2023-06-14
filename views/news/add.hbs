@@ -1,35 +1,35 @@
 <div class="container-for-article">
-    <header>
-        <h2 class="page-title">Dodaj aktualność</h2>
-    </header>
+  <header>
+    <h2 class="page-title">Dodaj aktualność</h2>
+  </header>
 
-    <form action="/aktualnosci" method="POST">
-        <div class="mx-auto text-lg">
-            <label class="block py-8 ">
-                <span class="pb-2 font-semibold">Tytuł</span>
-                <input id="input-news-title" type="text" name="title" minlength="3" maxlength="60" required
-                       class="text-input font-semibold">
-                <span id="title-char-counter">0/60</span>
-            </label>
+  <form action="/aktualnosci" method="POST">
+    <div class="mx-auto text-lg">
+      <label class="block py-8 ">
+        <span class="pb-2 font-semibold">Tytuł</span>
+        <input id="input-news-title" type="text" name="title" minlength="3" maxlength="60" required
+               class="text-input font-semibold">
+        <span id="title-char-counter">0/60</span>
+      </label>
 
-            <label class="block">
-                <span class="pb-2 font-semibold">Treść</span>
-                <textarea name="article" id="input-news-article" minlength="10" maxlength="5000" required
-                          class="text-input resize-y h-80"></textarea>
-                <span id="article-char-counter">0/5000</span>
-            </label>
+      <label class="block">
+        <span class="pb-2 font-semibold">Treść</span>
+        <textarea name="article" id="input-news-article" minlength="10" maxlength="5000" required
+                  class="text-input resize-y h-80"></textarea>
+        <span id="article-char-counter">0/5000</span>
+      </label>
 
-            <div class="text-center">
-                <button type="submit" id="send-article"
-                        class="actions-btn mx-2">
-                    Dodaj
-                </button>
+      <div class="text-center">
+        <button type="submit" id="send-article"
+                class="actions-btn mx-2">
+          Dodaj
+        </button>
 
-                <a href="/aktualnosci"
-                   class="actions-btn mx-2">Anuluj</a>
-            </div>
-        </div>
-    </form>
+        <a href="/aktualnosci"
+           class="actions-btn mx-2">Anuluj</a>
+      </div>
+    </div>
+  </form>
 
 </div>
 <script src="/scripts/news/add-form.js"></script>

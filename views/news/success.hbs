@@ -1,14 +1,12 @@
 <div class="container-for-article">
-    <header>
-        <h2 class="page-title">Sukces! {{message}}</h2>
-    </header>
+  <header>
+    <h2 class="page-title">Sukces! {{message}}</h2>
+  </header>
 
-    {{#if idOfNews}}
+  {{#if idOfNews}}
     <div class="bold-link-with-hover text-center"><a href="/aktualnosci/{{idOfNews}}">Wyświetl wpis</a></div>
-    {{/if}}
+  {{/if}}
 
-
-    <div class="bold-link-with-hover text-center"><a href="/aktualnosci">Przejdź do aktualności</a></div>
-    <div class="bold-link-with-hover text-center">{{>go-home}}</div>
-
+  <div class="bold-link-with-hover text-center"><a href="/aktualnosci">Przejdź do aktualności</a></div>
+  <div class="bold-link-with-hover text-center">{{>go-home}}</div>
 </div>
