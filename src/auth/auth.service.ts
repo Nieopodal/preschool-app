@@ -42,20 +42,21 @@ export class AuthService {
     return token;
   }
 
-  async login(req: AuthLoginDto, res: Response): Promise<any> {
+  async login(req: AuthLoginDto, res: Response, user: User): Promise<any> {
+    if (user) return res.redirect('/dashboard');
     try {
-      const user = await User.findOne({
+      const foundUser = await User.findOne({
         where: {
           email: req.email,
           pwdHash: await hashPwd(req.pwd),
         },
       });
 
-      if (!user) {
+      if (!foundUser) {
         return res.json({ error: 'Invalid login data!' });
       }
 
-      const token = await this.createToken(await this.generateToken(user));
+      const token = await this.createToken(await this.generateToken(foundUser));
 
       return res
         .cookie('jwt', token.accessToken, {
@@ -65,13 +66,13 @@ export class AuthService {
           // @TODO: in production domain
           httpOnly: true,
         })
-        .json({ ok: true });
+        .json({ ok: true }); //@TODO pageRenderHandler
     } catch (e) {
       return res.json({ error: e.message });
     }
   }
 
-  async logout(user: User, res: Response) {
+  async logout(res: Response, user: User) {
     try {
       user.currentTokenId = null;
       await user.save();
@@ -82,7 +83,7 @@ export class AuthService {
         httpOnly: true,
         //@TODO: in production: change secure && domain
       });
-      return res.json({ ok: true });
+      return res.json({ ok: true }); //@TODO Page render handler
     } catch (e) {
       return res.json({ error: e.message });
     }

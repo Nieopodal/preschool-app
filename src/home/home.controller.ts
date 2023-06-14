@@ -1,67 +1,73 @@
 import { Controller, Get, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { HomeService } from './home.service';
+import { UserObject } from '../decorators/user-object.decorator';
+import { User } from '../user/entity/user.entity';
+import { pageRenderHandler } from '../utils/page-render.handler';
 
 @Controller('/')
 export class HomeController {
   constructor(private readonly homeService: HomeService) {}
   @Get('/')
-  async getHomePage(@Res() res: Response) {
-    return await this.homeService.getHomePage(res);
+  async getHomePage(@UserObject() user: User, @Res() res: Response) {
+    return await this.homeService.getHomePage(res, user);
   }
 
   @Get('/o-przedszkolu')
-  async getAboutPage(@Res() res: Response) {
-    return res.render('home/about', { layout: 'index' });
+  async getAboutPage(@UserObject() user: User, @Res() res: Response) {
+    return pageRenderHandler(res, user, 'home/about');
   }
 
   @Get('/kontakt')
-  async getContactPage(@Res() res: Response) {
-    return res.render('home/contact', { layout: 'index' });
+  async getContactPage(@UserObject() user: User, @Res() res: Response) {
+    return pageRenderHandler(res, user, 'home/contact');
   }
 
   @Get('/statut')
-  async getStatutePage(@Res() res: Response) {
-    return res.render('home/statute', { layout: 'index' });
+  async getStatutePage(@UserObject() user: User, @Res() res: Response) {
+    return pageRenderHandler(res, user, 'home/statute');
   }
 
   @Get('/regulamin-i-procedury')
-  async getRegulationsPage(@Res() res: Response) {
-    return res.render('home/regulations', { layout: 'index' });
+  async getRegulationsPage(@UserObject() user: User, @Res() res: Response) {
+    return pageRenderHandler(res, user, 'home/regulations');
   }
 
   @Get('/oplaty')
-  async getFeesPage(@Res() res: Response) {
-    return res.render('home/fees', { layout: 'index' });
+  async getFeesPage(@UserObject() user: User, @Res() res: Response) {
+    return pageRenderHandler(res, user, 'home/fees');
   }
 
   @Get('/ochrona-danych-osobowych')
-  async getGdprPage(@Res() res: Response) {
-    return res.render('home/gdpr', { layout: 'index' });
+  async getGdprPage(@UserObject() user: User, @Res() res: Response) {
+    return pageRenderHandler(res, user, 'home/gdpr');
   }
 
   @Get('/polityka-prywatnosci')
-  async getPrivacyPolicyPage(@Res() res: Response) {
-    return res.render('home/privacy-policy', { layout: 'index' });
+  async getPrivacyPolicyPage(@UserObject() user: User, @Res() res: Response) {
+    return pageRenderHandler(res, user, 'home/privacy-policy');
   }
 
   @Get('/pracownicy-przedszkola')
-  async getEmployeesPage(@Res() res: Response) {
-    return res.render('home/employees', { layout: 'index' });
+  async getEmployeesPage(@UserObject() user: User, @Res() res: Response) {
+    return pageRenderHandler(res, user, 'home/employees');
   }
 
   @Get('/grupy-w-przedszkolu')
-  async getGroupsPage(@Res() res: Response) {
-    return res.render('home/groups', { layout: 'index' });
+  async getGroupsPage(@UserObject() user: User, @Res() res: Response) {
+    return pageRenderHandler(res, user, 'home/groups');
   }
 
   @Get('/realizowane-programy-certyfikaty')
-  async getImplementedProgramsPage(@Res() res: Response) {
-    return res.render('home/implemented-programs', { layout: 'index' });
+  async getImplementedProgramsPage(
+    @UserObject() user: User,
+    @Res() res: Response,
+  ) {
+    return pageRenderHandler(res, user, 'home/implemented-programs');
   }
 
   @Get('/organizacja-pracy')
-  async getOrganizationPage(@Res() res: Response) {
-    return res.render('home/organization', { layout: 'index' });
+  async getOrganizationPage(@UserObject() user: User, @Res() res: Response) {
+    return pageRenderHandler(res, user, 'home/organization');
   }
 }

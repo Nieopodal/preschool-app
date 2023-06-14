@@ -3,14 +3,10 @@ import { Request, Response } from 'express';
 import { format } from 'date-fns';
 import { paginationHandler } from '../utils/pagination.handler';
 import { Album } from './entity/album.entity';
-import { Photo } from '../photo/entity/photo.entity';
 import { PhotoService } from '../photo/photo.service';
-
-interface AlbumWithPhotos extends Album {
-  photos: Photo[];
-}
-
-// @TODO: przenieść do typów
+import { pageRenderHandler } from '../utils/page-render.handler';
+import { User } from '../user/entity/user.entity';
+import { AlbumWithPhotos } from '../types';
 
 @Injectable()
 export class AlbumService {
@@ -18,7 +14,8 @@ export class AlbumService {
     @Inject(forwardRef(() => PhotoService))
     private readonly photoService: PhotoService,
   ) {}
-  async getAllAlbums(res: Response, currentPage: number) {
+  async getAllAlbums(res: Response, user: User, currentPage: number) {
+    console.log(user);
     const maxPerPage = 10;
     const [albums, count]: [AlbumWithPhotos[], number] =
       await Album.findAndCount({
@@ -40,14 +37,18 @@ export class AlbumService {
         firstImg: photos[photos.length - 1],
       };
     });
-    return res.render('album/list-all', {
-      layout: 'index',
-      albums: fixedDateAlbums,
-      paginationSettings: paginationHandler(currentPage, pagesCount, 'album'),
-    });
+    pageRenderHandler(
+      res,
+      user,
+      'album/list-all',
+      { albums: fixedDateAlbums },
+      {
+        paginationSettings: paginationHandler(currentPage, pagesCount, 'album'),
+      },
+    );
   }
 
-  async getOneAlbum(res: Response, id: string) {
+  async getOneAlbum(res: Response, user: User, id: string) {
     const album: AlbumWithPhotos = await Album.findOne({
       relations: ['photos'],
       where: {
@@ -62,14 +63,14 @@ export class AlbumService {
       ...album,
       createdAt: format(album.createdAt, 'dd.MM.yyyy'),
     };
-    res.render('album/list-one', { layout: 'index', album: fixedDateAlbum });
+    pageRenderHandler(res, user, 'album/list-one', { album: fixedDateAlbum });
   }
 
-  async getAddAlbumPage(res: Response) {
-    return res.render('album/add', { layout: 'index' });
+  async getAddAlbumPage(res: Response, user: User) {
+    pageRenderHandler(res, user, 'album/add');
   }
 
-  async getEditAlbumPage(res: Response, id: string) {
+  async getEditAlbumPage(res: Response, user: User, id: string) {
     const album: AlbumWithPhotos = await Album.findOne({
       relations: ['photos'],
       where: {
@@ -85,16 +86,19 @@ export class AlbumService {
       createdAt: format(album.createdAt, 'dd.MM.yyyy'),
     };
 
-    return res.render('album/edit', {
-      layout: 'index',
-      item: fixedDateAlbum,
-      pageName: 'album',
-    });
+    pageRenderHandler(
+      res,
+      user,
+      'album/edit',
+      { item: fixedDateAlbum },
+      { pageName: 'album' },
+    );
   }
 
   async addOrEdit(
     req: Request,
     res: Response,
+    user: User,
     fileNames: string[],
     editingAlbumId?: string,
   ) {
@@ -113,13 +117,17 @@ export class AlbumService {
         }),
       );
 
-      return res.render('album/success', {
-        layout: 'index',
-        message: editingAlbumId
-          ? 'Zapisano zmiany'
-          : 'Pomyślnie dodano nowy album',
-        id: album.id,
-      });
+      return pageRenderHandler(
+        res,
+        user,
+        'album/success',
+        {
+          message: editingAlbumId
+            ? 'Zapisano zmiany'
+            : 'Pomyślnie dodano nowy album',
+        },
+        { id: album.id },
+      );
     } catch (e) {
       try {
         if (fileNames.length > 0) {
@@ -142,12 +150,6 @@ export class AlbumService {
     }
   }
 
-  async numberOfPhotos(id: string): Promise<number> {
-    const album = await Album.findOne({ where: { id } });
-    if (!album) throw new Error('Album nie został odnaleziony.');
-    return album.numberOfPhotos;
-  }
-
   async editOrDecreaseNumberOfPhotos(
     id: string,
     newValue?: number,
@@ -161,11 +163,10 @@ export class AlbumService {
       if (album.numberOfPhotos < 0)
         throw new Error('Liczba dostępnych zdjęć nie może być mniejsza od 0.');
     }
-
     await album.save();
   }
 
-  async delete(res: Response, id: string) {
+  async delete(res: Response, user: User, id: string) {
     const album = await Album.findOne({
       where: { id },
       relations: ['photos'],
@@ -181,8 +182,7 @@ export class AlbumService {
       );
       await album.remove();
 
-      return res.render('album/success', {
-        layout: 'index',
+      return pageRenderHandler(res, user, 'album/success', {
         message: 'Pomyślnie usunięto album',
       });
     } catch (e) {

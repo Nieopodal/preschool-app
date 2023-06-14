@@ -1,41 +1,40 @@
 import { Response } from 'express';
+import { User } from '../user/entity/user.entity';
 
 export const pageRenderHandler = (
   res: Response,
-  isLoggedIn: boolean,
+  user: User | undefined,
   viewPath: string,
-  firstProp: { [key: string]: any },
-  secProp: { [key: string]: any },
+  firstPropObj?: { [key: string]: any },
+  secPropObj?: { [key: string]: any },
 ) => {
-  if (!firstProp) {
-    res.render(viewPath, {
+  if (!firstPropObj) {
+    return res.render(viewPath, {
       layout: 'index',
-      userLoggedIn: isLoggedIn,
+      userLoggedIn: user,
     });
-    return;
   }
 
-  if (!secProp) {
-    const firstHbsVariableName = Object.keys(firstProp)[0];
-    const firstHbsVariableValue = Object.values(firstProp)[0];
+  if (!secPropObj) {
+    const firstHbsVariableName = Object.keys(firstPropObj)[0];
+    const firstHbsVariableValue = Object.values(firstPropObj)[0];
 
-    res.render(viewPath, {
+    return res.render(viewPath, {
       layout: 'index',
-      userLoggedIn: isLoggedIn,
+      userLoggedIn: user,
       [firstHbsVariableName]: firstHbsVariableValue,
     });
-    return;
   }
 
-  const firstHbsVariableName = Object.keys(firstProp)[0];
-  const firstHbsVariableValue = Object.values(firstProp)[0];
+  const firstHbsVariableName = Object.keys(firstPropObj)[0];
+  const firstHbsVariableValue = Object.values(firstPropObj)[0];
 
-  const secondHbsVariableName = Object.keys(secProp)[0];
-  const secondHbsVariableValue = Object.values(secProp)[0];
+  const secondHbsVariableName = Object.keys(secPropObj)[0];
+  const secondHbsVariableValue = Object.values(secPropObj)[0];
 
-  res.render(viewPath, {
+  return res.render(viewPath, {
     layout: 'index',
-    userLoggedIn: isLoggedIn,
+    userLoggedIn: user,
     [firstHbsVariableName]: firstHbsVariableValue,
     [secondHbsVariableName]: secondHbsVariableValue,
   });

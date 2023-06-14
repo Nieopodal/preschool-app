@@ -11,13 +11,17 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('/login')
-  async login(@Body() req: AuthLoginDto, @Res() res: Response): Promise<any> {
-    return this.authService.login(req, res);
+  async login(
+    @UserObject() user: User,
+    @Body() req: AuthLoginDto,
+    @Res() res: Response,
+  ): Promise<any> {
+    return this.authService.login(req, res, user);
   }
 
   @Get('/logout')
   @UseGuards(AuthGuard('jwt'))
   async logout(@UserObject() user: User, @Res() res: Response): Promise<any> {
-    return this.authService.logout(user, res);
+    return this.authService.logout(res, user);
   }
 }
