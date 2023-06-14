@@ -12,6 +12,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { AlbumModule } from './album/album.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { memoryStorage } from 'multer';
     PhotoModule,
     AdminModule,
     AlbumModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
