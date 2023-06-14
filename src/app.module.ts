@@ -7,7 +7,6 @@ import { DatabaseConfiguration } from './config/typeorm.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { NewsModule } from './news/news.module';
 import { PhotoModule } from './photo/photo.module';
-import { AdminModule } from './admin/admin.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { AlbumModule } from './album/album.module';
 import { MulterModule } from '@nestjs/platform-express';
@@ -31,7 +30,6 @@ import { AuthModule } from './auth/auth.module';
     HomeModule,
     NewsModule,
     PhotoModule,
-    AdminModule,
     AlbumModule,
     UserModule,
     AuthModule,
