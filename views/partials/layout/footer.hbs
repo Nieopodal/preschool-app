@@ -7,11 +7,13 @@
   </div>
   <div>
     <span class="footer-title">Kontakt</span>
-    <a class="link link-hover">ul. 1 Maja 3A, 44-330, Jastrzębie-Zdrój</a>
-    <a class="link link-hover">poczta@pp23.jastrzebie.pl</a>
-    <a class="link link-hover">32 476 23 48</a>
-    <a href="https://www.facebook.com/people/Publiczne-Przedszkole-Nr-23-w-Jastrz%C4%99biu-Zdroju/100063667836211/">
-      <img src="/img/f_logo_RGB-Blue_58.png" class="w-5 grayscale hover:grayscale-0 link" alt="Facebook">
+    <div class="link link-hover flex items-center"><span class="w-4 h-4 mr-2">{{> icons/pin-svg}}</span> <span>ul. 1 Maja 3A, 44-330, Jastrzębie-Zdrój</span></div>
+    <a class="link link-hover flex items-center" href="mailto:poczta@pp23.jastrzebie.pl"><span class="w-4 h-4 mr-2">{{> icons/mail-svg}}</span> <span>poczta@pp23.jastrzebie.pl</span></a>
+    <a class="link link-hover flex items-center" href="tel:324762348"><span class="w-4 h-4 mr-2">{{> icons/tel-svg}}</span> <span>32 476 23 48</span></a>
+    <a class="m-1 grayscale hover:grayscale-0" href="https://www.facebook.com/people/Publiczne-Przedszkole-Nr-23-w-Jastrz%C4%99biu-Zdroju/100063667836211/">
+      <div class="flex items-center font-semibold">
+        <span>Znajdź nas na</span> <img src="/img/f_logo_RGB-Blue_58.png" class="w-4 ml-2" alt="Facebook logo">
+      </div>
     </a>
   </div>
 
