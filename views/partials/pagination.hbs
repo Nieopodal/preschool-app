@@ -2,16 +2,16 @@
   {{#with paginationSettings}}
     Strony:
     {{#if this.addFirstPageNumber}}
-      <a href="/{{this.pageName}}/strona/1" class="hover:text-pink-400">Pierwsza</a> ...
+      <a href="/{{this.pageName}}/strona/1" class="hover:text-secondary-focus">Pierwsza</a> ...
     {{/if}}
 
     {{#each this.pageNumberList}}
-      <a href="/{{../this.pageName}}/strona/{{this}}" class="hover:text-pink-400" {{#if
+      <a href="/{{../this.pageName}}/strona/{{this}}" class="hover:text-secondary-focus" {{#if
         (isEqual this ../this.currPage)}}  style="font-weight: bold" {{/if}}>{{this}}</a>
     {{/each}}
 
     {{#if this.addLastPageNumber}}
-      ... <a href="/{{this.pageName}}/strona/{{this.lastPage}}" class="hover:text-pink-400">Ostatnia</a>
+      ... <a href="/{{this.pageName}}/strona/{{this.lastPage}}" class="hover:text-secondary-focus">Ostatnia</a>
     {{/if}}
   {{/with}}
 </div>

@@ -16,18 +16,18 @@
   {{#each news}}
     <div class="one-article">
       <div class="p-4">
-        <h3 class="font-bold text-2xl"><a href="/aktualnosci/{{this.id}}" class="hover:text-pink-400">{{this.title}}</a>
+        <h3 class="font-bold text-2xl"><a href="/aktualnosci/{{this.id}}" class="hover:text-secondary-focus">{{this.title}}</a>
         </h3>
         <div class="text-base block">{{this.createdAt}}</div>
         <div class="py-2 whitespace-pre-wrap">{{this.article}}{{#if this.isTooLong}}
-          ...<a class=" text-base font-bold text-pink-400 uppercase" href="/aktualnosci/{{this.id}}">czytaj
+          ...<a class=" text-base font-bold text-secondary-focus uppercase" href="/aktualnosci/{{this.id}}">czytaj
           dalej</a>{{/if}}</div>
 
         <div class="text-base pt-2">
-          <a href="/aktualnosci/{{this.id}}" class="hover:text-pink-400">Czytaj całość</a>
-
-          {{#if userLoggedIn}}| <a href="/aktualnosci/{{this.id}}/edycja" class="text-pink-400 hover:font-bold">Edytuj wpis</a>{{/if}}
-
+          <a href="/aktualnosci/{{this.id}}" class="hover:text-secondary-focus">Czytaj całość</a>
+    {{#if ../userLoggedIn}}
+          | <a href="/aktualnosci/{{this.id}}/edycja" class="text-secondary-focus hover:font-bold">Edytuj wpis</a>
+    {{/if}}
         </div>
       </div>
     </div>
