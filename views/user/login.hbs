@@ -6,17 +6,17 @@
   <div class="actions-container">
     <div class=" p-6 rounded-xl border-[1px] shadow-md ">
 
-      <form action="/session" method="POST">
+      <form action="/auth/login" method="POST">
         <div>
           <label>
-            <input placeholder="Login" type="text" name="username" required
+            <input placeholder="Login" type="text" name="email" required
                    class="border-[1px] rounded p-1 text-xl mb-2 focus:outline-pink-200">
           </label>
         </div>
 
         <div>
           <label>
-            <input placeholder="Hasło" type="password" name="password" required
+            <input placeholder="Hasło" type="password" name="pwd" required
                    class="border-[1px] rounded p-1 text-xl mb-2 focus:outline-pink-200">
           </label>
         </div>
@@ -28,8 +28,8 @@
         </div>
       </form>
       {{#if error}}
-        <div class="pt-4 text-pink-400 text-sm text-center">
-          Nieprawidłowy login lub hasło.
+        <div class="pt-4 text-secondary-focus text-sm text-center">
+          {{error}}
         </div>
       {{/if}}
     </div>

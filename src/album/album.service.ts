@@ -15,7 +15,6 @@ export class AlbumService {
     private readonly photoService: PhotoService,
   ) {}
   async getAllAlbums(res: Response, user: User, currentPage: number) {
-    console.log(user);
     const maxPerPage = 10;
     const [albums, count]: [AlbumWithPhotos[], number] =
       await Album.findAndCount({

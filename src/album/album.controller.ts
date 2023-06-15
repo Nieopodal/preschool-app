@@ -18,11 +18,13 @@ import { SharpPipe } from '../pipes/sharp.pipe';
 import { photoFileFilter } from '../utils/photo-file-filter.handler';
 import { UserObject } from '../decorators/user-object.decorator';
 import { User } from '../user/entity/user.entity';
+import { AllowAny } from '../decorators/allow-any.decorator';
 
 @Controller('album')
 export class AlbumController {
   constructor(private readonly albumService: AlbumService) {}
   @Get('/')
+  @AllowAny()
   @Redirect('/album/strona/1')
   redirect() {
     return;
@@ -71,6 +73,7 @@ export class AlbumController {
   }
 
   @Get('/strona/:pageNumber')
+  @AllowAny()
   async getAllAlbums(
     @UserObject() user: User,
     @Res() res: Response,
@@ -94,6 +97,7 @@ export class AlbumController {
   }
 
   @Get('/:id')
+  @AllowAny()
   async getOneAlbum(
     @UserObject() user: User,
     @Res() res: Response,

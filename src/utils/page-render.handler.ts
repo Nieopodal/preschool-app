@@ -3,15 +3,17 @@ import { User } from '../user/entity/user.entity';
 
 export const pageRenderHandler = (
   res: Response,
-  user: User | undefined,
+  user: User | true,
   viewPath: string,
   firstPropObj?: { [key: string]: any },
   secPropObj?: { [key: string]: any },
 ) => {
+  const userLoggedIn = user instanceof User;
+
   if (!firstPropObj) {
     return res.render(viewPath, {
       layout: 'index',
-      userLoggedIn: user,
+      userLoggedIn,
     });
   }
 
@@ -21,7 +23,7 @@ export const pageRenderHandler = (
 
     return res.render(viewPath, {
       layout: 'index',
-      userLoggedIn: user,
+      userLoggedIn,
       [firstHbsVariableName]: firstHbsVariableValue,
     });
   }
@@ -34,7 +36,7 @@ export const pageRenderHandler = (
 
   return res.render(viewPath, {
     layout: 'index',
-    userLoggedIn: user,
+    userLoggedIn,
     [firstHbsVariableName]: firstHbsVariableValue,
     [secondHbsVariableName]: secondHbsVariableValue,
   });

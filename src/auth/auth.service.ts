@@ -6,7 +6,8 @@ import { v4 as uuid } from 'uuid';
 import { sign } from 'jsonwebtoken';
 import { JwtPayload } from './jwt-strategy';
 import { ConfigService } from '@nestjs/config';
-import { hashPwd } from '../utils/hash-pwd';
+import { pageRenderHandler } from '../utils/page-render.handler';
+import { comparePwd } from '../utils/compare-pwd';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,7 @@ export class AuthService {
     expiresIn: number;
   } {
     const payload: JwtPayload = { id: currentTokenId };
-    const expiresIn = this.configService.get('EXPIRES_IN');
+    const expiresIn = 60 * 60 * 24;
     const accessToken = sign(payload, this.configService.get('SECRET_KEY'), {
       expiresIn,
     });
@@ -48,12 +49,21 @@ export class AuthService {
       const foundUser = await User.findOne({
         where: {
           email: req.email,
-          pwdHash: await hashPwd(req.pwd),
         },
       });
 
       if (!foundUser) {
-        return res.json({ error: 'Invalid login data!' });
+        return pageRenderHandler(res, user, 'user/login', {
+          error: 'Nieprawidłowy login i/lub hasło.',
+        });
+      }
+
+      const passwordMatch = await comparePwd(req.pwd, foundUser.pwdHash);
+
+      if (!passwordMatch) {
+        return pageRenderHandler(res, user, 'user/login', {
+          error: 'Nieprawidłowy login i/lub hasło.',
+        });
       }
 
       const token = await this.createToken(await this.generateToken(foundUser));
@@ -62,30 +72,40 @@ export class AuthService {
         .cookie('jwt', token.accessToken, {
           secure: false,
           // @TODO: in production TRUE
-          domain: 'localhost',
+          // domain: 'localhost',
           // @TODO: in production domain
           httpOnly: true,
         })
-        .json({ ok: true }); //@TODO pageRenderHandler
+        .redirect('/dashboard');
     } catch (e) {
       return res.json({ error: e.message });
     }
   }
 
+  async getConfirmLogoutPage(res: Response, user: User) {
+    return pageRenderHandler(res, user, 'user/confirm-logout');
+  }
   async logout(res: Response, user: User) {
     try {
       user.currentTokenId = null;
       await user.save();
 
-      res.clearCookie('jwt', {
-        secure: false,
-        domain: 'localhost',
-        httpOnly: true,
-        //@TODO: in production: change secure && domain
-      });
-      return res.json({ ok: true }); //@TODO Page render handler
+      res
+        .clearCookie('jwt', {
+          secure: false,
+          // domain: 'localhost',
+          httpOnly: true,
+          //@TODO: in production: change secure && domain
+        })
+        .redirect('/auth/login');
     } catch (e) {
       return res.json({ error: e.message });
     }
+  }
+
+  async getLoginPage(res: Response, user: User) {
+    if (user instanceof User) res.redirect('/dashboard');
+
+    return pageRenderHandler(res, user, 'user/login');
   }
 }

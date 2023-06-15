@@ -14,11 +14,13 @@ import { NewsService } from './news.service';
 import { NewsDto } from './dto/news.dto';
 import { UserObject } from '../decorators/user-object.decorator';
 import { User } from '../user/entity/user.entity';
+import { AllowAny } from '../decorators/allow-any.decorator';
 
 @Controller('/aktualnosci')
 export class NewsController {
   constructor(private readonly newsService: NewsService) {}
   @Get('/')
+  @AllowAny()
   @Redirect('/aktualnosci/strona/1')
   redirect() {
     return;
@@ -55,6 +57,7 @@ export class NewsController {
   }
 
   @Get('/strona/:pageNumber')
+  @AllowAny()
   async getAllNews(
     @UserObject() user: User,
     @Res() res: Response,
@@ -78,6 +81,7 @@ export class NewsController {
   }
 
   @Get('/:id')
+  @AllowAny()
   async getOneNews(
     @UserObject() user: User,
     @Res() res: Response,

@@ -1,6 +1,6 @@
 <article class="container-for-article">
   <header>
-    <h2 class="page-title block">Panel użytkownika</h2>
+    <h2 class="page-title">Panel użytkownika</h2>
   </header>
   <div class="actions-container">
     <div class="p-6 rounded-xl border-[1px] shadow-md">
@@ -10,13 +10,14 @@
         Edytuj aktualności
       </a>
       <a
-        class="lg-block-actions-btn hover:font-normal w-full mb-2"
+        class="lg-block-actions-btn w-full mb-2"
         href="/album">
         Edytuj album fotograficzny
       </a>
-      <form action="/session?_method=DELETE" method="POST">
-        <button class="lg-block-actions-btn w-full">Wyloguj się</button>
-      </form>
+      <a href="auth/logout"
+         class="lg-block-actions-btn w-full"
+      >Wyloguj się
+      </a>
     </div>
   </div>
 </article>

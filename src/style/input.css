@@ -32,8 +32,12 @@
     @apply block actions-btn p-1 text-lg
 }
 
+.ghost-actions-btn {
+    @apply btn btn-ghost border-2 my-2 mx-2 md:mx-1
+}
+
 .actions-btn {
-    @apply btn btn-primary my-2 mx-2 md:mx-1 font-semibold hover:font-semibold
+    @apply btn btn-primary my-2 mx-2 md:mx-1
 }
 
 .slider-actions-btn {
