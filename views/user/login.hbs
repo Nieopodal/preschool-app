@@ -10,14 +10,13 @@
         <div>
           <label>
             <input placeholder="Login" type="text" name="email" required
-                   class="border-[1px] rounded p-1 text-xl mb-2 focus:outline-pink-200">
+                   class="text-input p-1 text-xl mb-2">
           </label>
         </div>
-
         <div>
           <label>
             <input placeholder="Hasło" type="password" name="pwd" required
-                   class="border-[1px] rounded p-1 text-xl mb-2 focus:outline-pink-200">
+                   class="text-input p-1 text-xl mb-2">
           </label>
         </div>
         <div>
@@ -27,15 +26,14 @@
           </button>
         </div>
       </form>
+
       {{#if error}}
         <div class="pt-4 text-secondary-focus text-sm text-center">
           {{error}}
         </div>
       {{/if}}
-    </div>
-  </div>
 
-  <div class="one-article">
+    </div>
   </div>
 
 </article>
