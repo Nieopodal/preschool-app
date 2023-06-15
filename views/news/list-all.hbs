@@ -3,6 +3,7 @@
     <h2 class="page-title">Aktualności</h2>
   </header>
 
+{{#if userLoggedIn}}
   <div class="flex justify-center">
     <a
       href="/aktualnosci/dodaj"
@@ -10,6 +11,7 @@
       Dodaj nowy wpis
     </a>
   </div>
+{{/if}}
 
   {{#each news}}
     <div class="one-article">
@@ -24,7 +26,7 @@
         <div class="text-base pt-2">
           <a href="/aktualnosci/{{this.id}}" class="hover:text-pink-400">Czytaj całość</a>
 
-          | <a href="/aktualnosci/{{this.id}}/edycja" class="text-pink-400 hover:font-bold">Edytuj wpis</a>
+          {{#if userLoggedIn}}| <a href="/aktualnosci/{{this.id}}/edycja" class="text-pink-400 hover:font-bold">Edytuj wpis</a>{{/if}}
 
         </div>
       </div>

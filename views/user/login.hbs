@@ -9,14 +9,24 @@
       <form action="/auth/login" method="POST">
         <div>
           <label>
-            <input placeholder="Login" type="text" name="email" required
-                   class="text-input p-1 text-xl mb-2">
+            <input
+              placeholder="Login"
+              type="text"
+              name="email"
+              required
+              class="text-input p-1 text-xl mb-2"
+            >
           </label>
         </div>
         <div>
           <label>
-            <input placeholder="Hasło" type="password" name="pwd" required
-                   class="text-input p-1 text-xl mb-2">
+            <input
+              placeholder="Hasło"
+              type="password"
+              name="pwd"
+              required
+              class="text-input p-1 text-xl mb-2"
+            >
           </label>
         </div>
         <div>
@@ -28,9 +38,7 @@
       </form>
 
       {{#if error}}
-        <div class="pt-4 text-secondary-focus text-sm text-center">
-          {{error}}
-        </div>
+        <div class="pt-4 text-secondary-focus text-sm text-center">{{error}}</div>
       {{/if}}
 
     </div>
