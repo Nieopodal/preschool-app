@@ -15,18 +15,19 @@
 <div class="drawer">
 
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-  <div id="main-container" class="drawer-content flex flex-col">
+  <div class="drawer-content flex flex-col">
 
+    <div id="main-container">
     {{> layout/header}}
 
-    <main class="mt-[66px]">
+    <main class="mt-[66px] flex-1">
       {{{body}}}
     </main>
 
     {{> layout/footer}}
     {{> privacy-policy}}
   </div>
-
+</div>
   {{> layout/drawer}}
 </div>
 </body>
