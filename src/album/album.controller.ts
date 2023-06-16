@@ -16,11 +16,15 @@ import { AlbumService } from './album.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { SharpPipe } from '../pipes/sharp.pipe';
 import { photoFileFilter } from '../utils/photo-file-filter.handler';
+import { UserObject } from '../decorators/user-object.decorator';
+import { User } from '../user/entity/user.entity';
+import { AllowAny } from '../decorators/allow-any.decorator';
 
 @Controller('album')
 export class AlbumController {
   constructor(private readonly albumService: AlbumService) {}
   @Get('/')
+  @AllowAny()
   @Redirect('/album/strona/1')
   redirect() {
     return;
@@ -33,12 +37,13 @@ export class AlbumController {
     }),
   )
   async addAlbum(
+    @UserObject() user: User,
     @UploadedFiles(SharpPipe)
     files: string[],
     @Req() req: Request,
     @Res() res: Response,
   ) {
-    return await this.albumService.addOrEdit(req, res, files);
+    return await this.albumService.addOrEdit(req, res, user, files);
   }
 
   @Patch('/:id')
@@ -48,40 +53,56 @@ export class AlbumController {
     }),
   )
   async editAlbum(
+    @UserObject() user: User,
     @UploadedFiles(SharpPipe)
     files: string[],
     @Req() req: Request,
     @Res() res: Response,
     @Param('id') id: string,
   ) {
-    return await this.albumService.addOrEdit(req, res, files, id);
+    return await this.albumService.addOrEdit(req, res, user, files, id);
   }
 
   @Delete('/:id')
-  async deleteAlbum(@Res() res: Response, @Param('id') id: string) {
-    return await this.albumService.delete(res, id);
+  async deleteAlbum(
+    @UserObject() user: User,
+    @Res() res: Response,
+    @Param('id') id: string,
+  ) {
+    return await this.albumService.delete(res, user, id);
   }
 
   @Get('/strona/:pageNumber')
+  @AllowAny()
   async getAllAlbums(
+    @UserObject() user: User,
     @Res() res: Response,
     @Param('pageNumber') pageNumber: string,
   ) {
-    return await this.albumService.getAllAlbums(res, Number(pageNumber));
+    return await this.albumService.getAllAlbums(res, user, Number(pageNumber));
   }
 
   @Get('/dodaj')
-  async getAddAlbumPage(@Res() res: Response) {
-    return await this.albumService.getAddAlbumPage(res);
+  async getAddAlbumPage(@UserObject() user: User, @Res() res: Response) {
+    return await this.albumService.getAddAlbumPage(res, user);
   }
 
   @Get('/:id/edycja')
-  async getEditAlbumPage(@Res() res: Response, @Param('id') id: string) {
-    return await this.albumService.getEditAlbumPage(res, id);
+  async getEditAlbumPage(
+    @UserObject() user: User,
+    @Res() res: Response,
+    @Param('id') id: string,
+  ) {
+    return await this.albumService.getEditAlbumPage(res, user, id);
   }
 
   @Get('/:id')
-  async getOneAlbum(@Res() res: Response, @Param('id') id: string) {
-    return await this.albumService.getOneAlbum(res, id);
+  @AllowAny()
+  async getOneAlbum(
+    @UserObject() user: User,
+    @Res() res: Response,
+    @Param('id') id: string,
+  ) {
+    return await this.albumService.getOneAlbum(res, user, id);
   }
 }

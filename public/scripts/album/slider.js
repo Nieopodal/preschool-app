@@ -44,7 +44,7 @@ const loadContentToSlider = () => {
 
     photoDescription.classList.remove(
       'p-4',
-      'hover:text-pink-400',
+      'hover:text-secondary-focus',
       'leading-none',
       'hidden',
     );

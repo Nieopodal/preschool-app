@@ -10,11 +10,13 @@
     </p>
   </div>
 
+{{#if userLoggedIn}}
   <div class="flex justify-center py-4">
     <a href="/album/dodaj" class="actions-btn">
-      Dodaj nowy wpis
+      Dodaj nowy album
     </a>
   </div>
+{{/if}}
 
   <div class="all-photos-container">
     {{#each albums}}
