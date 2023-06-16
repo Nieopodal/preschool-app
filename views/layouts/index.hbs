@@ -12,15 +12,22 @@
 </head>
 
 <body class="relative bg-base-100">
+<div class="drawer">
 
-{{> layout/header this}}
+  <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+  <div id="main-container" class="drawer-content flex flex-col">
 
-<main class="mt-[67px]">
-  {{{body}}}
-</main>
+    {{> layout/header}}
 
-{{> layout/footer}}
-{{> privacy-policy}}
+    <main class="mt-[66px]">
+      {{{body}}}
+    </main>
 
+    {{> layout/footer}}
+    {{> privacy-policy}}
+  </div>
+
+  {{> layout/drawer}}
+</div>
 </body>
 </html>
