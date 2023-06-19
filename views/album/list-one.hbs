@@ -15,7 +15,8 @@
       {{#each this.photos}}
         <div class="photo-card one-photo">
           <img
-            class="photo-img image"
+            tabindex="0"
+            class="photo-img image focus:opacity-60"
             src="/img/upload//{{this.fileName}}"
             alt="Zdjęcie z albumu {{../this.title}}"
           >

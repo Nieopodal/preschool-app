@@ -95,6 +95,14 @@ allPhotosList.forEach((photo, i) => {
   });
 });
 
+allPhotosList.forEach((photo) => {
+  photo.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && sliderContainer.classList.contains('hidden')) {
+      photo.click();
+    }
+  });
+});
+
 closeBtn.addEventListener('click', () => {
   closeSliderHandler();
 });
@@ -104,13 +112,11 @@ window.addEventListener('keydown', (event) => {
     event.key === 'ArrowRight' &&
     !sliderContainer.classList.contains('hidden')
   ) {
-    console.log('strzałka prawa');
     nextPhotoBtn.click();
   } else if (
     event.key === 'ArrowLeft' &&
     !sliderContainer.classList.contains('hidden')
   ) {
-    console.log('strzałka lewa');
     prevPhotoBtn.click();
   } else if (
     event.key === 'Escape' &&
