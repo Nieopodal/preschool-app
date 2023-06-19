@@ -10,6 +10,21 @@
     @apply text-3xl md:text-3xl lg:text-4xl text-center font-bold text-secondary-focus pt-8 px-4
 }
 
+.mobile-menu-item {
+    @apply flex items-center w-full p-2 text-secondary-focus transition duration-75 rounded-lg pl-11 hover:bg-gray-200
+}
+
+.user-menu-item {
+    @apply block px-4 py-2 text-sm hover:bg-gray-100
+}
+
+.desktop-menu-item {
+    @apply block px-4 py-2 hover:bg-gray-100
+}
+
+.main-menu-item {
+    @apply btn btn-ghost text-secondary-focus w-full md:w-fit justify-start md:justify-center
+}
 .small-title {
     @apply text-xl md:text-2xl lg:text-3xl text-center font-bold text-secondary-focus py-8 px-4
 }

@@ -1,49 +1,52 @@
 <li class="md:hidden">
-  <button type="button"
-          class="btn btn-ghost text-secondary-focus w-full md:w-fit justify-start md:justify-center"
-          aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+  <button
+    type="button"
+    class="btn btn-ghost text-secondary-focus w-full md:w-fit justify-start md:justify-center"
+    aria-controls="dropdown-example"
+    data-collapse-toggle="dropdown-example"
+  >
     <span class="flex-1 text-left whitespace-nowrap">Menu</span>
     <span class="w-6 h-6">{{> icons/expand-svg}}</span>
   </button>
   <ul id="dropdown-example" class="hidden py-2 space-y-2">
     <li>
       <a href="/"
-         class="flex items-center w-full p-2 text-secondary-focus transition duration-75 rounded-lg pl-11 group hover:bg-gray-200">Strona
+         class="mobile-menu-item group">Strona
         główna</a>
     </li>
     <li>
       <a href="/aktualnosci"
-         class="flex items-center w-full p-2 text-secondary-focus transition duration-75 rounded-lg pl-11 group hover:bg-gray-200">Aktualności</a>
+         class="mobile-menu-item group">Aktualności</a>
     </li>
     <li>
       <a href="/pracownicy-przedszkola"
-         class="flex items-center w-full p-2 text-secondary-focus transition duration-75 rounded-lg pl-11 group hover:bg-gray-200">Pracownicy
+         class="mobile-menu-item group">Pracownicy
         przedszkola</a>
     </li>
     <li>
       <a href="/grupy-w-przedszkolu"
-         class="flex items-center w-full p-2 text-secondary-focus transition duration-75 rounded-lg pl-11 group hover:bg-gray-200">Grupy
+         class="mobile-menu-item group">Grupy
         w przedszkolu</a>
     </li>
     <li>
       <a href="/realizowane-programy-certyfikaty"
-         class="flex items-center w-full p-2 text-secondary-focus transition duration-75 rounded-lg pl-11 group hover:bg-gray-200">Realizowane
+         class="mobile-menu-item group">Realizowane
         programy, certyfikaty</a>
     </li>
     <li>
       <a href="/organizacja-pracy"
-         class="flex items-center w-full p-2 text-secondary-focus transition duration-75 rounded-lg pl-11 group hover:bg-gray-200">Organizacja
+         class="mobile-menu-item group">Organizacja
         pracy</a>
     </li>
     <li>
       <a href="/album"
-         class="flex items-center w-full p-2 text-secondary-focus transition duration-75 rounded-lg pl-11 group hover:bg-gray-200">Album
+         class="mobile-menu-item group0">Album
         fotograficzny</a>
     </li>
     {{#unless userLoggedIn}}
       <li>
         <a href="/auth/login"
-           class="flex items-center w-full p-2 text-secondary-focus transition duration-75 rounded-lg pl-11 group hover:bg-gray-200">Logowanie</a>
+           class="mobile-menu-item group">Logowanie</a>
       </li>
     {{/unless}}
   </ul>
