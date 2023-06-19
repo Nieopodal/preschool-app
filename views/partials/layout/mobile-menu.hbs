@@ -2,51 +2,37 @@
   <button
     type="button"
     class="btn btn-ghost text-secondary-focus w-full md:w-fit justify-start md:justify-center"
-    aria-controls="dropdown-example"
-    data-collapse-toggle="dropdown-example"
+    aria-controls="mobile-dropdown"
+    data-collapse-toggle="mobile-dropdown"
   >
     <span class="flex-1 text-left whitespace-nowrap">Menu</span>
     <span class="w-6 h-6">{{> icons/expand-svg}}</span>
   </button>
-  <ul id="dropdown-example" class="hidden py-2 space-y-2">
+  <ul id="mobile-dropdown" class="hidden py-2 space-y-2">
     <li>
-      <a href="/"
-         class="mobile-menu-item group">Strona
-        główna</a>
+      <a href="/" class="mobile-menu-item group">Strona główna</a>
     </li>
     <li>
-      <a href="/aktualnosci"
-         class="mobile-menu-item group">Aktualności</a>
+      <a href="/aktualnosci" class="mobile-menu-item group">Aktualności</a>
     </li>
     <li>
-      <a href="/pracownicy-przedszkola"
-         class="mobile-menu-item group">Pracownicy
-        przedszkola</a>
+      <a href="/pracownicy-przedszkola" class="mobile-menu-item group">Pracownicy przedszkola</a>
     </li>
     <li>
-      <a href="/grupy-w-przedszkolu"
-         class="mobile-menu-item group">Grupy
-        w przedszkolu</a>
+      <a href="/grupy-w-przedszkolu" class="mobile-menu-item group">Grupy w przedszkolu</a>
     </li>
     <li>
-      <a href="/realizowane-programy-certyfikaty"
-         class="mobile-menu-item group">Realizowane
-        programy, certyfikaty</a>
+      <a href="/realizowane-programy-certyfikaty" class="mobile-menu-item group">Realizowane programy, certyfikaty</a>
     </li>
     <li>
-      <a href="/organizacja-pracy"
-         class="mobile-menu-item group">Organizacja
-        pracy</a>
+      <a href="/organizacja-pracy" class="mobile-menu-item group">Organizacja pracy</a>
     </li>
     <li>
-      <a href="/album"
-         class="mobile-menu-item group0">Album
-        fotograficzny</a>
+      <a href="/album" class="mobile-menu-item group0">Album fotograficzny</a>
     </li>
     {{#unless userLoggedIn}}
       <li>
-        <a href="/auth/login"
-           class="mobile-menu-item group">Logowanie</a>
+        <a href="/auth/login" class="mobile-menu-item group">Logowanie</a>
       </li>
     {{/unless}}
   </ul>
