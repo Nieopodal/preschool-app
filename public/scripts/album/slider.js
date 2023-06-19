@@ -98,3 +98,24 @@ allPhotosList.forEach((photo, i) => {
 closeBtn.addEventListener('click', () => {
   closeSliderHandler();
 });
+
+window.addEventListener('keydown', (event) => {
+  if (
+    event.key === 'ArrowRight' &&
+    !sliderContainer.classList.contains('hidden')
+  ) {
+    console.log('strzałka prawa');
+    nextPhotoBtn.click();
+  } else if (
+    event.key === 'ArrowLeft' &&
+    !sliderContainer.classList.contains('hidden')
+  ) {
+    console.log('strzałka lewa');
+    prevPhotoBtn.click();
+  } else if (
+    event.key === 'Escape' &&
+    !sliderContainer.classList.contains('hidden')
+  ) {
+    closeBtn.click();
+  }
+});
