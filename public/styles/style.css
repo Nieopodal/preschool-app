@@ -5687,6 +5687,14 @@ html {
     margin-top: 68px;
   }
 
+  .\32xl\:mt-\[100px\] {
+    margin-top: 100px;
+  }
+
+  .\32xl\:mt-\[80px\] {
+    margin-top: 80px;
+  }
+
   .\32xl\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
