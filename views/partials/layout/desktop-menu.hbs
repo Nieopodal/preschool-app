@@ -1,0 +1,57 @@
+<li class="hidden md:block text-secondary-focus">
+  <button
+    id="dropdownNavbarLink"
+    data-dropdown-toggle="dropdownNavbar"
+    class="flex items-center justify-between btn btn-ghost"
+  >
+    Menu
+    <span class="w-6 h-6 ml-1">{{> icons/expand-svg}}</span>
+  </button>
+
+  <div id="dropdownNavbar"
+       class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-52">
+    <ul class="py-2 text-sm" aria-labelledby="dropdownLargeButton">
+      <li>
+        <a href="/" class="block px-4 py-2 hover:bg-gray-100">Strona
+          główna</a>
+      </li>
+      <li>
+        <a href="/aktualnosci"
+           class="block px-4 py-2 hover:bg-gray-100">Aktualności</a>
+      </li>
+      <li>
+        <a href="/pracownicy-przedszkola"
+           class="block px-4 py-2 hover:bg-gray-100">Pracownicy
+          przedszkola</a>
+      </li>
+
+      <li>
+        <a href="/grupy-w-przedszkolu"
+           class="block px-4 py-2 hover:bg-gray-100">Grupy w
+          przedszkolu</a>
+      </li>
+
+      <li>
+        <a href="/realizowane-programy-certyfikaty"
+           class="block px-4 py-2 hover:bg-gray-100">Realizowane
+          programy, certyfikaty</a>
+      </li>
+      <li>
+        <a href="/organizacja-pracy"
+           class="block px-4 py-2 hover:bg-gray-100">Organizacja
+          pracy</a>
+      </li>
+      <li>
+        <a href="/album" class="block px-4 py-2 hover:bg-gray-100">Album
+          fotograficzny</a>
+      </li>
+
+    </ul>
+    {{#unless userLoggedIn}}
+      <div class="py-1">
+        <a href="/auth/login"
+           class="block px-4 py-2 hover:bg-gray-100">Logowanie</a>
+      </div>
+    {{/unless}}
+  </div>
+</li>

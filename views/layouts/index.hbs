@@ -8,27 +8,19 @@
   <title>Publiczne Przedszkole Nr 23 w Jastrzębiu-Zdroju</title>
 
   <link rel="stylesheet" href="/styles/style.css">
-  <link rel="stylesheet" href="/styles/styles.css">
 </head>
 
-<body class="relative bg-base-100">
-<div class="drawer">
+<body class="relative bg-base-100 min-h-screen flex flex-col">
 
-  <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content flex flex-col">
+{{> layout/header}}
 
-    <div id="main-container">
-    {{> layout/header}}
+<main class="lg:mt-[64px] flex-1">
+  {{{body}}}
+</main>
 
-    <main class="mt-[66px] flex-1">
-      {{{body}}}
-    </main>
+{{> layout/footer}}
+{{> privacy-policy}}
 
-    {{> layout/footer}}
-    {{> privacy-policy}}
-  </div>
-</div>
-  {{> layout/drawer}}
-</div>
+<script src="/scripts/flowbite.min.js"></script>
 </body>
 </html>
