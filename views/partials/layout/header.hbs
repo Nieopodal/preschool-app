@@ -1,24 +1,24 @@
-<header class="border-gray-200 dark:bg-gray-900 block xl:fixed top-0 w-full bg-base-100 z-20 shadow-lg border-y-2">
+<header class="border-gray-200 dark:bg-gray-900 block 2xl:fixed top-0 w-full bg-base-100 z-20 shadow-lg border-y-2">
   <nav class="flex flex-wrap items-center justify-between p-4">
     <a href="/"
-       class="sm:btn sm:btn-ghost sm:text-primary-focus font-semibold normal-case text-sm md:text-xl text-primary-focus whitespace-prewrap break-words pl-1 {{#if
+       class="sm:btn sm:btn-ghost sm:text-primary-focus font-semibold normal-case text-sm md:text-xl text-primary-focus whitespace-prewrap break-words pl-1 xl:px-2 2xl:px-4 {{#if
          userLoggedIn}}max-w-[70%]{{/if}} {{#unless userLoggedIn}}max-w-[80%]{{/unless}}">Publiczne
       Przedszkole nr 23 w Jastrzębiu-Zdroju</a>
 
-    <div class="flex items-center {{#if userLoggedIn}}md:order-2{{/if}}">
+    <div class="flex items-center {{#if userLoggedIn}}xl:order-2{{/if}}">
       {{> layout/user-menu}}
 
       <button data-collapse-toggle="mobile-menu-2" type="button"
-              class="inline-flex items-center btn btn-ghost avatar md:hidden p-1"
+              class="inline-flex items-center btn btn-ghost avatar xl:hidden p-1"
               aria-controls="mobile-menu-2" aria-expanded="false">
         <span class="sr-only">Otwórz menu główne</span>
         <span class="w-6 h-6 rounded-full">{{> icons/menu-svg}}</span>
       </button>
 
     </div>
-    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
+    <div class="items-center justify-between hidden w-full xl:flex xl:w-auto xl:order-1" id="mobile-menu-2">
       <ul
-        class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:mt-0 md:border-0">
+        class="flex flex-col font-medium p-4 xl:p-0 mt-4 border border-gray-100 rounded-lg xl:flex-row xl:mt-0 xl:border-0">
         {{> layout/mobile-menu}}
         {{> layout/desktop-menu}}
 

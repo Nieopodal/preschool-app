@@ -21,9 +21,8 @@
 .desktop-menu-item {
     @apply block px-4 py-2 hover:bg-gray-100
 }
-
 .main-menu-item {
-    @apply btn btn-ghost text-secondary-focus w-full md:w-fit justify-start md:justify-center
+    @apply btn btn-ghost text-secondary-focus w-full xl:w-fit justify-start xl:justify-center px-2 2xl:px-4
 }
 .small-title {
     @apply text-xl md:text-2xl lg:text-3xl text-center font-bold text-secondary-focus py-8 px-4
