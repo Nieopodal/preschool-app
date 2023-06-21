@@ -38,7 +38,7 @@ const loadContentToSlider = () => {
   if (foundPhotoCard) {
     const cardCopy = foundPhotoCard.cloneNode(true);
     const img = cardCopy.querySelector('.photo-img');
-    const photoDescription = cardCopy.querySelector('#photo-description');
+    const photoDescription = cardCopy.querySelector('.photo-description');
     const titleSpan = photoDescription.querySelector('.title-span');
     const createdAtSpan = photoDescription.querySelector('.createdAt-span');
 
