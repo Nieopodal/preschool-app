@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .page-title {
-    @apply post-title pb-10
+    @apply post-title pb-10 pt-4
 }
 
 .post-title {
