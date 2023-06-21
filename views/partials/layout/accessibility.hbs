@@ -1,6 +1,16 @@
-<button id="zoom-out-btn" class="h-5 w-5" title="Zmniejsz rozmiar tekstu">{{> icons/zoom-out-svg}}</button>
-<button id="zoom-in-btn" class="h-5 w-5" title="Zwiększ rozmiar tekstu">{{> icons/zoom-in-svg}}</button>
-<button data-toggle-theme="main,highContrast" data-act-class="ACTIVECLASS" id="contrast-btn" class="h-5 w-5" title="Wysoki kontrast">{{> icons/contrast-svg}}</button>
+<div class="flex gap-x-[10px] py-0.5">
+  <button id="zoom-out-btn" class="h-5 w-5" title="Zmniejsz rozmiar tekstu">{{> icons/zoom-out-svg}}</button>
+  <button id="zoom-in-btn" class="h-5 w-5" title="Zwiększ rozmiar tekstu">{{> icons/zoom-in-svg}}</button>
+  <button
+    data-toggle-theme="main,highContrast"
+    data-act-class="ACTIVECLASS"
+    id="contrast-btn"
+    class="h-5 w-5"
+    title="Wysoki kontrast"
+  >
+    {{> icons/contrast-svg}}
+  </button>
+</div>
 
 <script src="/scripts/accesibility.js"></script>
 <script src="/scripts/theme-change.js"></script>
