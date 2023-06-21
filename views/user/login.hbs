@@ -1,6 +1,6 @@
 <article class="container-for-article">
   <header>
-    <h2 class="page-title">Panel logowania</h2>
+    <h1 class="page-title">Panel logowania</h1>
   </header>
 
   <div class="actions-container">
@@ -9,6 +9,7 @@
       <form action="/auth/login" method="POST">
         <div>
           <label>
+            <span class="font-semibold text-lg">Login:</span>
             <input
               placeholder="Login"
               type="text"
@@ -18,8 +19,9 @@
             >
           </label>
         </div>
-        <div>
+        <div class="pt-2">
           <label>
+            <span class="font-semibold text-lg">Hasło:</span>
             <input
               placeholder="Hasło"
               type="password"

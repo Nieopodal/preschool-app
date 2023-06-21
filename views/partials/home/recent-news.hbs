@@ -6,7 +6,7 @@
         {{#each shorterFirstNews}}
           <div class="flex flex-col relative">
             <h3 class="font-semibold text-2xl pt-2 text-start whitespace-pre-wrap break-words">{{this.title}}</h3>
-            <h4 class="text-start pb-2">{{this.createdAt}}</h4>
+            <p class="text-start pb-2">{{this.createdAt}}</p>
             <p
               class="py-4 pb-8 text-justify whitespace-pre-wrap break-words flex justify-center mb-auto">{{this.article}}{{#if
               this.isTooLong}}...{{/if}}</p>

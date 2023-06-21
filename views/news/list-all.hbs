@@ -1,6 +1,6 @@
 <article class="container-for-article">
   <header>
-    <h2 class="page-title">Aktualności</h2>
+    <h1 class="page-title">Aktualności</h1>
   </header>
 
 {{#if userLoggedIn}}
@@ -16,8 +16,8 @@
   {{#each news}}
     <div class="one-article">
       <div class="p-4">
-        <h3 class="font-bold text-2xl"><a href="/aktualnosci/{{this.id}}" class="hover:text-secondary-focus">{{this.title}}</a>
-        </h3>
+        <h2 class="font-bold text-2xl"><a href="/aktualnosci/{{this.id}}" class="hover:text-secondary-focus">{{this.title}}</a>
+        </h2>
         <div class="text-base block">{{this.createdAt}}</div>
         <div class="py-2 whitespace-pre-wrap">{{this.article}}{{#if this.isTooLong}}...<a class=" text-base font-bold text-secondary-focus uppercase" href="/aktualnosci/{{this.id}}">czytaj dalej</a>{{/if}}</div>
 
