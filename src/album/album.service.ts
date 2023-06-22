@@ -3,7 +3,6 @@ import {
   Inject,
   Injectable,
   InternalServerErrorException,
-  NotFoundException,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { format } from 'date-fns';
@@ -15,6 +14,7 @@ import { User } from '../user/entity/user.entity';
 import { AlbumWithPhotos } from '../types';
 import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
 import { CustomBadRequestException } from '../exceptions/custom-bad-request.exception';
+import { CustomNotFoundException } from '../exceptions/custom-not-found.exception';
 
 @Injectable()
 export class AlbumService {
@@ -64,7 +64,7 @@ export class AlbumService {
     });
 
     if (!album) {
-      throw new NotFoundException('Album nie został odnaleziony.');
+      throw new CustomNotFoundException('Album nie został odnaleziony.');
     }
     const fixedDateAlbum = {
       ...album,
@@ -86,7 +86,7 @@ export class AlbumService {
     });
 
     if (!album) {
-      throw new NotFoundException('Album nie został odnaleziony.');
+      throw new CustomNotFoundException('Album nie został odnaleziony.');
     }
     const fixedDateAlbum = {
       ...album,
@@ -164,7 +164,8 @@ export class AlbumService {
     newValue?: number,
   ): Promise<void> {
     const album = await Album.findOne({ where: { id } });
-    if (!album) throw new NotFoundException('Album nie został odnaleziony.');
+    if (!album)
+      throw new CustomNotFoundException('Album nie został odnaleziony.');
     if (newValue) {
       album.numberOfPhotos = newValue;
     } else {
@@ -183,7 +184,8 @@ export class AlbumService {
       relations: ['photos'],
     });
 
-    if (!album) throw new NotFoundException('Album nie został odnaleziony.');
+    if (!album)
+      throw new CustomNotFoundException('Album nie został odnaleziony.');
 
     try {
       await Promise.all(

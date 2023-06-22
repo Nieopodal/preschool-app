@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Response } from 'express';
 import { format } from 'date-fns';
 import { News } from './entity/news.entity';
@@ -7,6 +7,7 @@ import { NewsResponse } from '../types';
 import { User } from '../user/entity/user.entity';
 import { pageRenderHandler } from '../utils/page-render.handler';
 import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
+import { CustomNotFoundException } from '../exceptions/custom-not-found.exception';
 
 @Injectable()
 export class NewsService {
@@ -66,7 +67,7 @@ export class NewsService {
     });
 
     if (!news) {
-      throw new NotFoundException('Artykuł nie został odnaleziony.');
+      throw new CustomNotFoundException('Artykuł nie został odnaleziony.');
     }
     const fixedDateNews = {
       ...news,
@@ -86,7 +87,7 @@ export class NewsService {
     });
 
     if (!news) {
-      throw new NotFoundException('Artykuł nie został odnaleziony.');
+      throw new CustomNotFoundException('Artykuł nie został odnaleziony.');
     }
     const fixedDateNews = {
       ...news,

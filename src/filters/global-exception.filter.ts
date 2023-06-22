@@ -10,6 +10,7 @@ import { pageRenderHandler } from '../utils/page-render.handler';
 import { User } from '../user/entity/user.entity';
 import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
 import { CustomBadRequestException } from '../exceptions/custom-bad-request.exception';
+import { CustomNotFoundException } from '../exceptions/custom-not-found.exception';
 
 interface RequestWithUser extends Request {
   user?: User;
@@ -43,6 +44,14 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         error: (exception as CustomBadRequestException)
           ? (exception as CustomBadRequestException).message
           : 'Przekazano niepoprawne dane.',
+      });
+    }
+
+    if (status === 404) {
+      return pageRenderHandler(response, request.user, 'error/error', {
+        error: !(exception instanceof CustomNotFoundException)
+          ? 'Szukana strona nie istnieje.'
+          : (exception as CustomNotFoundException).message,
       });
     }
 

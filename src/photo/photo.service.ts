@@ -1,9 +1,4 @@
-import {
-  forwardRef,
-  Inject,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { Response } from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -12,6 +7,7 @@ import { storageDir } from '../utils/storage';
 import { Photo } from './entity/photo.entity';
 import { Album } from '../album/entity/album.entity';
 import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
+import { CustomNotFoundException } from '../exceptions/custom-not-found.exception';
 
 @Injectable()
 export class PhotoService {
@@ -34,9 +30,10 @@ export class PhotoService {
           fileName,
         },
       });
-      if (!photo) throw new NotFoundException('Brak zdjęcia w bazie danych.');
+      if (!photo)
+        throw new CustomNotFoundException('Brak zdjęcia w bazie danych.');
       if (photo.album.id !== albumId)
-        throw new NotFoundException(
+        throw new CustomNotFoundException(
           'Zdjęcie nie znajduje się w bieżącym albumie.',
         );
 
