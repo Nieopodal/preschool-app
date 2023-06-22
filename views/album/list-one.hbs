@@ -3,13 +3,22 @@
 <article class="container-for-article">
 
   {{#with album}}
-    <h1 class="post-title">{{this.title}}</h1>
+    <header class="pb-10">
 
-    <h2 class="text-center pb-10 pt-2">{{this.createdAt}}</h2>
+      {{> breadcrumbs
+        routeUrl="/album"
+        routeName="Album fotograficzny"
+        subpageUrl=this.id
+        subpageName=this.title
+      }}
 
-    {{#if ../userLoggedIn}}
-      {{> edit-post this}}
-    {{/if}}
+      <h1 class="post-title">{{this.title}}</h1>
+      <p class="text-center py-2">{{this.createdAt}}</p>
+
+      {{#if ../userLoggedIn}}
+        {{> edit-post this}}
+      {{/if}}
+    </header>
 
     <div class="all-photos-container">
       {{#each this.photos}}
