@@ -1,9 +1,7 @@
 import {
-  BadRequestException,
   forwardRef,
   Inject,
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { Response } from 'express';
@@ -13,6 +11,7 @@ import { AlbumService } from '../album/album.service';
 import { storageDir } from '../utils/storage';
 import { Photo } from './entity/photo.entity';
 import { Album } from '../album/entity/album.entity';
+import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
 
 @Injectable()
 export class PhotoService {
@@ -37,7 +36,7 @@ export class PhotoService {
       });
       if (!photo) throw new NotFoundException('Brak zdjęcia w bazie danych.');
       if (photo.album.id !== albumId)
-        throw new BadRequestException(
+        throw new NotFoundException(
           'Zdjęcie nie znajduje się w bieżącym albumie.',
         );
 
@@ -50,7 +49,7 @@ export class PhotoService {
       if (redirect) res.redirect(`/album/${albumId}/edycja/`);
     } catch (e) {
       console.error(e);
-      throw new InternalServerErrorException(
+      throw new CustomInternalServerException(
         'Podczas usuwania zdjęcia wystąpił błąd.',
       );
     }

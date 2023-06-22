@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Response } from 'express';
 import { format } from 'date-fns';
 import { News } from './entity/news.entity';
@@ -10,6 +6,7 @@ import { paginationHandler } from '../utils/pagination.handler';
 import { NewsResponse } from '../types';
 import { User } from '../user/entity/user.entity';
 import { pageRenderHandler } from '../utils/page-render.handler';
+import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
 
 @Injectable()
 export class NewsService {
@@ -145,7 +142,7 @@ export class NewsService {
       isTooLong: article.length > 600,
     });
     if (news.affected !== 1) {
-      throw new InternalServerErrorException(
+      throw new CustomInternalServerException(
         'Podczas aktualizacji wpisu wystąpił błąd.',
       );
     }
@@ -162,7 +159,7 @@ export class NewsService {
   async removeNews(res: Response, user: User, id: string) {
     const deleteResult = await News.delete(id);
     if (deleteResult.affected !== 1) {
-      throw new InternalServerErrorException(
+      throw new CustomInternalServerException(
         'Podczas usuwania wpisu wystąpił błąd.',
       );
     }

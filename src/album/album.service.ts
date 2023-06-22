@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   forwardRef,
   Inject,
   Injectable,
@@ -14,6 +13,8 @@ import { PhotoService } from '../photo/photo.service';
 import { pageRenderHandler } from '../utils/page-render.handler';
 import { User } from '../user/entity/user.entity';
 import { AlbumWithPhotos } from '../types';
+import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
+import { CustomBadRequestException } from '../exceptions/custom-bad-request.exception';
 
 @Injectable()
 export class AlbumService {
@@ -150,12 +151,11 @@ export class AlbumService {
         if (brokenAlbum) await brokenAlbum.remove();
       } catch (e2) {
         console.error(e2);
-        throw new InternalServerErrorException(
+        throw new CustomInternalServerException(
           'Podczas usuwania pliku wystąpił błąd.',
         );
       }
-      console.error(e);
-      throw new InternalServerErrorException();
+      throw new InternalServerErrorException(e);
     }
   }
 
@@ -170,8 +170,8 @@ export class AlbumService {
     } else {
       album.numberOfPhotos--;
       if (album.numberOfPhotos < 0)
-        throw new BadRequestException(
-          'Liczba dostępnych zdjęć nie może być mniejsza od 0.',
+        throw new CustomBadRequestException(
+          'Liczba dostępnych zdjęć w albumie nie może być mniejsza od 0.',
         );
     }
     await album.save();
@@ -197,7 +197,8 @@ export class AlbumService {
         message: 'Pomyślnie usunięto album',
       });
     } catch (e) {
-      throw new InternalServerErrorException(
+      console.error(e);
+      throw new CustomInternalServerException(
         'Podczas próby usunięcia albumu wystąpił błąd.',
       );
     }

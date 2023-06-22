@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { BadRequestException } from '@nestjs/common';
+import { CustomBadRequestException } from '../exceptions/custom-bad-request.exception';
 
 const acceptableMimeTypes = [
   'image/jpeg',
@@ -14,10 +14,13 @@ export const photoFileFilter = (
   callback,
 ) => {
   if (!acceptableMimeTypes.includes(file.mimetype)) {
-    return callback(new BadRequestException('Błędny typ pliku.'), false);
+    return callback(new CustomBadRequestException('Błędny typ pliku.'), false);
   }
   if (file.size > 7340032) {
-    return callback(new BadRequestException('Plik jest zbyt duży.'), false);
+    return callback(
+      new CustomBadRequestException('Plik jest zbyt duży.'),
+      false,
+    );
   }
 
   return callback(null, true);

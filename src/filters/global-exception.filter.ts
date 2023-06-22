@@ -1,15 +1,15 @@
 import {
   ArgumentsHost,
-  BadRequestException,
   Catch,
   ExceptionFilter,
   HttpException,
   HttpStatus,
-  InternalServerErrorException,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { pageRenderHandler } from '../utils/page-render.handler';
 import { User } from '../user/entity/user.entity';
+import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
+import { CustomBadRequestException } from '../exceptions/custom-bad-request.exception';
 
 interface RequestWithUser extends Request {
   user?: User;
@@ -27,27 +27,24 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
     console.error(exception);
+
+    if (exception instanceof CustomInternalServerException) {
+      return pageRenderHandler(response, request.user, 'error/error', {
+        error: (exception as CustomInternalServerException).message,
+      });
+    }
+
     if (status === 401) {
       return response.redirect('/auth/login');
     }
 
     if (status === 400) {
       return pageRenderHandler(response, request.user, 'error/error', {
-        error:
-          (exception as BadRequestException).message === 'Bad Request'
-            ? 'Przekazano niepoprawne dane.'
-            : (exception as BadRequestException).message,
+        error: (exception as CustomBadRequestException)
+          ? (exception as CustomBadRequestException).message
+          : 'Przekazano niepoprawne dane.',
       });
     }
-
-    if (
-      status === 500 &&
-      (exception as InternalServerErrorException).message !==
-        'Internal Server Error'
-    )
-      return pageRenderHandler(response, request.user, 'error/error', {
-        error: (exception as InternalServerErrorException).message,
-      });
 
     return pageRenderHandler(response, request.user, 'error/error', {
       error: 'Przepraszamy, spróbuj ponownie później.',
