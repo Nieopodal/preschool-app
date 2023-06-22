@@ -8,6 +8,16 @@
       {{> blur-effect-div}}
 
       <header>
+
+        {{> breadcrumbs
+          routeUrl="/aktualnosci"
+          routeName="Aktualności"
+          subpageUrl=this.id
+          subpageName=this.title
+          actionName="Edycja"
+          actionUrl="/edycja"
+        }}
+
         <h1 class="page-title">Edycja wpisu z dnia {{this.createdAt}}</h1>
       </header>
 

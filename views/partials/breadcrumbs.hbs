@@ -7,16 +7,23 @@
       </a>
     </li>
     <li>
-      <a href="{{routeUrl}}" class="{{#unless subpage}}font-semibold{{/unless}}">
+      <a href="{{routeUrl}}" class="{{#unless subpageUrl}}font-semibold{{/unless}}">
         {{routeName}}
       </a>
     </li>
     {{#if subpageUrl}}
       <li>
-        <a href="{{routeUrl}}{{subpageUrl}}" class="font-semibold">
+        <a href="{{routeUrl}}/{{subpageUrl}}" class="{{#unless actionUrl}}font-semibold{{/unless}}">
           {{subpageName}}
         </a>
       </li>
+      {{#if actionUrl}}
+        <li>
+          <a href="{{routeUrl}}/{{subpageUrl}}{{actionUrl}}" class="font-semibold">
+            {{actionName}}
+          </a>
+        </li>
+      {{/if}}
     {{/if}}
   </ul>
 </section>

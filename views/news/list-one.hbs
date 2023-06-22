@@ -1,14 +1,23 @@
 <article class="container-for-article">
 
   {{#with news}}
-    <h1 class="post-title">{{this.title}}</h1>
+    <header class="pb-10">
 
-    <p class="text-center pb-10 pt-2">Data: {{this.createdAt}}</p>
+      {{> breadcrumbs
+        routeUrl="/aktualnosci"
+        routeName="Aktualności"
+        subpageUrl=this.id
+        subpageName=this.title
+      }}
 
-    {{#if ../userLoggedIn}}
-      {{> edit-post this}}
-    {{/if}}
+      <h1 class="post-title">{{this.title}}</h1>
 
+      <p class="text-center py-2">Data: {{this.createdAt}}</p>
+
+      {{#if ../userLoggedIn}}
+        {{> edit-post this}}
+      {{/if}}
+    </header>
     <div class="text-xl whitespace-pre-wrap break-all flex justify-center text-justify">
       <span>{{this.article}}</span>
     </div>
