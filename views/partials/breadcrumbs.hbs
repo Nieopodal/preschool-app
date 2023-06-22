@@ -1,0 +1,22 @@
+<section class="breadcrumbs overflow-x md:overflow-x-auto mx-auto w-fit">
+  <span class="sr-only">Jesteś tutaj:</span>
+  <ul class=" flex flex-col md:flex-row w-fit break-words">
+    <li>
+      <a href="/">
+        Strona główna
+      </a>
+    </li>
+    <li>
+      <a href="{{routeUrl}}" class="{{#unless subpage}}font-semibold{{/unless}}">
+        {{routeName}}
+      </a>
+    </li>
+    {{#if subpageUrl}}
+      <li>
+        <a href="{{routeUrl}}{{subpageUrl}}" class="font-semibold">
+          {{subpageName}}
+        </a>
+      </li>
+    {{/if}}
+  </ul>
+</section>

@@ -7,7 +7,7 @@
 }
 
 .post-title {
-    @apply text-2xl md:text-3xl lg:text-4xl text-center font-bold text-secondary-focus pt-8 px-4
+    @apply text-2xl md:text-3xl lg:text-4xl text-center font-bold text-secondary-focus pt-8  px-2 sm:px-4 break-words
 }
 
 .hero-title {
@@ -34,7 +34,7 @@
 
 /*the whole page*/
 .container-for-article {
-    @apply mt-0 mb-8 mx-auto md:max-w-screen-lg pt-4 md:pt-8 px-8 break-words
+    @apply mt-0 mb-8 mx-auto md:max-w-screen-lg pt-4 md:pt-8 px-3 md:px-8 break-words
 }
 
 /*one article*/
