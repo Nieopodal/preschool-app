@@ -45,6 +45,7 @@ export class AuthService {
 
   async login(req: AuthLoginDto, res: Response, user: User): Promise<any> {
     if (user) return res.redirect('/dashboard');
+
     try {
       const foundUser = await User.findOne({
         where: {
@@ -90,7 +91,7 @@ export class AuthService {
       user.currentTokenId = null;
       await user.save();
 
-      res
+      return res
         .clearCookie('jwt', {
           secure: false,
           // domain: 'localhost',
@@ -104,7 +105,7 @@ export class AuthService {
   }
 
   async getLoginPage(res: Response, user: User) {
-    if (user instanceof User) res.redirect('/dashboard');
+    if (user instanceof User) return res.redirect('/dashboard');
 
     return pageRenderHandler(res, user, 'user/login');
   }

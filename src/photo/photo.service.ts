@@ -1,4 +1,11 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  forwardRef,
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { Response } from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -20,7 +27,7 @@ export class PhotoService {
     albumId: string,
     redirect?: boolean,
     e?: any,
-  ): Promise<any> {
+  ): Promise<void> {
     try {
       const photo = await Photo.findOne({
         relations: ['album'],
@@ -28,9 +35,11 @@ export class PhotoService {
           fileName,
         },
       });
-      if (!photo) throw new Error('Brak zdjęcia w bazie danych.');
+      if (!photo) throw new NotFoundException('Brak zdjęcia w bazie danych.');
       if (photo.album.id !== albumId)
-        throw new Error('Zdjęcie nie znajduje się w bieżącym albumie.');
+        throw new BadRequestException(
+          'Zdjęcie nie znajduje się w bieżącym albumie.',
+        );
 
       await fs.promises.unlink(path.join(storageDir(), 'upload', fileName));
       if (photo) await photo.remove();
@@ -40,7 +49,10 @@ export class PhotoService {
       if (e) return e;
       if (redirect) res.redirect(`/album/${albumId}/edycja/`);
     } catch (e) {
-      console.log(e);
+      console.error(e);
+      throw new InternalServerErrorException(
+        'Podczas usuwania zdjęcia wystąpił błąd.',
+      );
     }
   }
 

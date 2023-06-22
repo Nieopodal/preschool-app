@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { format } from 'date-fns';
 import { News } from './entity/news.entity';
@@ -65,7 +69,7 @@ export class NewsService {
     });
 
     if (!news) {
-      throw new Error('Artykuł nie został odnaleziony.');
+      throw new NotFoundException('Artykuł nie został odnaleziony.');
     }
     const fixedDateNews = {
       ...news,
@@ -85,7 +89,7 @@ export class NewsService {
     });
 
     if (!news) {
-      throw new Error('Artykuł nie został odnaleziony.');
+      throw new NotFoundException('Artykuł nie został odnaleziony.');
     }
     const fixedDateNews = {
       ...news,
@@ -123,7 +127,7 @@ export class NewsService {
       res,
       user,
       'news/success',
-      { message: 'Pomyślnie dodano nowy artykuł' },
+      { message: 'Pomyślnie dodano nowy artykuł.' },
       { id: newArticle.id },
     );
   }
@@ -141,14 +145,16 @@ export class NewsService {
       isTooLong: article.length > 600,
     });
     if (news.affected !== 1) {
-      throw new Error('Podczas aktualizacji wpisu wystąpił błąd.');
+      throw new InternalServerErrorException(
+        'Podczas aktualizacji wpisu wystąpił błąd.',
+      );
     }
 
     return pageRenderHandler(
       res,
       user,
       'news/success',
-      { message: 'Pomyślnie zaktualizowano wpis' },
+      { message: 'Pomyślnie zaktualizowano wpis.' },
       { id },
     );
   }
@@ -156,7 +162,9 @@ export class NewsService {
   async removeNews(res: Response, user: User, id: string) {
     const deleteResult = await News.delete(id);
     if (deleteResult.affected !== 1) {
-      throw new Error('Podczas usuwania wpisu wystąpił błąd.');
+      throw new InternalServerErrorException(
+        'Podczas usuwania wpisu wystąpił błąd.',
+      );
     }
 
     return pageRenderHandler(res, user, 'news/success', {

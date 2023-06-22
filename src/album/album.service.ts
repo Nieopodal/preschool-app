@@ -1,4 +1,11 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  forwardRef,
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { Request, Response } from 'express';
 import { format } from 'date-fns';
 import { paginationHandler } from '../utils/pagination.handler';
@@ -56,7 +63,7 @@ export class AlbumService {
     });
 
     if (!album) {
-      throw new Error('Album nie został odnaleziony.');
+      throw new NotFoundException('Album nie został odnaleziony.');
     }
     const fixedDateAlbum = {
       ...album,
@@ -78,7 +85,7 @@ export class AlbumService {
     });
 
     if (!album) {
-      throw new Error('Album nie został odnaleziony.');
+      throw new NotFoundException('Album nie został odnaleziony.');
     }
     const fixedDateAlbum = {
       ...album,
@@ -142,10 +149,13 @@ export class AlbumService {
 
         if (brokenAlbum) await brokenAlbum.remove();
       } catch (e2) {
-        console.log('błąd podczas usuwania pliku', e2);
+        console.error(e2);
+        throw new InternalServerErrorException(
+          'Podczas usuwania pliku wystąpił błąd.',
+        );
       }
-      //@TODO: improve errors
-      throw e;
+      console.error(e);
+      throw new InternalServerErrorException();
     }
   }
 
@@ -154,13 +164,15 @@ export class AlbumService {
     newValue?: number,
   ): Promise<void> {
     const album = await Album.findOne({ where: { id } });
-    if (!album) throw new Error('Album nie został odnaleziony.');
+    if (!album) throw new NotFoundException('Album nie został odnaleziony.');
     if (newValue) {
       album.numberOfPhotos = newValue;
     } else {
       album.numberOfPhotos--;
       if (album.numberOfPhotos < 0)
-        throw new Error('Liczba dostępnych zdjęć nie może być mniejsza od 0.');
+        throw new BadRequestException(
+          'Liczba dostępnych zdjęć nie może być mniejsza od 0.',
+        );
     }
     await album.save();
   }
@@ -171,7 +183,7 @@ export class AlbumService {
       relations: ['photos'],
     });
 
-    if (!album) throw new Error('Nie znaleziono albumu.');
+    if (!album) throw new NotFoundException('Album nie został odnaleziony.');
 
     try {
       await Promise.all(
@@ -185,7 +197,9 @@ export class AlbumService {
         message: 'Pomyślnie usunięto album',
       });
     } catch (e) {
-      console.log(e);
+      throw new InternalServerErrorException(
+        'Podczas próby usunięcia albumu wystąpił błąd.',
+      );
     }
   }
 }
