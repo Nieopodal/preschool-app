@@ -3417,6 +3417,11 @@ html {
   padding: 1.5rem;
 }
 
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -3475,6 +3480,11 @@ html {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 .pb-10 {
@@ -5401,6 +5411,10 @@ html {
 
   .xl\:order-2 {
     order: 2;
+  }
+
+  .xl\:order-last {
+    order: 9999;
   }
 
   .xl\:mx-0 {
