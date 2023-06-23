@@ -25,21 +25,23 @@
 .desktop-menu-item {
     @apply block px-4 py-2 hover:bg-gray-100 no-animation
 }
+
 .main-menu-item {
     @apply btn btn-ghost text-secondary-focus w-full xl:w-fit justify-start xl:justify-center px-2 2xl:px-4 no-animation
 }
+
 .small-title {
     @apply text-xl md:text-2xl lg:text-3xl text-center font-bold text-secondary-focus py-8 px-4
 }
 
 /*the whole page*/
 .container-for-article {
-    @apply mt-0 mb-8 mx-auto md:max-w-screen-lg pt-4 md:pt-8 px-3 md:px-8 break-words
+    @apply mt-0 mb-8 mx-auto md:max-w-screen-lg pt-4 md:pt-16 px-3 md:px-8 break-words
 }
 
 /*one article*/
 .one-article {
-    @apply py-4 text-justify lg:text-xl pb-10
+    @apply py-4 lg:text-xl pb-10
 }
 
 .actions-container {

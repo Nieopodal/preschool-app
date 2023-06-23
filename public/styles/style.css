@@ -2946,12 +2946,12 @@ html {
   margin-top: 1rem;
 }
 
-.mt-auto {
-  margin-top: auto;
-}
-
 .mt-8 {
   margin-top: 2rem;
+}
+
+.mt-auto {
+  margin-top: auto;
 }
 
 .block {
@@ -3343,6 +3343,11 @@ html {
   border-top-width: 2px;
 }
 
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
 .border-blue-600 {
   --tw-border-opacity: 1;
   border-color: rgb(37 99 235 / var(--tw-border-opacity));
@@ -3373,24 +3378,9 @@ html {
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
 
-.border-secondary-focus {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--sf, var(--s)) / var(--tw-border-opacity));
-}
-
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-
-.border-primary {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--p) / var(--tw-border-opacity));
-}
-
-.border-black {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .bg-base-100 {
@@ -3601,10 +3591,6 @@ html {
   padding-top: 1rem;
 }
 
-.pt-8 {
-  padding-top: 2rem;
-}
-
 .text-left {
   text-align: left;
 }
@@ -3626,8 +3612,8 @@ html {
   line-height: 2rem;
 }
 
-.text-\[150\%\] {
-  font-size: 150%;
+.text-\[100\%\] {
+  font-size: 100%;
 }
 
 .text-base {
@@ -3648,14 +3634,6 @@ html {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-\[100\%\] {
-  font-size: 100%;
-}
-
-.text-\[200\%\] {
-  font-size: 200%;
 }
 
 .font-bold {
@@ -4282,7 +4260,7 @@ html {
     max-width: 1024px;
     padding-left: 2rem;
     padding-right: 2rem;
-    padding-top: 2rem;
+    padding-top: 4rem;
   }
 }
 
@@ -4291,7 +4269,6 @@ html {
 .one-article {
   padding-top: 1rem;
   padding-bottom: 2.5rem;
-  text-align: justify;
 }
 
 @media (min-width: 1024px) {
@@ -5248,12 +5225,13 @@ html {
   }
 }
 
-.hover\:border-2:hover {
-  border-width: 2px;
-}
-
 .hover\:border-\[1px\]:hover {
   border-width: 1px;
+}
+
+.hover\:border-black:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .hover\:border-gray-300:hover {
@@ -5264,11 +5242,6 @@ html {
 .hover\:border-white:hover {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-
-.hover\:border-black:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .hover\:bg-blue-800:hover {
