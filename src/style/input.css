@@ -91,3 +91,7 @@
 .image {
     @apply h-60 sm:h-80 md:h-64 w-full object-cover rounded hover:cursor-pointer
 }
+
+.skip-to-content {
+    @apply transition left-0 bg-black text-white absolute p-3 m-3 -translate-y-20 focus:translate-y-0 focus:underline
+}

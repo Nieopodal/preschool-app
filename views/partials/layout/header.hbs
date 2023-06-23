@@ -1,6 +1,8 @@
-<header class="border-gray-200 block 2xl:fixed top-0 w-full bg-base-100 z-20 shadow-lg border-y-2 p-4">
-  <nav class="flex flex-wrap items-center justify-between ">
+<header class="border-gray-200 block 2xl:fixed top-0 w-full bg-base-100 z-20 shadow-lg border-y-2 p-4 relative">
 
+  {{> layout/skip-to-content}}
+
+  <nav class="flex flex-wrap items-center justify-between ">
     <a href="/"
        class=" font-semibold normal-case text-sm md:text-xl text-primary-focus whitespace-prewrap break-words pl-1 xl:px-2 2xl:px-4 {{#if
          userLoggedIn}}max-w-[70%]{{/if}} {{#unless userLoggedIn}}max-w-[80%]{{/unless}}">Publiczne
