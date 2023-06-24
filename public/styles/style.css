@@ -3636,6 +3636,14 @@ html {
   line-height: 1.75rem;
 }
 
+.text-\[150\%\] {
+  font-size: 150%;
+}
+
+.text-\[200\%\] {
+  font-size: 200%;
+}
+
 .font-bold {
   font-weight: 700;
 }
