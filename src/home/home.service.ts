@@ -9,8 +9,6 @@ export class HomeService {
   constructor(private newsService: NewsService) {}
   async getHomePage(res: Response, user: User) {
     const shorterFirstNews = await this.newsService.getRecentShortenNews();
-
     return pageRenderHandler(res, user, 'home/home', { shorterFirstNews });
-    // return res.render('home/home', { layout: 'index', shorterFirstNews });
   }
 }

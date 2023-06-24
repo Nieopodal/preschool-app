@@ -9,12 +9,21 @@
     {{> blur-effect-div}}
 
     <header>
-      <h2 class="page-title">Edycja albumu z dnia {{this.createdAt}}</h2>
+
+      {{> breadcrumbs
+        routeUrl="/album"
+        routeName="Album fotograficzny"
+        subpageUrl=this.id
+        subpageName=this.title
+        actionName="Edycja"
+        actionUrl="/edycja"
+      }}
+
+      <h1 class="page-title">Edycja albumu z dnia {{this.createdAt}}</h1>
       <p class="mx-auto w-fit text-lg">Tutaj możesz zmienić tytuł, dodać/usunąć zdjęcia lub usunąć cały album.</p>
     </header>
 
     {{> album/editing-form this}}
-
     {{> album/editing-photo this}}
 
   {{/with}}

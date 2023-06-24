@@ -1,12 +1,11 @@
 <div class="container-for-article">
   <header>
-    <h2 class="page-title">Sukces! {{message}}</h2>
+    <h1 class="page-title">Sukces! {{message}}</h1>
   </header>
 
   {{#if id}}
     <div class="bold-link-with-hover text-center"><a href="/album/{{id}}">Wyświetl ten album</a></div>
   {{/if}}
-
 
   <div class="bold-link-with-hover text-center"><a href="/album">Przejdź do listy albumów</a></div>
   <div class="bold-link-with-hover text-center">{{>go-home}}</div>

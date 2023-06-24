@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="pl">
+<html lang="pl" class="text-[100%]" data-theme="main">
+<script src="/scripts/fast-theme-loader.js"></script>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
@@ -8,19 +9,19 @@
   <title>Publiczne Przedszkole Nr 23 w Jastrzębiu-Zdroju</title>
 
   <link rel="stylesheet" href="/styles/style.css">
-  <link rel="stylesheet" href="/styles/styles.css">
 </head>
 
-<body class="relative bg-base-100">
+<body class="relative bg-base-100 min-h-screen flex flex-col">
 
-{{> layout/header this}}
+{{> layout/header}}
 
-<main class="mt-[67px]">
+<main id="main" class="2xl:mt-[5rem] flex-1">
   {{{body}}}
 </main>
 
 {{> layout/footer}}
 {{> privacy-policy}}
 
+<script src="/scripts/flowbite.min.js"></script>
 </body>
 </html>

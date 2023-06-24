@@ -1,21 +1,29 @@
 <article class="container-for-article">
 
   {{#with news}}
-    <h2 class="post-title">{{this.title}}</h2>
+    <header class="pb-10">
 
-    <h3 class="text-center pb-10 pt-2">Data: {{this.createdAt}}</h3>
+      {{> breadcrumbs
+        routeUrl="/aktualnosci"
+        routeName="Aktualności"
+        subpageUrl=this.id
+        subpageName=this.title
+      }}
 
-    {{#if userLoggedIn}}
-      {{> edit-post this}}
-    {{/if}}
+      <h1 class="post-title">{{this.title}}</h1>
+      <p class="text-center py-2">Data: {{this.createdAt}}</p>
 
-    <div class="text-xl whitespace-pre-wrap break-all flex justify-center text-justify">
+      {{#if ../userLoggedIn}}
+        {{> edit-post this}}
+      {{/if}}
+    </header>
+    <section class="text-xl whitespace-pre-wrap break-all flex justify-center">
       <span>{{this.article}}</span>
-    </div>
+    </section>
   {{/with}}
 
   <div class="flex justify-center">
-    <a href="/aktualnosci" class="text-center semibold-link-with-hover pt-8">Powrót do aktualności</a>
+    <a href="/aktualnosci" class="text-center semibold-link-with-hover mt-8 hover:underline">Powrót do aktualności</a>
   </div>
 
 </article>

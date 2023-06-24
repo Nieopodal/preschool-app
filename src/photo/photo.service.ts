@@ -6,6 +6,8 @@ import { AlbumService } from '../album/album.service';
 import { storageDir } from '../utils/storage';
 import { Photo } from './entity/photo.entity';
 import { Album } from '../album/entity/album.entity';
+import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
+import { CustomNotFoundException } from '../exceptions/custom-not-found.exception';
 
 @Injectable()
 export class PhotoService {
@@ -20,7 +22,7 @@ export class PhotoService {
     albumId: string,
     redirect?: boolean,
     e?: any,
-  ): Promise<any> {
+  ): Promise<void> {
     try {
       const photo = await Photo.findOne({
         relations: ['album'],
@@ -28,9 +30,12 @@ export class PhotoService {
           fileName,
         },
       });
-      if (!photo) throw new Error('Brak zdjęcia w bazie danych.');
+      if (!photo)
+        throw new CustomNotFoundException('Brak zdjęcia w bazie danych.');
       if (photo.album.id !== albumId)
-        throw new Error('Zdjęcie nie znajduje się w bieżącym albumie.');
+        throw new CustomNotFoundException(
+          'Zdjęcie nie znajduje się w bieżącym albumie.',
+        );
 
       await fs.promises.unlink(path.join(storageDir(), 'upload', fileName));
       if (photo) await photo.remove();
@@ -40,7 +45,10 @@ export class PhotoService {
       if (e) return e;
       if (redirect) res.redirect(`/album/${albumId}/edycja/`);
     } catch (e) {
-      console.log(e);
+      console.error(e);
+      throw new CustomInternalServerException(
+        'Podczas usuwania zdjęcia wystąpił błąd.',
+      );
     }
   }
 

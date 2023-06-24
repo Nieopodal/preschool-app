@@ -38,7 +38,7 @@ const loadContentToSlider = () => {
   if (foundPhotoCard) {
     const cardCopy = foundPhotoCard.cloneNode(true);
     const img = cardCopy.querySelector('.photo-img');
-    const photoDescription = cardCopy.querySelector('#photo-description');
+    const photoDescription = cardCopy.querySelector('.photo-description');
     const titleSpan = photoDescription.querySelector('.title-span');
     const createdAtSpan = photoDescription.querySelector('.createdAt-span');
 
@@ -95,6 +95,33 @@ allPhotosList.forEach((photo, i) => {
   });
 });
 
+allPhotosList.forEach((photo) => {
+  photo.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && sliderContainer.classList.contains('hidden')) {
+      photo.click();
+    }
+  });
+});
+
 closeBtn.addEventListener('click', () => {
   closeSliderHandler();
+});
+
+window.addEventListener('keydown', (event) => {
+  if (
+    event.key === 'ArrowRight' &&
+    !sliderContainer.classList.contains('hidden')
+  ) {
+    nextPhotoBtn.click();
+  } else if (
+    event.key === 'ArrowLeft' &&
+    !sliderContainer.classList.contains('hidden')
+  ) {
+    prevPhotoBtn.click();
+  } else if (
+    event.key === 'Escape' &&
+    !sliderContainer.classList.contains('hidden')
+  ) {
+    closeBtn.click();
+  }
 });

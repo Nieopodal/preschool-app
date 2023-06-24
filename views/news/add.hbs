@@ -1,6 +1,14 @@
 <div class="container-for-article">
   <header>
-    <h2 class="page-title">Dodaj aktualność</h2>
+
+    {{> breadcrumbs
+      routeUrl="/aktualnosci"
+      routeName="Aktualności"
+      subpageUrl="dodaj"
+      subpageName="Dodaj nowy wpis"
+    }}
+
+    <h1 class="page-title">Dodaj aktualność</h1>
   </header>
 
   <form action="/aktualnosci" method="POST">

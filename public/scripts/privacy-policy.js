@@ -5,7 +5,12 @@ const privacyPolicyBtn = document.querySelector('#privacy-policy-btn');
 
 const displayCookie = () => {
   const displayNotice = localStorage.getItem('cookie-notice-displayed');
+  if (!displayNotice) {
+    privacyPolicyContainer.classList.remove('hidden');
+  }
   if (displayNotice === 'true') {
+    const isHidden = [...privacyPolicyContainer.classList].includes('hidden');
+    if (isHidden) return;
     privacyPolicyContainer.classList.add('hidden');
   }
 };

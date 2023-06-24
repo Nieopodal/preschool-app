@@ -6,6 +6,8 @@ import { paginationHandler } from '../utils/pagination.handler';
 import { NewsResponse } from '../types';
 import { User } from '../user/entity/user.entity';
 import { pageRenderHandler } from '../utils/page-render.handler';
+import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
+import { CustomNotFoundException } from '../exceptions/custom-not-found.exception';
 
 @Injectable()
 export class NewsService {
@@ -65,7 +67,7 @@ export class NewsService {
     });
 
     if (!news) {
-      throw new Error('Artykuł nie został odnaleziony.');
+      throw new CustomNotFoundException('Artykuł nie został odnaleziony.');
     }
     const fixedDateNews = {
       ...news,
@@ -85,7 +87,7 @@ export class NewsService {
     });
 
     if (!news) {
-      throw new Error('Artykuł nie został odnaleziony.');
+      throw new CustomNotFoundException('Artykuł nie został odnaleziony.');
     }
     const fixedDateNews = {
       ...news,
@@ -123,7 +125,7 @@ export class NewsService {
       res,
       user,
       'news/success',
-      { message: 'Pomyślnie dodano nowy artykuł' },
+      { message: 'Pomyślnie dodano nowy artykuł.' },
       { id: newArticle.id },
     );
   }
@@ -141,14 +143,16 @@ export class NewsService {
       isTooLong: article.length > 600,
     });
     if (news.affected !== 1) {
-      throw new Error('Podczas aktualizacji wpisu wystąpił błąd.');
+      throw new CustomInternalServerException(
+        'Podczas aktualizacji wpisu wystąpił błąd.',
+      );
     }
 
     return pageRenderHandler(
       res,
       user,
       'news/success',
-      { message: 'Pomyślnie zaktualizowano wpis' },
+      { message: 'Pomyślnie zaktualizowano wpis.' },
       { id },
     );
   }
@@ -156,7 +160,9 @@ export class NewsService {
   async removeNews(res: Response, user: User, id: string) {
     const deleteResult = await News.delete(id);
     if (deleteResult.affected !== 1) {
-      throw new Error('Podczas usuwania wpisu wystąpił błąd.');
+      throw new CustomInternalServerException(
+        'Podczas usuwania wpisu wystąpił błąd.',
+      );
     }
 
     return pageRenderHandler(res, user, 'news/success', {

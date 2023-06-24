@@ -3,11 +3,31 @@
 @tailwind utilities;
 
 .page-title {
-    @apply post-title pb-10
+    @apply post-title pb-10 pt-4
 }
 
 .post-title {
-    @apply text-3xl md:text-3xl lg:text-4xl text-center font-bold text-secondary-focus pt-8 px-4
+    @apply text-2xl md:text-3xl lg:text-4xl text-center font-bold text-secondary-focus pt-8  px-2 sm:px-4 break-words
+}
+
+.hero-title {
+    @apply text-4xl lg:text-5xl font-bold
+}
+
+.mobile-menu-item {
+    @apply flex items-center w-full p-2 text-secondary-focus transition duration-75 rounded-lg pl-11 hover:bg-gray-200
+}
+
+.user-menu-item {
+    @apply block px-4 py-2 text-sm hover:bg-gray-100 no-animation
+}
+
+.desktop-menu-item {
+    @apply block px-4 py-2 hover:bg-gray-100 no-animation
+}
+
+.main-menu-item {
+    @apply btn btn-ghost text-secondary-focus w-full xl:w-fit justify-start xl:justify-center px-2 2xl:px-4 no-animation
 }
 
 .small-title {
@@ -16,12 +36,12 @@
 
 /*the whole page*/
 .container-for-article {
-    @apply mt-0 mb-8 mx-auto md:max-w-screen-lg pt-4 md:pt-8 px-8 break-words
+    @apply mt-0 mb-8 mx-auto md:max-w-screen-lg pt-4 md:pt-16 px-3 md:px-8 break-words
 }
 
 /*one article*/
 .one-article {
-    @apply py-4 text-justify lg:text-xl pb-10
+    @apply py-4 lg:text-xl pb-10
 }
 
 .actions-container {
@@ -70,4 +90,8 @@
 
 .image {
     @apply h-60 sm:h-80 md:h-64 w-full object-cover rounded hover:cursor-pointer
+}
+
+.skip-to-content {
+    @apply transition left-0 bg-black text-white absolute p-3 m-3 -translate-y-20 focus:translate-y-0 focus:underline
 }

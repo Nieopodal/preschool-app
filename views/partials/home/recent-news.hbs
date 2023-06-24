@@ -1,19 +1,17 @@
-<div class="hero min-h-screen bg-primary text-white">
+<div class="hero min-h-screen bg-primary text-white overflow-y-auto">
   <div class="hero-content text-center">
     <div class="w-full">
-      <h2 class="text-5xl font-bold pb-10">Z życia przedszkola</h2>
+      <h2 class="hero-title pb-4 md:pb-10 break-words">Z życia przedszkola</h2>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full">
         {{#each shorterFirstNews}}
           <div class="flex flex-col relative">
-            <h3 class="font-semibold text-2xl pt-2 text-start whitespace-pre-wrap break-all">{{this.title}}</h3>
-            <h4 class="text-start pb-2">{{this.createdAt}}</h4>
+            <h3 class="font-semibold text-2xl pt-2 text-start whitespace-pre-wrap break-words">{{this.title}}</h3>
+            <p class="text-start pb-2">{{this.createdAt}}</p>
             <p
-              class="py-4 pb-8 text-justify whitespace-pre-wrap break-all flex justify-center mb-auto">{{this.article}}{{#if
+              class="py-4 pb-8 text-justify whitespace-pre-wrap break-words flex justify-center mb-auto">{{this.article}}{{#if
               this.isTooLong}}...{{/if}}</p>
-            {{#if this.isTooLong}}
-              <a class="btn btn-ghost border-white font-bold uppercase mt-auto w-fit" href="/aktualnosci/{{this.id}}">czytaj
+            <a class="btn btn-ghost border-white font-bold uppercase mt-auto w-fit" href="/aktualnosci/{{this.id}}"><span class="sr-only">Czytaj całość artykułu: {{this.title}}</span>czytaj
                 dalej</a>
-            {{/if}}
           </div>
 
         {{/each}}
