@@ -4,11 +4,15 @@ import { format } from 'date-fns';
 import { News } from './entity/news.entity';
 import { paginationHandler } from '../utils/pagination.handler';
 import { NewsResponse } from '../types';
+import { User } from '../user/entity/user.entity';
+import { pageRenderHandler } from '../utils/page-render.handler';
+import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
+import { CustomNotFoundException } from '../exceptions/custom-not-found.exception';
 
 @Injectable()
 export class NewsService {
-  async getNewsPage(res: Response, currentPage: number) {
-    const maxPerPage = 3;
+  async getNewsPage(res: Response, user: User, currentPage: number) {
+    const maxPerPage = 10;
     const [news, count] = await News.findAndCount({
       order: {
         createdAt: 'DESC',
@@ -24,15 +28,20 @@ export class NewsService {
         createdAt: format(news.createdAt, 'dd.MM.yyyy, HH:mm'),
       };
     });
-    return res.render('news/list-all', {
-      layout: 'index',
-      news: fixedDateNews,
-      paginationSettings: paginationHandler(
-        currentPage,
-        pagesCount,
-        'aktualnosci',
-      ),
-    });
+
+    return pageRenderHandler(
+      res,
+      user,
+      'news/list-all',
+      { news: fixedDateNews },
+      {
+        paginationSettings: paginationHandler(
+          currentPage,
+          pagesCount,
+          'aktualnosci',
+        ),
+      },
+    );
   }
 
   async getRecentShortenNews(): Promise<NewsResponse[] | null> {
@@ -50,7 +59,7 @@ export class NewsService {
     }));
   }
 
-  async getOneNews(res: Response, id: string) {
+  async getOneNews(res: Response, user: User, id: string) {
     const news = await News.findOne({
       where: {
         id,
@@ -58,56 +67,72 @@ export class NewsService {
     });
 
     if (!news) {
-      throw new Error('Artykuł nie został odnaleziony.');
+      throw new CustomNotFoundException('Artykuł nie został odnaleziony.');
     }
     const fixedDateNews = {
       ...news,
       createdAt: format(news.createdAt, 'dd.MM.yyyy, HH:mm'),
     };
-    res.render('news/list-one', { layout: 'index', news: fixedDateNews });
-  }
 
-  async getEditNewsPage(res: Response, id: string) {
-    const news = await News.findOne({
-      where: {
-        id,
-      },
-    });
-
-    if (!news) {
-      throw new Error('Artykuł nie został odnaleziony.');
-    }
-    const fixedDateNews = {
-      ...news,
-      createdAt: format(news.createdAt, 'dd.MM.yyyy, HH:mm'),
-    };
-    res.render('news/edit', {
-      layout: 'index',
+    return pageRenderHandler(res, user, 'news/list-one', {
       news: fixedDateNews,
-      pageName: 'aktualnosci',
     });
   }
 
-  async getAddNewsPage(res: Response) {
-    return res.render('news/add', { layout: 'index' });
+  async getEditNewsPage(res: Response, user: User, id: string) {
+    const news = await News.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!news) {
+      throw new CustomNotFoundException('Artykuł nie został odnaleziony.');
+    }
+    const fixedDateNews = {
+      ...news,
+      createdAt: format(news.createdAt, 'dd.MM.yyyy, HH:mm'),
+    };
+
+    return pageRenderHandler(
+      res,
+      user,
+      'news/edit',
+      {
+        item: fixedDateNews,
+      },
+      { pageName: 'aktualnosci' },
+    );
   }
 
-  async addNews(res: Response, data: { title: string; article: string }) {
+  async getAddNewsPage(res: Response, user: User) {
+    return pageRenderHandler(res, user, 'news/add');
+  }
+
+  async addNews(
+    res: Response,
+    user: User,
+    data: { title: string; article: string },
+  ) {
     const { title, article } = data;
     const newArticle = new News();
     newArticle.title = title;
     newArticle.article = article;
     newArticle.isTooLong = article.length > 600;
     await newArticle.save();
-    return res.render('news/success', {
-      layout: 'index',
-      message: 'Pomyślnie dodano nowy artykuł',
-      idOfNews: newArticle.id,
-    });
+
+    return pageRenderHandler(
+      res,
+      user,
+      'news/success',
+      { message: 'Pomyślnie dodano nowy artykuł.' },
+      { id: newArticle.id },
+    );
   }
 
   async editNews(
     res: Response,
+    user: User,
     id: string,
     data: { title: string; article: string },
   ) {
@@ -115,25 +140,33 @@ export class NewsService {
     const news = await News.update(id, {
       title,
       article,
+      isTooLong: article.length > 600,
     });
     if (news.affected !== 1) {
-      throw new Error('Podczas aktualizacji wpisu wystąpił błąd.');
+      throw new CustomInternalServerException(
+        'Podczas aktualizacji wpisu wystąpił błąd.',
+      );
     }
-    return res.render('news/success', {
-      layout: 'index',
-      message: 'Pomyślnie zaktualizowano wpis.',
-      idOfNews: id,
-    });
+
+    return pageRenderHandler(
+      res,
+      user,
+      'news/success',
+      { message: 'Pomyślnie zaktualizowano wpis.' },
+      { id },
+    );
   }
 
-  async removeNews(res: Response, id: string) {
+  async removeNews(res: Response, user: User, id: string) {
     const deleteResult = await News.delete(id);
     if (deleteResult.affected !== 1) {
-      throw new Error('Podczas usuwania wpisu wystąpił błąd.');
+      throw new CustomInternalServerException(
+        'Podczas usuwania wpisu wystąpił błąd.',
+      );
     }
-    return res.render('news/success', {
-      layout: 'index',
-      message: 'Pomyślnie usunięto wpis.',
+
+    return pageRenderHandler(res, user, 'news/success', {
+      message: 'Pomyślnie usunięto wpis',
     });
   }
 }

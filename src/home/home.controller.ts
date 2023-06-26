@@ -1,67 +1,94 @@
-import { Controller, Get, Res } from '@nestjs/common';
-import { Response } from 'express';
+import { Controller, Get, Req, Res } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { HomeService } from './home.service';
+import { UserObject } from '../decorators/user-object.decorator';
+import { User } from '../user/entity/user.entity';
+import { AllowAny } from '../decorators/allow-any.decorator';
 
 @Controller('/')
 export class HomeController {
   constructor(private readonly homeService: HomeService) {}
   @Get('/')
-  async getHomePage(@Res() res: Response) {
-    return await this.homeService.getHomePage(res);
+  @AllowAny()
+  async getHomePage(@UserObject() user: User, @Res() res: Response) {
+    return await this.homeService.getHomePage(res, user);
   }
 
   @Get('/o-przedszkolu')
-  async getAboutPage(@Res() res: Response) {
-    return res.render('home/about', { layout: 'index' });
+  @AllowAny()
+  async getAboutPage(@UserObject() user: User, @Res() res: Response) {
+    return await this.homeService.getAboutPage(res, user);
   }
 
   @Get('/kontakt')
-  async getContactPage(@Res() res: Response) {
-    return res.render('home/contact', { layout: 'index' });
+  @AllowAny()
+  async getContactPage(@UserObject() user: User, @Res() res: Response) {
+    return await this.homeService.getContactPage(res, user);
   }
 
   @Get('/statut')
-  async getStatutePage(@Res() res: Response) {
-    return res.render('home/statute', { layout: 'index' });
+  @AllowAny()
+  async getStatutePage(@UserObject() user: User, @Res() res: Response) {
+    return await this.homeService.getStatutePage(res, user);
   }
 
   @Get('/regulamin-i-procedury')
-  async getRegulationsPage(@Res() res: Response) {
-    return res.render('home/regulations', { layout: 'index' });
+  @AllowAny()
+  async getRegulationsPage(@UserObject() user: User, @Res() res: Response) {
+    return this.homeService.getRegulationsPage(res, user);
   }
 
   @Get('/oplaty')
-  async getFeesPage(@Res() res: Response) {
-    return res.render('home/fees', { layout: 'index' });
+  @AllowAny()
+  async getFeesPage(@UserObject() user: User, @Res() res: Response) {
+    return await this.homeService.getFeesPage(res, user);
   }
 
   @Get('/ochrona-danych-osobowych')
-  async getGdprPage(@Res() res: Response) {
-    return res.render('home/gdpr', { layout: 'index' });
+  @AllowAny()
+  async getGdprPage(@UserObject() user: User, @Res() res: Response) {
+    return await this.homeService.getGdprPage(res, user);
   }
 
   @Get('/polityka-prywatnosci')
-  async getPrivacyPolicyPage(@Res() res: Response) {
-    return res.render('home/privacy-policy', { layout: 'index' });
+  @AllowAny()
+  async getPrivacyPolicyPage(@UserObject() user: User, @Res() res: Response) {
+    return await this.homeService.getPrivacyPolicyPage(res, user);
   }
 
   @Get('/pracownicy-przedszkola')
-  async getEmployeesPage(@Res() res: Response) {
-    return res.render('home/employees', { layout: 'index' });
+  @AllowAny()
+  async getEmployeesPage(@UserObject() user: User, @Res() res: Response) {
+    return await this.homeService.getEmployeesPage(res, user);
   }
 
   @Get('/grupy-w-przedszkolu')
-  async getGroupsPage(@Res() res: Response) {
-    return res.render('home/groups', { layout: 'index' });
+  @AllowAny()
+  async getGroupsPage(@UserObject() user: User, @Res() res: Response) {
+    return await this.homeService.getGroupsPage(res, user);
   }
 
   @Get('/realizowane-programy-certyfikaty')
-  async getImplementedProgramsPage(@Res() res: Response) {
-    return res.render('home/implemented-programs', { layout: 'index' });
+  @AllowAny()
+  async getImplementedProgramsPage(
+    @UserObject() user: User,
+    @Res() res: Response,
+  ) {
+    return await this.homeService.getImplementedProgramsPage(res, user);
   }
 
   @Get('/organizacja-pracy')
-  async getOrganizationPage(@Res() res: Response) {
-    return res.render('home/organization', { layout: 'index' });
+  @AllowAny()
+  async getOrganizationPage(@UserObject() user: User, @Res() res: Response) {
+    return await this.homeService.getOrganizationPage(res, user);
+  }
+
+  @Get('/dashboard')
+  async getDashboardPage(
+    @UserObject() user: User,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    return await this.homeService.getDashboardPage(res, user);
   }
 }

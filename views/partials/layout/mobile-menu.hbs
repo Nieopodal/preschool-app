@@ -1,0 +1,42 @@
+<li class="xl:hidden">
+  <button
+    type="button"
+    class="btn btn-ghost text-secondary-focus w-full xl:w-fit justify-start xl:justify-center no-animation px-2"
+    aria-controls="mobile-dropdown"
+    data-collapse-toggle="mobile-dropdown"
+  >
+    <span class="flex-1 text-left whitespace-nowrap">Menu</span>
+    <span class="w-6 h-6" aria-hidden="true">{{> icons/expand-svg}}</span>
+  </button>
+  <ul id="mobile-dropdown" class="hidden py-2 space-y-2">
+    <li>
+      <a href="/" class="mobile-menu-item group">Strona główna</a>
+    </li>
+    <li>
+      <a href="/aktualnosci" class="mobile-menu-item group">Aktualności</a>
+    </li>
+    <li>
+      <a href="/pracownicy-przedszkola" class="mobile-menu-item group">Pracownicy przedszkola</a>
+    </li>
+    <li>
+      <a href="/grupy-w-przedszkolu" class="mobile-menu-item group">Grupy w przedszkolu</a>
+    </li>
+    <li>
+      <a href="/realizowane-programy-certyfikaty" class="mobile-menu-item group">Realizowane programy, certyfikaty</a>
+    </li>
+    <li>
+      <a href="/organizacja-pracy" class="mobile-menu-item group">Organizacja pracy</a>
+    </li>
+    <li>
+      <a href="/album" class="mobile-menu-item group">Album fotograficzny</a>
+    </li>
+    <li>
+      <a href="/regulamin-i-procedury" class="mobile-menu-item group">Regulamin i procedury</a>
+    </li>
+    {{#unless userLoggedIn}}
+      <li>
+        <a href="/auth/login" class="mobile-menu-item group">Logowanie</a>
+      </li>
+    {{/unless}}
+  </ul>
+</li>

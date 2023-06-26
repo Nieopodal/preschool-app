@@ -1,13 +1,25 @@
 <article class="container-for-article">
-    <header>
-        <h2 class="page-title">Kontakt</h2>
-    </header>
+  <header>
+    {{> breadcrumbs routeUrl="/kontakt" routeName="Kontakt"}}
 
-    <div class="pb-8">
+    <h1 class="page-title">Kontakt</h1>
+  </header>
+
+  <div class="pb-8">
     {{> contact-details }}
-    </div>
-    <div>
-        <iframe class="w-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2567.307616624371!2d18.572275015713284!3d49.94933177940934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47115374b7cd87d7%3A0xe8f0d63bde47b4a!2sPrzedszkole%20publiczne%20nr%2023!5e0!3m2!1spl!2spl!4v1665311598569!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
+  </div>
+  <div>
+    <iframe
+      aria-label="Położenie przedszkola na mapie"
+      class="w-full"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2567.307616624371!2d18.572275015713284!3d49.94933177940934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47115374b7cd87d7%3A0xe8f0d63bde47b4a!2sPrzedszkole%20publiczne%20nr%2023!5e0!3m2!1spl!2spl!4v1665311598569!5m2!1spl!2spl"
+      width="600"
+      height="450"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
 </article>
 

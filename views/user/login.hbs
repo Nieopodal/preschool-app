@@ -1,0 +1,50 @@
+<article class="container-for-article">
+  <header>
+    {{> breadcrumbs routeUrl="/auth/login" routeName="Logowanie"}}
+    <h1 class="page-title">Panel logowania</h1>
+  </header>
+
+  <div class="actions-container">
+    <div class=" p-6 rounded-xl border-[1px] shadow-md ">
+
+      <form action="/auth/login" method="POST">
+        <div>
+          <label>
+            <span class="font-semibold text-lg">Login:</span>
+            <input
+              placeholder="Login"
+              type="text"
+              name="email"
+              required
+              class="text-input p-1 text-xl mb-2"
+            >
+          </label>
+        </div>
+        <div class="pt-2">
+          <label>
+            <span class="font-semibold text-lg">Hasło:</span>
+            <input
+              placeholder="Hasło"
+              type="password"
+              name="pwd"
+              required
+              class="text-input p-1 text-xl mb-2"
+            >
+          </label>
+        </div>
+        <div>
+          <button type="submit"
+                  class="lg-block-actions-btn w-full">
+            Zaloguj
+          </button>
+        </div>
+      </form>
+
+      {{#if error}}
+        <div class="pt-4 text-secondary-focus text-sm text-center">{{error}}</div>
+      {{/if}}
+
+    </div>
+  </div>
+
+</article>

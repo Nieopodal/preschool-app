@@ -1,0 +1,47 @@
+{{> album/photo-gallery}}
+
+<article class="container-for-article">
+
+  {{#with album}}
+    <header class="pb-10">
+
+      {{> breadcrumbs
+        routeUrl="/album"
+        routeName="Album fotograficzny"
+        subpageUrl=this.id
+        subpageName=this.title
+      }}
+
+      <h1 class="post-title">{{this.title}}</h1>
+      <p class="text-center py-2">{{this.createdAt}}</p>
+
+      {{#if ../userLoggedIn}}
+        {{> edit-post this}}
+      {{/if}}
+    </header>
+
+    <div class="all-photos-container">
+      {{#each this.photos}}
+        <div class="photo-card one-photo">
+          <img
+            tabindex="0"
+            class="photo-img image focus:opacity-60"
+            src="/img/upload//{{this.fileName}}"
+            alt="Zdjęcie z albumu {{../this.title}}"
+          >
+
+          <div class="p-4 hidden photo-description">
+            <span class="title-span font-bold py-4 text-xl">{{../this.title}}</span>
+            <span class="createdAt-span text-basic block">{{../this.createdAt}}</span>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+
+  {{/with}}
+
+  {{> album/go-to-albums}}
+
+</article>
+
+<script src="/scripts/album/slider.js"></script>

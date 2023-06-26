@@ -1,0 +1,29 @@
+<section class="breadcrumbs overflow-x md:overflow-x-auto mx-auto w-fit">
+  <span class="sr-only">Jesteś tutaj:</span>
+  <ul class=" flex flex-col md:flex-row w-fit break-words">
+    <li>
+      <a href="/">
+        Strona główna
+      </a>
+    </li>
+    <li>
+      <a href="{{routeUrl}}" class="{{#unless subpageUrl}}font-semibold{{/unless}}">
+        {{routeName}}
+      </a>
+    </li>
+    {{#if subpageUrl}}
+      <li>
+        <a href="{{routeUrl}}/{{subpageUrl}}" class="{{#unless actionUrl}}font-semibold{{/unless}}">
+          {{subpageName}}
+        </a>
+      </li>
+      {{#if actionUrl}}
+        <li>
+          <a href="{{routeUrl}}/{{subpageUrl}}{{actionUrl}}" class="font-semibold">
+            {{actionName}}
+          </a>
+        </li>
+      {{/if}}
+    {{/if}}
+  </ul>
+</section>

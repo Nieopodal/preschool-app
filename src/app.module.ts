@@ -7,12 +7,21 @@ import { DatabaseConfiguration } from './config/typeorm.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { NewsModule } from './news/news.module';
 import { PhotoModule } from './photo/photo.module';
-import { AdminModule } from './admin/admin.module';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { AlbumModule } from './album/album.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { APP_GUARD, Reflector } from '@nestjs/core';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    MulterModule.register({
+      storage: memoryStorage(),
+    }),
     TypeOrmModule.forRootAsync({
       useClass: DatabaseConfiguration,
     }),
@@ -23,9 +32,18 @@ import { ThrottlerModule } from '@nestjs/throttler';
     HomeModule,
     NewsModule,
     PhotoModule,
-    AdminModule,
+    AlbumModule,
+    UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useFactory: (ref) => new JwtAuthGuard(ref),
+      inject: [Reflector],
+    },
+  ],
 })
 export class AppModule {}
