@@ -83,6 +83,12 @@ export class HomeController {
     return await this.homeService.getOrganizationPage(res, user);
   }
 
+  @Get('/mapa-strony')
+  @AllowAny()
+  async getSitemapPage(@UserObject() user: User, @Res() res: Response) {
+    return await this.homeService.getSitemapPage(res, user);
+  }
+
   @Get('/dashboard')
   async getDashboardPage(
     @UserObject() user: User,

@@ -86,4 +86,10 @@ export class HomeService {
   async getDashboardPage(res: Response, user: User) {
     return pageRenderHandler(res, user, 'user/dashboard');
   }
+
+  async getSitemapPage(res: Response, user: User) {
+    return pageRenderHandler(res, user, 'home/sitemap', {
+      content: await getPagesDataHandler('sitemapPageContent'),
+    });
+  }
 }
