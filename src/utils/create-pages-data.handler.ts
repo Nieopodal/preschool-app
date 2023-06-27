@@ -13,6 +13,7 @@ import { gdprPageContent } from '../content/gdpr-page.content';
 import { groupsPageContent } from '../content/groups-page.content';
 import { regulationsPageContent } from '../content/regulations-page.content';
 import { sitemapPageContent } from '../content/sitemap-page.content';
+import { accessibilityInfoPageContent } from '../content/accessibility-info-page.content';
 
 (async () => {
   try {
@@ -30,6 +31,7 @@ import { sitemapPageContent } from '../content/sitemap-page.content';
       organizationPageContent,
       statutePageContent,
       sitemapPageContent,
+      accessibilityInfoPageContent,
     };
     const destination = path.join(__dirname, '../../data/pages.data.json');
     await fs.writeFile(destination, JSON.stringify(contentPages));

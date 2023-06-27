@@ -89,6 +89,15 @@ export class HomeController {
     return await this.homeService.getSitemapPage(res, user);
   }
 
+  @Get('/informacje-o-dostepnosci')
+  @AllowAny()
+  async getAccessibilityInfoPage(
+    @UserObject() user: User,
+    @Res() res: Response,
+  ) {
+    return await this.homeService.getAccessibilityInfoPage(res, user);
+  }
+
   @Get('/dashboard')
   async getDashboardPage(
     @UserObject() user: User,

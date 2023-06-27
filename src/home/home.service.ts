@@ -92,4 +92,10 @@ export class HomeService {
       content: await getPagesDataHandler('sitemapPageContent'),
     });
   }
+
+  async getAccessibilityInfoPage(res: Response, user: User) {
+    return pageRenderHandler(res, user, 'home/accessibility-info', {
+      content: await getPagesDataHandler('accessibilityInfoPageContent'),
+    });
+  }
 }

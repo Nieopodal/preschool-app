@@ -1,0 +1,16 @@
+{{#with content}}
+  <article class="container-for-article">
+    <header>
+      {{> breadcrumbs
+        routeUrl=this.breadcrumbs.routeUrl
+        routeName=this.breadcrumbs.routeName
+      }}
+
+      <h1 class="page-title">{{this.h1}}</h1>
+    </header>
+
+    <section class="one-article">
+    </section>
+
+  </article>
+{{/with}}{
