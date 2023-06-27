@@ -1,44 +1,33 @@
-<article class="container-for-article">
-  <header>
-    {{> breadcrumbs routeUrl="/realizowane-programy-certyfikaty" routeName="Realizowane programy oraz certyfikaty"}}
-
-    <h1 class="page-title">Realizowane programy oraz certyfikaty</h1>
-  </header>
-
-
-  <section class="one-article">
+{{#with content}}
+  <article class="container-for-article">
     <header>
-      <h2 class="small-title">Realizowane programy</h2>
-    </header>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?</p>
-  </section>
 
-  <section class="one-article">
-    <header>
-      <h2 class="small-title">Certyfikaty</h2>
+      {{> breadcrumbs
+        routeUrl=this.breadcrumbs.routeUrl
+        routeName=this.breadcrumbs.routeName
+      }}
+
+      <h1 class="page-title">{{this.h1}}</h1>
     </header>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?</p>
-  </section>
-</article>
+
+    {{#each this.sections}}
+    <section class="one-article">
+      <h2 class="text-2xl pb-4 font-semibold mx-auto w-fit">{{this.title}}</h2>
+      <ul class="mx-auto w-fit">
+        {{#each this.mainListItems}}
+        <li>{{this.text}}
+         {{#if this.smallListItems}}
+          <ul class="ml-10 list-disc py-2">
+            {{#each this.smallListItems}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+         {{/if}}
+        </li>
+        {{/each}}
+      </ul>
+    </section>
+    {{/each}}
+
+  </article>
+{{/with}}

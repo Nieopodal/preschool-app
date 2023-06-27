@@ -3172,6 +3172,10 @@ html {
   list-style-type: none;
 }
 
+.list-disc {
+  list-style-type: disc;
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -3634,14 +3638,6 @@ html {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-\[150\%\] {
-  font-size: 150%;
-}
-
-.text-\[200\%\] {
-  font-size: 200%;
 }
 
 .font-bold {

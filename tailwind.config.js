@@ -4,6 +4,7 @@ module.exports = {
     './views/**/*.{html,js,hbs}',
     './public/scripts/album/slider.js',
     './node_modules/flowbite/**/*.js',
+    './content/*.ts',
   ],
   theme: {
     extend: {},

@@ -1,9 +1,18 @@
-<div class="hero min-h-screen overflow-y-auto" style="background-image: url(/img/hero.jpg);">
-  <div class="hero-overlay bg-opacity-20"></div>
-  <div class="hero-content text-center text-white break-words">
-    <div class="max-w-md text-info">
-      <h1 class="hero-title break-words">ZAPRASZAMY</h1>
-      <p class="py-6 text-xl">Lorem ipsum dolor sit amet!</p>
+{{#with this.hero}}
+  {{#with img}}
+    <div
+      class="hero min-h-screen overflow-y-auto"
+      role="img"
+      aria-label="{{this.alt}}"
+      style="background-image: url({{this.src}});">
+  {{/with}}
+
+    <div class="hero-overlay bg-opacity-20"></div>
+    <div class="hero-content text-center text-white break-words">
+      <div class="max-w-md text-info">
+        <h1 class="hero-title break-words">{{this.h1}}</h1>
+        <p class="py-6 text-xl">{{this.headerDescription}}</p>
+      </div>
     </div>
   </div>
-</div>
+{{/with}}

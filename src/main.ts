@@ -15,7 +15,15 @@ import { GlobalExceptionFilter } from './filters/global-exception.filter';
 async function bootstrap() {
   const { isEqual } = handlebarsHelpers;
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          'frame-src': ['https://www.google.com', "'self'"],
+        },
+      },
+    }),
+  );
   app.use(cookieParser());
   app.use(urlencoded({ extended: true }));
   app.use(express.json());

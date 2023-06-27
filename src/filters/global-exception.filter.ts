@@ -36,10 +36,12 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     }
 
     if (status === 401) {
+      response.status(401);
       return response.redirect('/auth/login');
     }
 
     if (status === 400) {
+      response.status(400);
       return pageRenderHandler(response, request.user, 'error/error', {
         error: (exception as CustomBadRequestException)
           ? (exception as CustomBadRequestException).message
@@ -48,6 +50,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     }
 
     if (status === 404) {
+      response.status(404);
       return pageRenderHandler(response, request.user, 'error/error', {
         error: !(exception instanceof CustomNotFoundException)
           ? 'Szukana strona nie istnieje.'
@@ -55,6 +58,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       });
     }
 
+    response.status(500);
     return pageRenderHandler(response, request.user, 'error/error', {
       error: 'Przepraszamy, spróbuj ponownie później.',
     });
