@@ -12,18 +12,20 @@
     </header>
 
     <section class="one-article">
-      <iframe
+      <object
         aria-label="{{this.ariaLabel}}"
-        src="{{this.fileSrc}}"
+        data="{{this.fileSrc}}"
         type="application/pdf" width="100%" height="800px"
       >
         <a
           href="{{this.fileSrc}}"
-          class="hover:underline mx-auto w-fit"
+          class="hover:underline flex justify-center w-fit py-2"
         >
           {{this.altText}}
         </a>
-      </iframe>
+
+
+      </object>
     </section>
 
   </article>

@@ -20,6 +20,7 @@ async function bootstrap() {
       contentSecurityPolicy: {
         directives: {
           'frame-src': ['https://www.google.com', "'self'"],
+          'object-src': ["'self'"],
         },
       },
     }),
