@@ -93,5 +93,5 @@
 }
 
 .skip-to-content {
-    @apply transition left-0 bg-black text-white absolute p-3 m-3 -translate-y-20 focus:translate-y-0 focus:underline
+    @apply transition left-0 bg-black text-white absolute p-3 m-3 -translate-y-60 focus:translate-y-0 focus:underline
 }
