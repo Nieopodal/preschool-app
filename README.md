@@ -10,10 +10,9 @@
 * [Aim](#-aim)
 * [Home Page](#-home-page)
 * [Technologies](#-technologies)
-* [Photos](#-photos)
-
 * [Install locally](#-install-locally)
-
+* [Photos](#-photos)
+  
 # 🛫 Description:
 
 **Assumptions of the project:**
