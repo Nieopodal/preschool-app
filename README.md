@@ -6,9 +6,10 @@
 # 📖 Contents:
 
 * [Description](#-description)
+* [Aim](#-aim)
 * [Home Page](#-home-page)
 * [Technologies](#-technologies)
-* [Aim](#-aim)
+
 * [Install locally](#-install-locally)
 
 # 🛫 Description:
@@ -23,6 +24,9 @@
 + Author's design
 + Author's photo gallery script
 
+# 🧿 Aim:
+
+The aim of the project was to create a real website for a functioning kindergarten. The project had to meet the requirements for public websites operating in the European Union.
 
 # 🏠 Home page:
 
@@ -46,10 +50,6 @@
 + bcrypt
 
 and others
-
-# 🧿 Aim:
-
-The aim of the project was to create a real website for a functioning kindergarten. The project had to meet the requirements for public websites operating in the European Union.
 
 # ‍🔛 Install locally:
 
