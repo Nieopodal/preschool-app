@@ -5,11 +5,11 @@
 
 # 📖 Contents:
 
-* [Description](#-description-)
-* [Home Page](#-home-page-)
-* [Technologies](#-technologies-)
-* [Aim](#-aim-)
-* [Install locally](#-install-locally-)
+* [Description](#-description)
+* [Home Page](#-home-page)
+* [Technologies](#-technologies)
+* [Aim](#-aim)
+* [Install locally](#-install-locally)
 
 # 🛫 Description:
 
@@ -98,6 +98,6 @@ After that, it is advised to turn this setting off.
 
 ## Open in browser:
 
-    > [http://localhost:3000](http://localhost:3000)
+   > [http://localhost:3000](http://localhost:3000)
 
 
