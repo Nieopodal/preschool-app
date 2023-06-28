@@ -42,3 +42,4 @@ lerna-debug.log*
 /public/img/home.jpg
 /public/docs/Statut Publicznego Przedszkola nr 23.pdf
 /data/pages.data.json
+/src/content/
