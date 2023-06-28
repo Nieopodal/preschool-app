@@ -1,5 +1,6 @@
 # Preschool App
 
+![Main1](https://github.com/Nieopodal/preschool-app/assets/123494717/4f6f0888-f8c5-4393-a9f3-ed7405299e54)
 
 ### Here modernity meets simplicity ###
 
@@ -9,6 +10,7 @@
 * [Aim](#-aim)
 * [Home Page](#-home-page)
 * [Technologies](#-technologies)
+* [Photos](#-photos)
 
 * [Install locally](#-install-locally)
 
@@ -100,4 +102,20 @@ After that, it is advised to turn this setting off.
 
    > [http://localhost:3000](http://localhost:3000)
 
+# 📸 Photos:
 
+![Main2](https://github.com/Nieopodal/preschool-app/assets/123494717/d19c40aa-6866-4a20-a42d-44062b5333ad)
+
+![Main3](https://github.com/Nieopodal/preschool-app/assets/123494717/908c506a-1fa5-4454-b10b-e8508a3b576f)
+
+![Album](https://github.com/Nieopodal/preschool-app/assets/123494717/3a978346-7cf2-4c38-91d0-ec554230a0b0)
+
+![Article](https://github.com/Nieopodal/preschool-app/assets/123494717/bf46d0af-8a29-4711-99d9-abbee5439131)
+
+## high contrast
+
+![HighContrast](https://github.com/Nieopodal/preschool-app/assets/123494717/0ad3b86d-5c3b-4e32-882c-b9675904e5e0)
+
+## mobile
+
+![Mobile](https://github.com/Nieopodal/preschool-app/assets/123494717/e75c9dc6-d3ec-48cd-9bfc-986d8d91c203)
