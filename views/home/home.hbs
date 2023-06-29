@@ -1,5 +1,13 @@
-{{> home/main-hero}}
+{{#with content}}
 
-{{> home/why-us}}
+  {{> home/main-hero}}
 
-{{> home/recent-news}}
+  {{> home/why-us}}
+
+{{/with}}
+
+{{#with shorterFirstNews}}
+
+  {{> home/recent-news}}
+
+{{/with}}

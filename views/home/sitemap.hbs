@@ -1,7 +1,6 @@
 {{#with content}}
   <article class="container-for-article">
     <header>
-
       {{> breadcrumbs
         routeUrl=this.breadcrumbs.routeUrl
         routeName=this.breadcrumbs.routeName
@@ -10,17 +9,15 @@
       <h1 class="page-title">{{this.h1}}</h1>
     </header>
 
-    <div class="one-article mx-auto w-fit">
-      <p>{{this.hoursDescription}} <strong>{{this.hours}}</strong></p>
-      <h2 class="py-4">{{this.h2}}</h2>
-      <ul class="mx-auto w-fit">
-        {{#each this.classes}}
+    <section class="one-article mx-auto w-fit">
+      <ul class="mx-auto w-fit list-disc">
+        {{#each this.sites}}
           <li class="py-1">
-            {{this.years}} <strong>{{this.name}}</strong>
+            <a href="{{this.url}}" class="hover:underline hover:text-secondary-focus">{{this.name}}</a>
           </li>
         {{/each}}
       </ul>
-    </div>
+    </section>
 
   </article>
 {{/with}}

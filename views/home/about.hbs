@@ -1,18 +1,33 @@
-<article class="container-for-article">
-  <header>
-    {{> breadcrumbs routeUrl="/o-przedszkolu" routeName="O przedszkolu"}}
+{{#with content}}
 
-    <h1 class="page-title">O przedszkolu</h1>
-  </header>
+  <article class="container-for-article">
+    <header>
 
-  <div class="one-article">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque debitis dignissimos est eveniet
-      incidunt libero magnam, maxime minus molestias nobis. Autem consequatur, culpa deleniti iusto magni obcaecati
-      repellendus! Illo, quam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci commodi dignissimos,
-      doloribus in maxime quidem quos! Aspernatur assumenda blanditiis dignissimos odio officia quasi suscipit
-      veritatis. Hic incidunt placeat tempore voluptatum?
-    </p>
-  </div>
-</article>
+      {{> breadcrumbs
+        routeUrl=this.breadcrumbs.routeUrl
+        routeName=this.breadcrumbs.routeName
+      }}
+
+      <h1 class="page-title">{{this.h1}}</h1>
+    </header>
+
+    <section class="one-article">
+      <h2 class="text-xl md:text-2xl pb-4 font-semibold flex justify-flex">{{this.h2}}</h2>
+
+      {{#with this.mainPromotion}}
+      <h3 class="font-semibold pt-2 pb-4">{{this.title}}</h3>
+      <p class="pb-4">{{this.paragraph}}</p>
+    {{/with}}
+      {{#each this.advantages}}
+        <h3 class="font-semibold py-2">{{this.title}}</h3>
+        <ul class="ml-10 list-disc pt-2 pb-4">
+          {{#each this.listItems}}
+            <li class="py-1">{{this}}</li>
+          {{/each}}
+        </ul>
+      {{/each}}
+    </section>
+
+  </article>
+
+{{/with}}

@@ -1,12 +1,13 @@
 {
   "name": "pp23",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "",
   "author": "Nieopodal",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
+    "build:static": "ts-node ./src/utils/create-pages-data.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",

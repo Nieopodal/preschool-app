@@ -36,7 +36,9 @@ lerna-debug.log*
 /.env
 /public/img/upload/
 /public/img/f_logo_RGB-Blue_58.png
-/public/img/logo-prototyp.jpg
 
 /public/img/hero.jpg
 /public/img/home.jpg
+/public/docs/Statut Publicznego Przedszkola nr 23.pdf
+/data/pages.data.json
+/src/content/
