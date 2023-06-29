@@ -4,28 +4,34 @@
     <h1 class="page-title">Aktualności</h1>
   </header>
 
-{{#if userLoggedIn}}
-  <div class="flex justify-center">
-    <a
-      href="/aktualnosci/dodaj"
-      class="actions-btn">
-      Dodaj nowy wpis
-    </a>
-  </div>
-{{/if}}
+  {{#if userLoggedIn}}
+    <div class="flex justify-center">
+      <a
+        href="/aktualnosci/dodaj"
+        class="actions-btn">
+        Dodaj nowy wpis
+      </a>
+    </div>
+  {{/if}}
 
   {{#each news}}
     <div class="one-article">
       <div class="p-4">
         <h2 class="font-bold text-2xl">{{this.title}}</h2>
         <div class="text-base block">{{this.createdAt}}</div>
-        <div class="py-2 whitespace-pre-wrap">{{this.article}}{{#if this.isTooLong}}...<a class=" text-base font-bold text-secondary-focus uppercase hover:underline" href="/aktualnosci/{{this.id}}"><span class="sr-only">Czytaj całość artykułu: {{this.title}}</span>czytaj całość artykułu</a>{{/if}}</div>
+        <div class="py-2 whitespace-pre-wrap">{{this.article}}{{#if this.isTooLong}}
+          ...<a class=" text-base font-bold text-secondary-focus uppercase hover:underline"
+                href="/aktualnosci/{{this.id}}"><span class="sr-only">Czytaj całość artykułu: {{this.title}}</span>czytaj
+          całość artykułu</a>{{/if}}</div>
 
         <div class="text-base pt-2">
-          <a href="/aktualnosci/{{this.id}}" class="hover:text-secondary-focus hover:underline"><span class="sr-only">Przejdź do artykułu: {{this.title}}</span>Przejdź do artykułu</a>
-    {{#if ../userLoggedIn}}
-          | <a href="/aktualnosci/{{this.id}}/edycja" class="text-secondary-focus hover:font-bold hover:underline">Edytuj wpis</a>
-    {{/if}}
+          {{#unless this.isTooLong}}
+            <a href="/aktualnosci/{{this.id}}" class="hover:text-secondary-focus hover:underline"><span class="sr-only">Przejdź do artykułu: {{this.title}}</span>Przejdź
+              do artykułu</a>{{/unless}}
+          {{#if ../userLoggedIn}}
+            | <a href="/aktualnosci/{{this.id}}/edycja" class="text-secondary-focus hover:font-bold hover:underline">Edytuj
+            wpis</a>
+          {{/if}}
         </div>
       </div>
     </div>
