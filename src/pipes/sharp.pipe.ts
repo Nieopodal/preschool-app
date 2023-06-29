@@ -16,7 +16,7 @@ export class SharpPipe
         await sharp(photo.buffer)
           .rotate()
           .resize({
-            height: 900,
+            height: 800,
             fit: 'contain',
           })
           .webp({ effort: 3 })
