@@ -8,6 +8,7 @@ import { JwtPayload } from './jwt-strategy';
 import { ConfigService } from '@nestjs/config';
 import { pageRenderHandler } from '../utils/page-render.handler';
 import { comparePwd } from '../utils/compare-pwd';
+import { sleep } from '../utils/sleep';
 
 @Injectable()
 export class AuthService {
@@ -44,6 +45,7 @@ export class AuthService {
   }
 
   async login(req: AuthLoginDto, res: Response, user: User): Promise<any> {
+    await sleep(2000);
     if (user) return res.redirect('/dashboard');
 
     try {

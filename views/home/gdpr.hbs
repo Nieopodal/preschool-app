@@ -1,19 +1,16 @@
-<article class="container-for-article">
-  <header>
-    {{> breadcrumbs routeUrl="/ochrona-danych-osobowych" routeName="Ochrona danych osobowych"}}
+{{#with content}}
+  <article class="container-for-article">
+    <header>
+      {{> breadcrumbs
+        routeUrl=this.breadcrumbs.routeUrl
+        routeName=this.breadcrumbs.routeName
+      }}
 
-    <h1 class="page-title">Ochrona danych osobowych</h1>
-  </header>
+      <h1 class="page-title">{{this.h1}}</h1>
+    </header>
 
-  <div class="one-article">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore
-      tenetur ullam vel? Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam aliquid assumenda
-      blanditiis culpa deleniti ea eligendi exercitationem illum ipsa ipsum laboriosam libero, optio perferendis
-      praesentium quae quas saepe, voluptatem.
-    </p>
-    <p>
-      <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur, assumenda dolore eos expedita facere id maiores necessitatibus nostrum numquam porro quibusdam ratione sunt suscipit temporibus vel vero voluptates voluptatum! Voluptate.</span><span>Ad adipisci aperiam assumenda aut consequuntur culpa cum dicta, dolorum ducimus ea exercitationem facilis fugit ipsam ipsum magni molestiae mollitia nesciunt nihil nobis odio officia omnis perspiciatis, rem totam veniam.</span><span>Accusamus accusantium adipisci assumenda consequatur corporis dolorum eaque enim error, explicabo fugiat magnam magni nesciunt nulla officia porro quaerat quos reiciendis repudiandae sed sit tempore ut velit voluptate! Quam, vel.</span><span>Adipisci autem, ex ipsum magnam maxime molestias mollitia optio provident, quia quidem sapiente similique, sit vero voluptas voluptatibus! At consequuntur ducimus earum eligendi excepturi harum nemo nobis nulla repellat sit!</span><span>Aliquam debitis ex expedita hic labore maxime quis saepe ut veritatis, vero? Aliquid distinctio error libero modi odio odit quis sint? Aperiam nesciunt numquam obcaecati odit ratione recusandae, suscipit voluptatibus!</span>
-    </p>
-  </div>
-</article>
+    <section class="one-article">
+    </section>
+
+  </article>
+{{/with}}

@@ -1,31 +1,32 @@
-<article class="container-for-article">
-  <header>
-    {{> breadcrumbs routeUrl="/statut" routeName="Statut"}}
+{{#with content}}
+  <article class="container-for-article">
 
-    <h1 class="page-title">Statut</h1>
-  </header>
+    <header>
 
-  <div class="one-article">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus ad adipisci consectetur, dignissimos
-      distinctio doloremque eaque error harum illum incidunt ipsum minima natus pariatur quibusdam, tempore tenetur
-      ullam vel?</p>
-  </div>
-</article>
+      {{> breadcrumbs
+        routeUrl=this.breadcrumbs.routeUrl
+        routeName=this.breadcrumbs.routeName
+      }}
+
+      <h1 class="page-title">{{this.h1}}</h1>
+    </header>
+
+    <section class="one-article">
+      <object
+        aria-label="{{this.ariaLabel}}"
+        data="{{this.fileSrc}}"
+        type="application/pdf" width="100%" height="800px"
+      >
+        <a
+          href="{{this.fileSrc}}"
+          class="hover:underline flex justify-center w-fit py-2"
+        >
+          {{this.altText}}
+        </a>
+
+
+      </object>
+    </section>
+
+  </article>
+{{/with}}

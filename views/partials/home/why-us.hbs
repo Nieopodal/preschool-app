@@ -1,20 +1,15 @@
-<div class="hero min-h-screen bg-base-100 overflow-y-auto">
-  <div class="hero-content flex-col-reverse lg:flex-row-reverse">
-    <img src="/img/home.jpg" alt="zdjęcie promocyjne" class="max-w-screen lg:max-w-[20rem] rounded-full shadow-lg" />
-    <div>
-      <h2 class="hero-title">Dlaczego my?</h2>
-      <p class="py-6 pr-6 text-justify lg:text-left max-w-screen break-words">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam
-        culpa
-        dignissimos
-        distinctio dolorem
-        doloremque ducimus illo laboriosam laudantium maxime natus nisi, quaerat quos ratione rerum sapiente sed
-        soluta vel vitae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto cumque
-        dignissimos dolorem ea est
-        fugiat laboriosam nemo, officiis perspiciatis sunt tenetur vel, velit veniam veritatis voluptas! A
-        eligendi fugit natus? Ab aspernatur, aut esse excepturi impedit ipsum iste magni officiis optio porro,
-        quasi voluptatibus.
-        Asperiores commodi consequatur obcaecati, odio quasi vitae. Adipisci architecto autem eaque iste laborum
-        nam nulla unde?</p>
+{{#with whyUs}}
+  <div class="hero min-h-screen bg-base-100 overflow-y-auto">
+    <div class="hero-content flex-col-reverse lg:flex-row-reverse">
+
+      {{#with img}}
+      <img src="{{this.src}}" alt="{{this.alt}}" class="max-w-screen lg:max-w-[20rem] rounded-full shadow-lg" />
+      {{/with}}
+
+      <div>
+        <h2 class="hero-title">{{this.h2}}</h2>
+        <p class="py-6 pr-6 text-justify lg:text-left max-w-screen break-words text-lg">{{this.paragraph}}</p>
+      </div>
     </div>
   </div>
-</div>
+{{/with}}

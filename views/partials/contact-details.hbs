@@ -1,27 +1,36 @@
-<section class="pt-2 text-sm md:text-base xl:text-lg w-fit mx-auto">
-  <div class="flex flex-col items-start">
-    <div class="flex justify-center items-center font-semibold text-lg">
-      <span class="w-6 h-6 mr-4" aria-hidden="true">{{> icons/office-svg}}</span> <span>Nazwa przedszkola</span>
-    </div>
-    <p class="ml-10 mb-2">Publiczne Przedszkole nr 23 w Jastrzębiu-Zdroju</p>
+{{#with contactDetails}}
+  <section class="pt-2 pb-8 text-sm md:text-base xl:text-lg w-fit mx-auto">
+    <div class="flex flex-col items-start">
+      <div class="flex justify-center items-center font-semibold text-lg">
+        <span class="w-6 h-6 mr-4" aria-hidden="true">{{> icons/office-svg}}</span> <span>Nazwa przedszkola</span>
+      </div>
+      <p class="ml-10 mb-2">{{this.name}}</p>
 
-    <div class="flex justify-center items-center font-semibold text-lg">
-      <span class="w-6 h-6 mr-4" aria-hidden="true">{{> icons/pin-svg}}</span> <span>Adres</span>
-    </div>
-    <p class="ml-10 mb-2">ul. 1 Maja 3A, 44-330, Jastrzębie-Zdrój</p>
+      <div class="flex justify-center items-center font-semibold text-lg">
+        <span class="w-6 h-6 mr-4" aria-hidden="true">{{> icons/pin-svg}}</span> <span>Adres</span>
+      </div>
+      <p class="ml-10 mb-2">{{this.address}}</p>
 
-    <div class="flex justify-center items-center font-semibold text-lg">
-      <span class="w-6 h-6 mr-4" aria-hidden="true">{{> icons/mail-svg}}</span> <span>Adres E-mail</span>
-    </div>
-    <p class="ml-10 mb-2"><a href="mailto:poczta@pp23.jastrzebie.pl" class="hover:text-secondary-focus hover:underline">poczta@pp23.jastrzebie.pl</a></p>
+      <div class="flex justify-center items-center font-semibold text-lg">
+        <span class="w-6 h-6 mr-4" aria-hidden="true">{{> icons/mail-svg}}</span> <span>Adres E-mail</span>
+      </div>
+      <p class="ml-10 mb-2">
+        <a href="mailto:{{this.email}}" class="hover:text-secondary-focus hover:underline">{{this.email}}</a>
+      </p>
 
-    <div class="flex justify-center items-center font-semibold text-lg">
-      <span class="w-6 h-6 mr-4" aria-hidden="true">{{> icons/tel-svg}}</span> <span>Telefon</span>
+      <div class="flex justify-center items-center font-semibold text-lg">
+        <span class="w-6 h-6 mr-4" aria-hidden="true">{{> icons/tel-svg}}</span> <span>Telefon</span>
+      </div>
+      <p class="ml-10 mb-2">
+        <a href="tel:{{this.hrefTel}}" class="hover:text-secondary-focus hover:underline">{{this.tel}}</a>
+      </p>
     </div>
-    <p class="ml-10 mb-2"><a href="tel:324762348" class="hover:text-secondary-focus hover:underline">32 476 23 48</a></p>
-  </div>
 
-    <a class="m-1 grayscale hover:grayscale-0 hover:underline w-fit mx-auto flex justify-center items-center font-semibold text-lg hover:text-secondary-focus" href="https://www.facebook.com/people/Publiczne-Przedszkole-Nr-23-w-Jastrz%C4%99biu-Zdroju/100063667836211/">
-      <span>Znajdź nas na</span> <img src="/img/f_logo_RGB-Blue_58.png" class="w-6 ml-2" alt="Facebook logo">
+    <a
+      class="m-1 grayscale hover:grayscale-0 hover:underline w-fit mx-auto flex justify-center items-center font-semibold text-lg hover:text-secondary-focus"
+      href="{{this.facebook.url}}"
+    >
+      <span>Znajdź nas na</span> <img src="{{this.facebook.img.src}}" class="w-6 ml-2" alt="{{this.facebook.img.alt}}">
     </a>
-</section>
+  </section>
+{{/with}}

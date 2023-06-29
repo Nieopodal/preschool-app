@@ -22,7 +22,7 @@
         <div class="py-2 whitespace-pre-wrap">{{this.article}}{{#if this.isTooLong}}...<a class=" text-base font-bold text-secondary-focus uppercase hover:underline" href="/aktualnosci/{{this.id}}"><span class="sr-only">Czytaj całość artykułu: {{this.title}}</span>czytaj całość artykułu</a>{{/if}}</div>
 
         <div class="text-base pt-2">
-          <a href="/aktualnosci/{{this.id}}" class="hover:text-secondary-focus hover:underline"><span class="sr-only">Przejdź do artykułu: {{this.title}}</span>Przejdź do artykułu</a>
+          {{#unless this.isTooLong}}<a href="/aktualnosci/{{this.id}}" class="hover:text-secondary-focus hover:underline"><span class="sr-only">Przejdź do artykułu: {{this.title}}</span>Przejdź do artykułu</a>{{/unless}}
     {{#if ../userLoggedIn}}
           | <a href="/aktualnosci/{{this.id}}/edycja" class="text-secondary-focus hover:font-bold hover:underline">Edytuj wpis</a>
     {{/if}}
