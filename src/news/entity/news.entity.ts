@@ -1,14 +1,17 @@
 import {
   BaseEntity,
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { generateSlugHandler } from '../../utils/generate-slug.handler';
 
 @Entity()
 export class News extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Column({
@@ -28,4 +31,10 @@ export class News extends BaseEntity {
 
   @Column()
   isTooLong: boolean;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  generateSlugId() {
+    this.id = generateSlugHandler(this.title);
+  }
 }

@@ -8,6 +8,8 @@ import { User } from '../user/entity/user.entity';
 import { pageRenderHandler } from '../utils/page-render.handler';
 import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
 import { CustomNotFoundException } from '../exceptions/custom-not-found.exception';
+import slugify from 'slugify';
+import * as short from 'short-uuid';
 
 @Injectable()
 export class NewsService {
@@ -137,9 +139,18 @@ export class NewsService {
     data: { title: string; article: string },
   ) {
     const { title, article } = data;
+    const found = await News.findOne({
+      where: { id },
+    });
+    const actualId =
+      title === found.title
+        ? found.id
+        : slugify(title, { lower: true }) + '-' + short.generate();
+
     const news = await News.update(id, {
       title,
       article,
+      id: actualId,
       isTooLong: article.length > 600,
     });
     if (news.affected !== 1) {
@@ -153,7 +164,7 @@ export class NewsService {
       user,
       'news/success',
       { message: 'Pomyślnie zaktualizowano wpis.' },
-      { id },
+      { id: actualId },
     );
   }
 
