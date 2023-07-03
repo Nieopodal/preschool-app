@@ -8,7 +8,7 @@
       {{> breadcrumbs
         routeUrl="/album"
         routeName="Album fotograficzny"
-        subpageUrl=this.id
+        subpageUrl=this.slug
         subpageName=this.title
       }}
 
@@ -16,7 +16,7 @@
       <p class="text-center py-2">{{this.createdAt}}</p>
 
       {{#if ../userLoggedIn}}
-        {{> edit-post this}}
+        {{> edit-post useSlug=true}}
       {{/if}}
     </header>
 

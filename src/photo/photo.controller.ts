@@ -6,12 +6,12 @@ import { PhotoService } from './photo.service';
 export class PhotoController {
   constructor(private readonly photoService: PhotoService) {}
 
-  @Delete('/:fileName/:albumId')
+  @Delete('/:fileName/:albumSlug')
   async delete(
     @Res() res: Response,
     @Param('fileName') fileName: string,
-    @Param('albumId') albumId: string,
+    @Param('albumSlug') albumSlug: string,
   ) {
-    return await this.photoService.delete(res, fileName, albumId, true);
+    return await this.photoService.delete(res, fileName, albumSlug, true);
   }
 }

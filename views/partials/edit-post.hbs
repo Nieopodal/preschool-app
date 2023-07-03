@@ -1,3 +1,3 @@
 <div class="flex justify-center">
-  <a href="{{this.id}}/edycja" class="actions-btn mb-8">Edytuj wpis</a>
+  <a href="{{#if useSlug}}{{this.slug}}{{/if}}{{#unless useSlug}}{{this.id}}{{/unless}}/edycja" class="actions-btn mb-8">Edytuj wpis</a>
 </div>

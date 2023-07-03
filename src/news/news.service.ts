@@ -8,8 +8,7 @@ import { User } from '../user/entity/user.entity';
 import { pageRenderHandler } from '../utils/page-render.handler';
 import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
 import { CustomNotFoundException } from '../exceptions/custom-not-found.exception';
-import slugify from 'slugify';
-import * as short from 'short-uuid';
+import { generateSlugHandler } from '../utils/generate-slug.handler';
 
 @Injectable()
 export class NewsService {
@@ -143,9 +142,7 @@ export class NewsService {
       where: { id },
     });
     const actualId =
-      title === found.title
-        ? found.id
-        : slugify(title, { lower: true }) + '-' + short.generate();
+      title === found.title ? found.id : generateSlugHandler(title);
 
     const news = await News.update(id, {
       title,

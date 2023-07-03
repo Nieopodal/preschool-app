@@ -15,6 +15,7 @@ import { AlbumWithPhotos } from '../types';
 import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
 import { CustomBadRequestException } from '../exceptions/custom-bad-request.exception';
 import { CustomNotFoundException } from '../exceptions/custom-not-found.exception';
+import { generateSlugHandler } from '../utils/generate-slug.handler';
 
 @Injectable()
 export class AlbumService {
@@ -22,6 +23,7 @@ export class AlbumService {
     @Inject(forwardRef(() => PhotoService))
     private readonly photoService: PhotoService,
   ) {}
+
   async getAllAlbums(res: Response, user: User, currentPage: number) {
     const maxPerPage = 10;
     const [albums, count]: [AlbumWithPhotos[], number] =
@@ -35,9 +37,9 @@ export class AlbumService {
       });
     const pagesCount = Math.ceil(count / maxPerPage);
     const fixedDateAlbums = albums.map((album) => {
-      const { id, title, createdAt, numberOfPhotos, photos } = album;
+      const { slug, title, createdAt, numberOfPhotos, photos } = album;
       return {
-        id,
+        slug,
         title,
         numberOfPhotos,
         createdAt: format(createdAt, 'dd.MM.yyyy'),
@@ -55,11 +57,11 @@ export class AlbumService {
     );
   }
 
-  async getOneAlbum(res: Response, user: User, id: string) {
+  async getOneAlbum(res: Response, user: User, slug: string) {
     const album: AlbumWithPhotos = await Album.findOne({
       relations: ['photos'],
       where: {
-        id,
+        slug,
       },
     });
 
@@ -77,11 +79,11 @@ export class AlbumService {
     pageRenderHandler(res, user, 'album/add');
   }
 
-  async getEditAlbumPage(res: Response, user: User, id: string) {
+  async getEditAlbumPage(res: Response, user: User, slug: string) {
     const album: AlbumWithPhotos = await Album.findOne({
       relations: ['photos'],
       where: {
-        id,
+        slug,
       },
     });
 
@@ -107,14 +109,22 @@ export class AlbumService {
     res: Response,
     user: User,
     fileNames: string[],
-    editingAlbumId?: string,
+    editingAlbumSlug?: string,
   ) {
-    const album = editingAlbumId
-      ? await Album.findOneOrFail({ where: { id: editingAlbumId } })
+    const album = editingAlbumSlug
+      ? await Album.findOneOrFail({ where: { slug: editingAlbumSlug } })
       : new Album();
     try {
-      album.title = JSON.parse(JSON.stringify(req.body)).title;
-      album.numberOfPhotos = editingAlbumId
+      const newTitle = JSON.parse(JSON.stringify(req.body)).title;
+
+      if (editingAlbumSlug) {
+        if (album.title !== newTitle) {
+          album.slug = generateSlugHandler(newTitle);
+          album.title = newTitle;
+        }
+      }
+      if (!editingAlbumSlug) album.title = newTitle;
+      album.numberOfPhotos = editingAlbumSlug
         ? album.numberOfPhotos + fileNames.length
         : fileNames.length;
       await album.save();
@@ -129,18 +139,24 @@ export class AlbumService {
         user,
         'album/success',
         {
-          message: editingAlbumId
+          message: editingAlbumSlug
             ? 'Zapisano zmiany'
             : 'Pomyślnie dodano nowy album',
         },
-        { id: album.id },
+        { slug: album.slug },
       );
     } catch (e) {
       try {
         if (fileNames.length > 0) {
           await Promise.all(
             fileNames.map(async (fileName) => {
-              await this.photoService.delete(res, fileName, album.id, false, e);
+              await this.photoService.delete(
+                res,
+                fileName,
+                album.slug,
+                false,
+                e,
+              );
             }),
           );
         }
@@ -160,10 +176,10 @@ export class AlbumService {
   }
 
   async editOrDecreaseNumberOfPhotos(
-    id: string,
+    slug: string,
     newValue?: number,
   ): Promise<void> {
-    const album = await Album.findOne({ where: { id } });
+    const album = await Album.findOne({ where: { slug } });
     if (!album)
       throw new CustomNotFoundException('Album nie został odnaleziony.');
     if (newValue) {
@@ -178,19 +194,23 @@ export class AlbumService {
     await album.save();
   }
 
-  async delete(res: Response, user: User, id: string) {
+  async delete(res: Response, user: User, slug: string) {
     const album = await Album.findOne({
-      where: { id },
+      where: { slug },
       relations: ['photos'],
     });
-
     if (!album)
       throw new CustomNotFoundException('Album nie został odnaleziony.');
 
     try {
       await Promise.all(
         album.photos.map(async (photo) => {
-          await this.photoService.delete(res, photo.fileName, album.id, false);
+          await this.photoService.delete(
+            res,
+            photo.fileName,
+            album.slug,
+            false,
+          );
         }),
       );
       await album.remove();

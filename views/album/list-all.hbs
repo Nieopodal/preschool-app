@@ -16,7 +16,7 @@
 
   <div class="all-photos-container">
     {{#each albums}}
-      <a href="/album/{{this.id}}" aria-label="Przejdź do albumu {{this.title}}" >
+      <a href="/album/{{this.slug}}" aria-label="Przejdź do albumu {{this.title}}" >
         <div class="photo-card one-photo hover:text-secondary-focus">
           <img class="photo-img image"
                src="/img/upload/{{this.firstImg.fileName}}"

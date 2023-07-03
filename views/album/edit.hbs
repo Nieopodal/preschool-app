@@ -1,6 +1,6 @@
 <div class="container-for-article">
 
-  {{> deleting-dialog-box this}}
+  {{> deleting-dialog-box useSlug="true"}}
 
   {{#with item}}
 
@@ -13,7 +13,7 @@
       {{> breadcrumbs
         routeUrl="/album"
         routeName="Album fotograficzny"
-        subpageUrl=this.id
+        subpageUrl=this.slug
         subpageName=this.title
         actionName="Edycja"
         actionUrl="/edycja"

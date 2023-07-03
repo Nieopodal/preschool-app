@@ -1,5 +1,6 @@
 import {
   BaseEntity,
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -7,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Photo } from '../../photo/entity/photo.entity';
+import { generateSlugHandler } from '../../utils/generate-slug.handler';
 
 @Entity()
 export class Album extends BaseEntity {
@@ -30,4 +32,15 @@ export class Album extends BaseEntity {
 
   @OneToMany(() => Photo, (entity) => entity.album)
   photos: Photo[];
+
+  @Column({
+    unique: true,
+    length: 255,
+  })
+  slug: string;
+
+  @BeforeInsert()
+  generateSlugId() {
+    this.slug = generateSlugHandler(this.title);
+  }
 }
