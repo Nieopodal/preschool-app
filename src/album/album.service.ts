@@ -15,6 +15,7 @@ import { AlbumWithPhotos } from '../types';
 import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
 import { CustomBadRequestException } from '../exceptions/custom-bad-request.exception';
 import { CustomNotFoundException } from '../exceptions/custom-not-found.exception';
+import { generateSlugHandler } from '../utils/generate-slug.handler';
 
 @Injectable()
 export class AlbumService {
@@ -22,6 +23,7 @@ export class AlbumService {
     @Inject(forwardRef(() => PhotoService))
     private readonly photoService: PhotoService,
   ) {}
+
   async getAllAlbums(res: Response, user: User, currentPage: number) {
     const maxPerPage = 10;
     const [albums, count]: [AlbumWithPhotos[], number] =
@@ -35,9 +37,10 @@ export class AlbumService {
       });
     const pagesCount = Math.ceil(count / maxPerPage);
     const fixedDateAlbums = albums.map((album) => {
-      const { id, title, createdAt, numberOfPhotos, photos } = album;
+      const { id, slug, title, createdAt, numberOfPhotos, photos } = album;
       return {
         id,
+        slug,
         title,
         numberOfPhotos,
         createdAt: format(createdAt, 'dd.MM.yyyy'),
@@ -55,7 +58,7 @@ export class AlbumService {
     );
   }
 
-  async getOneAlbum(res: Response, user: User, id: string) {
+  async getOneAlbum(res: Response, user: User, id: string, slug?: string) {
     const album: AlbumWithPhotos = await Album.findOne({
       relations: ['photos'],
       where: {
@@ -66,6 +69,11 @@ export class AlbumService {
     if (!album) {
       throw new CustomNotFoundException('Album nie został odnaleziony.');
     }
+
+    if (album.slug !== slug) {
+      return res.redirect(`/album/${album.id}/${album.slug}`);
+    }
+
     const fixedDateAlbum = {
       ...album,
       createdAt: format(album.createdAt, 'dd.MM.yyyy'),
@@ -113,7 +121,15 @@ export class AlbumService {
       ? await Album.findOneOrFail({ where: { id: editingAlbumId } })
       : new Album();
     try {
-      album.title = JSON.parse(JSON.stringify(req.body)).title;
+      const newTitle = JSON.parse(JSON.stringify(req.body)).title;
+
+      if (editingAlbumId) {
+        if (album.title !== newTitle) {
+          album.slug = generateSlugHandler(newTitle);
+          album.title = newTitle;
+        }
+      }
+      if (!editingAlbumId) album.title = newTitle;
       album.numberOfPhotos = editingAlbumId
         ? album.numberOfPhotos + fileNames.length
         : fileNames.length;
@@ -183,7 +199,6 @@ export class AlbumService {
       where: { id },
       relations: ['photos'],
     });
-
     if (!album)
       throw new CustomNotFoundException('Album nie został odnaleziony.');
 

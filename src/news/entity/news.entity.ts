@@ -1,14 +1,17 @@
+import * as short from 'short-uuid';
 import {
   BaseEntity,
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
 } from 'typeorm';
+import { generateSlugHandler } from '../../utils/generate-slug.handler';
 
 @Entity()
 export class News extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   @Column({
@@ -28,4 +31,19 @@ export class News extends BaseEntity {
 
   @Column()
   isTooLong: boolean;
+
+  @Column({
+    length: 255,
+  })
+  slug: string;
+
+  @BeforeInsert()
+  generateSlug() {
+    this.slug = generateSlugHandler(this.title);
+  }
+
+  @BeforeInsert()
+  generateId() {
+    this.id = short.generate();
+  }
 }
