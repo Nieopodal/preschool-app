@@ -1,3 +1,4 @@
+import * as short from 'short-uuid';
 import {
   BaseEntity,
   BeforeInsert,
@@ -31,8 +32,18 @@ export class News extends BaseEntity {
   @Column()
   isTooLong: boolean;
 
+  @Column({
+    length: 255,
+  })
+  slug: string;
+
   @BeforeInsert()
-  generateSlugId() {
-    this.id = generateSlugHandler(this.title);
+  generateSlug() {
+    this.slug = generateSlugHandler(this.title);
+  }
+
+  @BeforeInsert()
+  generateId() {
+    this.id = short.generate();
   }
 }

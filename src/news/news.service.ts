@@ -60,7 +60,7 @@ export class NewsService {
     }));
   }
 
-  async getOneNews(res: Response, user: User, id: string) {
+  async getOneNews(res: Response, user: User, id: string, slug?: string) {
     const news = await News.findOne({
       where: {
         id,
@@ -70,6 +70,10 @@ export class NewsService {
     if (!news) {
       throw new CustomNotFoundException('Artykuł nie został odnaleziony.');
     }
+    if (news.slug !== slug) {
+      return res.redirect(`/aktualnosci/${news.id}/${news.slug}`);
+    }
+
     const fixedDateNews = {
       ...news,
       createdAt: format(news.createdAt, 'dd.MM.yyyy, HH:mm'),
@@ -141,13 +145,13 @@ export class NewsService {
     const found = await News.findOne({
       where: { id },
     });
-    const actualId =
-      title === found.title ? found.id : generateSlugHandler(title);
+    const actualSlug =
+      title === found.title ? found.slug : generateSlugHandler(title);
 
     const news = await News.update(id, {
       title,
       article,
-      id: actualId,
+      slug: actualSlug,
       isTooLong: article.length > 600,
     });
     if (news.affected !== 1) {
@@ -161,7 +165,7 @@ export class NewsService {
       user,
       'news/success',
       { message: 'Pomyślnie zaktualizowano wpis.' },
-      { id: actualId },
+      { id },
     );
   }
 
