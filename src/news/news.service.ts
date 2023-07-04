@@ -8,6 +8,7 @@ import { User } from '../user/entity/user.entity';
 import { pageRenderHandler } from '../utils/page-render.handler';
 import { CustomInternalServerException } from '../exceptions/custom-internal-server.exception';
 import { CustomNotFoundException } from '../exceptions/custom-not-found.exception';
+import { generateSlugHandler } from '../utils/generate-slug.handler';
 
 @Injectable()
 export class NewsService {
@@ -59,7 +60,7 @@ export class NewsService {
     }));
   }
 
-  async getOneNews(res: Response, user: User, id: string) {
+  async getOneNews(res: Response, user: User, id: string, slug?: string) {
     const news = await News.findOne({
       where: {
         id,
@@ -69,6 +70,10 @@ export class NewsService {
     if (!news) {
       throw new CustomNotFoundException('Artykuł nie został odnaleziony.');
     }
+    if (news.slug !== slug) {
+      return res.redirect(`/aktualnosci/${news.id}/${news.slug}`);
+    }
+
     const fixedDateNews = {
       ...news,
       createdAt: format(news.createdAt, 'dd.MM.yyyy, HH:mm'),
@@ -137,9 +142,16 @@ export class NewsService {
     data: { title: string; article: string },
   ) {
     const { title, article } = data;
+    const found = await News.findOne({
+      where: { id },
+    });
+    const actualSlug =
+      title === found.title ? found.slug : generateSlugHandler(title);
+
     const news = await News.update(id, {
       title,
       article,
+      slug: actualSlug,
       isTooLong: article.length > 600,
     });
     if (news.affected !== 1) {

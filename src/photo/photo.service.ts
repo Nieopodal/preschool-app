@@ -32,7 +32,7 @@ export class PhotoService {
       });
       if (!photo)
         throw new CustomNotFoundException('Brak zdjęcia w bazie danych.');
-      if (photo.album.id !== albumId)
+      if (photo.album.id !== albumId && photo.album.id)
         throw new CustomNotFoundException(
           'Zdjęcie nie znajduje się w bieżącym albumie.',
         );

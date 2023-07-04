@@ -7,7 +7,7 @@
   <div class="actions-container">
     <div class=" p-6 rounded-xl border-[1px] shadow-md ">
 
-      <form action="/auth/login" method="POST">
+      <form action="/auth/login" method="POST" id="login-form">
         <div>
           <label>
             <span class="font-semibold text-lg">Login:</span>
@@ -34,7 +34,9 @@
         </div>
         <div>
           <button type="submit"
-                  class="lg-block-actions-btn w-full">
+                  class="lg-block-actions-btn w-full"
+                  id="login-btn"
+          >
             Zaloguj
           </button>
         </div>
@@ -47,4 +49,5 @@
     </div>
   </div>
 
+  <script src="/scripts/loading.js"></script>
 </article>

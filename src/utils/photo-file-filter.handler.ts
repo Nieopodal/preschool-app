@@ -25,4 +25,3 @@ export const photoFileFilter = (
 
   return callback(null, true);
 };
-//@TODO: improve errors

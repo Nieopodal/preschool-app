@@ -96,13 +96,14 @@ export class AlbumController {
     return await this.albumService.getEditAlbumPage(res, user, id);
   }
 
-  @Get('/:id')
+  @Get('/:id/:slug?')
   @AllowAny()
   async getOneAlbum(
     @UserObject() user: User,
     @Res() res: Response,
     @Param('id') id: string,
+    @Param('slug') slug: string,
   ) {
-    return await this.albumService.getOneAlbum(res, user, id);
+    return await this.albumService.getOneAlbum(res, user, id, slug);
   }
 }

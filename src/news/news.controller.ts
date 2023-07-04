@@ -80,13 +80,14 @@ export class NewsController {
     return await this.newsService.getEditNewsPage(res, user, id);
   }
 
-  @Get('/:id')
+  @Get('/:id/:slug?')
   @AllowAny()
   async getOneNews(
     @UserObject() user: User,
     @Res() res: Response,
     @Param('id') id: string,
+    @Param('slug') slug: string,
   ) {
-    return await this.newsService.getOneNews(res, user, id);
+    return await this.newsService.getOneNews(res, user, id, slug);
   }
 }

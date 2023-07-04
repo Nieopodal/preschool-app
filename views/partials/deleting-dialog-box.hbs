@@ -1,6 +1,7 @@
 {{#with item}}
+  {{log this.slug}}
   <form
-    action="/{{../pageName}}/{{this.id}}?_method=DELETE"
+    action="/{{../pageName}}/{{#if ../useSlug}}{{this.slug}}{{/if}}{{#unless ../useSlug}}{{this.id}}{{/unless}}?_method=DELETE"
     method="POST"
     id="news-deleting-form"
     class="z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex content-center border-2 p-4 rounded px-5 md:px-20 bg-white w-9/12 md:w-auto shadow-md hidden"
