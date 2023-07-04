@@ -37,8 +37,9 @@ export class AlbumService {
       });
     const pagesCount = Math.ceil(count / maxPerPage);
     const fixedDateAlbums = albums.map((album) => {
-      const { slug, title, createdAt, numberOfPhotos, photos } = album;
+      const { id, slug, title, createdAt, numberOfPhotos, photos } = album;
       return {
+        id,
         slug,
         title,
         numberOfPhotos,
@@ -57,17 +58,22 @@ export class AlbumService {
     );
   }
 
-  async getOneAlbum(res: Response, user: User, slug: string) {
+  async getOneAlbum(res: Response, user: User, id: string, slug?: string) {
     const album: AlbumWithPhotos = await Album.findOne({
       relations: ['photos'],
       where: {
-        slug,
+        id,
       },
     });
 
     if (!album) {
       throw new CustomNotFoundException('Album nie został odnaleziony.');
     }
+
+    if (album.slug !== slug) {
+      return res.redirect(`/album/${album.id}/${album.slug}`);
+    }
+
     const fixedDateAlbum = {
       ...album,
       createdAt: format(album.createdAt, 'dd.MM.yyyy'),
@@ -79,11 +85,11 @@ export class AlbumService {
     pageRenderHandler(res, user, 'album/add');
   }
 
-  async getEditAlbumPage(res: Response, user: User, slug: string) {
+  async getEditAlbumPage(res: Response, user: User, id: string) {
     const album: AlbumWithPhotos = await Album.findOne({
       relations: ['photos'],
       where: {
-        slug,
+        id,
       },
     });
 
@@ -109,22 +115,22 @@ export class AlbumService {
     res: Response,
     user: User,
     fileNames: string[],
-    editingAlbumSlug?: string,
+    editingAlbumId?: string,
   ) {
-    const album = editingAlbumSlug
-      ? await Album.findOneOrFail({ where: { slug: editingAlbumSlug } })
+    const album = editingAlbumId
+      ? await Album.findOneOrFail({ where: { id: editingAlbumId } })
       : new Album();
     try {
       const newTitle = JSON.parse(JSON.stringify(req.body)).title;
 
-      if (editingAlbumSlug) {
+      if (editingAlbumId) {
         if (album.title !== newTitle) {
           album.slug = generateSlugHandler(newTitle);
           album.title = newTitle;
         }
       }
-      if (!editingAlbumSlug) album.title = newTitle;
-      album.numberOfPhotos = editingAlbumSlug
+      if (!editingAlbumId) album.title = newTitle;
+      album.numberOfPhotos = editingAlbumId
         ? album.numberOfPhotos + fileNames.length
         : fileNames.length;
       await album.save();
@@ -139,24 +145,18 @@ export class AlbumService {
         user,
         'album/success',
         {
-          message: editingAlbumSlug
+          message: editingAlbumId
             ? 'Zapisano zmiany'
             : 'Pomyślnie dodano nowy album',
         },
-        { slug: album.slug },
+        { id: album.id },
       );
     } catch (e) {
       try {
         if (fileNames.length > 0) {
           await Promise.all(
             fileNames.map(async (fileName) => {
-              await this.photoService.delete(
-                res,
-                fileName,
-                album.slug,
-                false,
-                e,
-              );
+              await this.photoService.delete(res, fileName, album.id, false, e);
             }),
           );
         }
@@ -176,10 +176,10 @@ export class AlbumService {
   }
 
   async editOrDecreaseNumberOfPhotos(
-    slug: string,
+    id: string,
     newValue?: number,
   ): Promise<void> {
-    const album = await Album.findOne({ where: { slug } });
+    const album = await Album.findOne({ where: { id } });
     if (!album)
       throw new CustomNotFoundException('Album nie został odnaleziony.');
     if (newValue) {
@@ -194,9 +194,9 @@ export class AlbumService {
     await album.save();
   }
 
-  async delete(res: Response, user: User, slug: string) {
+  async delete(res: Response, user: User, id: string) {
     const album = await Album.findOne({
-      where: { slug },
+      where: { id },
       relations: ['photos'],
     });
     if (!album)
@@ -205,12 +205,7 @@ export class AlbumService {
     try {
       await Promise.all(
         album.photos.map(async (photo) => {
-          await this.photoService.delete(
-            res,
-            photo.fileName,
-            album.slug,
-            false,
-          );
+          await this.photoService.delete(res, photo.fileName, album.id, false);
         }),
       );
       await album.remove();

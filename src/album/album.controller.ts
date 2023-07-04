@@ -46,7 +46,7 @@ export class AlbumController {
     return await this.albumService.addOrEdit(req, res, user, files);
   }
 
-  @Patch('/:slug')
+  @Patch('/:id')
   @UseInterceptors(
     FilesInterceptor('files', 10, {
       fileFilter: photoFileFilter,
@@ -58,18 +58,18 @@ export class AlbumController {
     files: string[],
     @Req() req: Request,
     @Res() res: Response,
-    @Param('slug') slug: string,
+    @Param('id') id: string,
   ) {
-    return await this.albumService.addOrEdit(req, res, user, files, slug);
+    return await this.albumService.addOrEdit(req, res, user, files, id);
   }
 
-  @Delete('/:slug')
+  @Delete('/:id')
   async deleteAlbum(
     @UserObject() user: User,
     @Res() res: Response,
-    @Param('slug') slug: string,
+    @Param('id') id: string,
   ) {
-    return await this.albumService.delete(res, user, slug);
+    return await this.albumService.delete(res, user, id);
   }
 
   @Get('/strona/:pageNumber')
@@ -87,22 +87,23 @@ export class AlbumController {
     return await this.albumService.getAddAlbumPage(res, user);
   }
 
-  @Get('/:slug/edycja')
+  @Get('/:id/edycja')
   async getEditAlbumPage(
     @UserObject() user: User,
     @Res() res: Response,
-    @Param('slug') slug: string,
+    @Param('id') id: string,
   ) {
-    return await this.albumService.getEditAlbumPage(res, user, slug);
+    return await this.albumService.getEditAlbumPage(res, user, id);
   }
 
-  @Get('/:slug')
+  @Get('/:id/:slug?')
   @AllowAny()
   async getOneAlbum(
     @UserObject() user: User,
     @Res() res: Response,
+    @Param('id') id: string,
     @Param('slug') slug: string,
   ) {
-    return await this.albumService.getOneAlbum(res, user, slug);
+    return await this.albumService.getOneAlbum(res, user, id, slug);
   }
 }

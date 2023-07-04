@@ -5,14 +5,15 @@ import {
   CreateDateColumn,
   Entity,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
 } from 'typeorm';
 import { Photo } from '../../photo/entity/photo.entity';
 import { generateSlugHandler } from '../../utils/generate-slug.handler';
+import * as short from 'short-uuid';
 
 @Entity()
 export class Album extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   @Column({
@@ -40,7 +41,12 @@ export class Album extends BaseEntity {
   slug: string;
 
   @BeforeInsert()
-  generateSlugId() {
+  generateSlug() {
     this.slug = generateSlugHandler(this.title);
+  }
+
+  @BeforeInsert()
+  generateId() {
+    this.id = short.generate();
   }
 }
