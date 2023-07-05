@@ -1,6 +1,6 @@
 # Preschool App
 
-![Main1](https://github.com/Nieopodal/preschool-app/assets/123494717/4f6f0888-f8c5-4393-a9f3-ed7405299e54)
+![preschool-main](https://github.com/Nieopodal/preschool-app/assets/123494717/6d6d3910-c07c-453e-9f6e-5aa098376546)
 
 ### Here modernity meets simplicity ###
 
@@ -103,18 +103,19 @@ After that, it is advised to turn this setting off.
 
 # 📸 Photos:
 
-![Main2](https://github.com/Nieopodal/preschool-app/assets/123494717/d19c40aa-6866-4a20-a42d-44062b5333ad)
+![why-us](https://github.com/Nieopodal/preschool-app/assets/123494717/4cc1708a-79f7-411a-8c78-9ce1fa066bba)
 
-![Main3](https://github.com/Nieopodal/preschool-app/assets/123494717/908c506a-1fa5-4454-b10b-e8508a3b576f)
+![recent-news](https://github.com/Nieopodal/preschool-app/assets/123494717/0aea26c6-e0fb-4645-a3a5-88923bc065f7)
 
-![Album](https://github.com/Nieopodal/preschool-app/assets/123494717/3a978346-7cf2-4c38-91d0-ec554230a0b0)
+![album](https://github.com/Nieopodal/preschool-app/assets/123494717/4f25b451-5571-4eff-8d74-6bbb45d8d566)
 
-![Article](https://github.com/Nieopodal/preschool-app/assets/123494717/bf46d0af-8a29-4711-99d9-abbee5439131)
+![fees](https://github.com/Nieopodal/preschool-app/assets/123494717/2b1b6450-5ff0-49cb-b8da-986eb355d6f8)
 
 ## high contrast
 
-![HighContrast](https://github.com/Nieopodal/preschool-app/assets/123494717/0ad3b86d-5c3b-4e32-882c-b9675904e5e0)
+![high-contrast](https://github.com/Nieopodal/preschool-app/assets/123494717/bd3bd97f-7fbe-4640-ad19-545df7e84927)
 
 ## mobile
 
-![Mobile](https://github.com/Nieopodal/preschool-app/assets/123494717/e75c9dc6-d3ec-48cd-9bfc-986d8d91c203)
+![mobile-img](https://github.com/Nieopodal/preschool-app/assets/123494717/686e3617-5e15-4ee4-b70b-873f2510b373)
+
