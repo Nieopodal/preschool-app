@@ -43,9 +43,9 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     if (status === 400) {
       response.status(400);
       return pageRenderHandler(response, request.user, 'error/error', {
-        error: (exception as CustomBadRequestException)
-          ? (exception as CustomBadRequestException).message
-          : 'Przekazano niepoprawne dane.',
+        error: !(exception instanceof CustomBadRequestException)
+          ? 'Przekazano niepoprawne dane.'
+          : (exception as CustomBadRequestException).message,
       });
     }
 
@@ -55,6 +55,14 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         error: !(exception instanceof CustomNotFoundException)
           ? 'Szukana strona nie istnieje.'
           : (exception as CustomNotFoundException).message,
+      });
+    }
+
+    if (status === 429) {
+      response.status(429);
+      return pageRenderHandler(response, request.user, 'error/error', {
+        error:
+          'Wygenerowano zbyt wiele zapytań. Odczekaj minutę i odśwież stronę.',
       });
     }
 

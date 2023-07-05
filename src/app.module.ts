@@ -7,7 +7,7 @@ import { DatabaseConfiguration } from './config/typeorm.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { NewsModule } from './news/news.module';
 import { PhotoModule } from './photo/photo.module';
-import { ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { AlbumModule } from './album/album.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
@@ -43,6 +43,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
       provide: APP_GUARD,
       useFactory: (ref) => new JwtAuthGuard(ref),
       inject: [Reflector],
+      useClass: ThrottlerGuard,
     },
   ],
 })
