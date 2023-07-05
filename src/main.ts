@@ -12,6 +12,11 @@ import { handlebarsHelpers } from './utils/handlebars-helpers';
 import { urlencoded } from 'express';
 import { GlobalExceptionFilter } from './filters/global-exception.filter';
 
+process.on('uncaughtException', function (err) {
+  console.error(err);
+  process.exit();
+});
+
 async function bootstrap() {
   const { isEqual } = handlebarsHelpers;
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
