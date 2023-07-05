@@ -58,6 +58,14 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       });
     }
 
+    if (status === 429) {
+      response.status(429);
+      return pageRenderHandler(response, request.user, 'error/error', {
+        error:
+          'Wygenerowano zbyt wiele zapytań. Odczekaj minutę i odśwież stronę.',
+      });
+    }
+
     response.status(500);
     return pageRenderHandler(response, request.user, 'error/error', {
       error: 'Przepraszamy, spróbuj ponownie później.',
