@@ -1,10 +1,10 @@
 {
   "name": "pp23",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "",
   "author": "Nieopodal",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "build:static": "ts-node ./src/utils/create-pages-data.ts",
