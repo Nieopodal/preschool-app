@@ -32,7 +32,7 @@ The aim of the project was to create a real website for a functioning kindergart
 # 🏠 Home page:
 
 *[]()*
-
+(under construction)
 
 # 🔧 Technologies:
 
