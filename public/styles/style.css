@@ -3624,6 +3624,10 @@ html {
   line-height: 2rem;
 }
 
+.text-\[100\%\] {
+  font-size: 100%;
+}
+
 .text-\[150\%\] {
   font-size: 150%;
 }
@@ -3650,10 +3654,6 @@ html {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-\[100\%\] {
-  font-size: 100%;
 }
 
 .font-bold {
