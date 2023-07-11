@@ -9,8 +9,29 @@
       <h1 class="page-title">{{this.h1}}</h1>
     </header>
 
-    <section class="one-article">
-    </section>
+    {{#each this.sections}}
+      <section class="one-article">
+        <h2 class="text-xl md:text-2xl pb-4 font-semibold mx-auto w-fit">{{this.title}}</h2>
+        <p>{{{this.subtitle}}}</p>
+        <ol class="list-decimal ml-4">
+          {{#each this.mainListItems}}
+            <li class="py-1"><span class="py-2">{{{this.text}}}</span>
+                {{#if this.smallListItems}}
+                  <ul class="list-disc">
+                    {{#each this.smallListItems}}
+                      <li class=" ml-4">{{{this}}}</li>
+
+                    {{/each}}
+                  </ul>
+                {{/if}}
+                {{#each this.paragraphs}}
+                  <p class="pt-2">{{{this}}}</p>
+                {{/each}}
+            </li>
+          {{/each}}
+        </ol>
+      </section>
+    {{/each}}
 
   </article>
 {{/with}}
