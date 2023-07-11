@@ -43,6 +43,9 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
       provide: APP_GUARD,
       useFactory: (ref) => new JwtAuthGuard(ref),
       inject: [Reflector],
+    },
+    {
+      provide: APP_GUARD,
       useClass: ThrottlerGuard,
     },
   ],
