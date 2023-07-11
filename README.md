@@ -31,8 +31,7 @@ The aim of the project was to create a real website for a functioning kindergart
 
 # 🏠 Home page:
 
-*[]()*
-(under construction)
+[http://pp23.jastrzebie.pl](http://pp23.jastrzebie.pl)
 
 # 🔧 Technologies:
 
