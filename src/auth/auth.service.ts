@@ -70,12 +70,12 @@ export class AuthService {
       }
 
       const token = await this.createToken(await this.generateToken(foundUser));
-
       return res
         .cookie('jwt', token.accessToken, {
           secure: false,
           // @TODO: in production TRUE
-          // domain: 'localhost',
+          sameSite: 'strict',
+          domain: '.localhost',
           // @TODO: in production domain
           httpOnly: true,
         })
@@ -96,7 +96,9 @@ export class AuthService {
       return res
         .clearCookie('jwt', {
           secure: false,
-          // domain: 'localhost',
+          //@TODO: in production true
+          sameSite: 'strict',
+          domain: '.localhost',
           httpOnly: true,
           //@TODO: in production: change secure && domain
         })
